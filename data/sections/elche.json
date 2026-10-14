@@ -1,0 +1,65 @@
+{
+ "slug": "elche",
+ "name": "Elche",
+ "municipality": "03065",
+ "fua": "ES505L1",
+ "income_year": 2023,
+ "sections": 173,
+ "ranked": 156,
+ "population": 240073,
+ "population_ranked": 213554,
+ "ci_canopy": 0.253,
+ "ci_canopy_tcd": 0.275,
+ "rho_canopy": 0.294,
+ "rho_lst": -0.584,
+ "rho_stl_tcd": 0.813,
+ "canopy_pct": 2.87,
+ "quintiles": {
+  "1": {
+   "income": 12531.89,
+   "canopy": 1.61,
+   "canopy_tcd": 0.81,
+   "lst": 46.14
+  },
+  "2": {
+   "income": 15258.0,
+   "canopy": 1.82,
+   "canopy_tcd": 1.06,
+   "lst": 46.11
+  },
+  "3": {
+   "income": 16635.54,
+   "canopy": 2.48,
+   "canopy_tcd": 1.66,
+   "lst": 45.85
+  },
+  "4": {
+   "income": 19001.71,
+   "canopy": 3.04,
+   "canopy_tcd": 2.01,
+   "lst": 45.02
+  },
+  "5": {
+   "income": 24114.07,
+   "canopy": 5.42,
+   "canopy_tcd": 3.15,
+   "lst": 44.59
+  }
+ },
+ "canopy_gap": 3.81,
+ "lst_gap": 1.55,
+ "canopy_urban_tcd_pct": 4.17,
+ "canopy_municipality_tcd_pct": 5.73,
+ "urban_area_ha": 8497,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 81,
+  "days": 46,
+  "clear_median": 37
+ },
+ "sections_without_income": 0
+}

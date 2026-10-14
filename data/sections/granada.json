@@ -1,0 +1,65 @@
+{
+ "slug": "granada",
+ "name": "Granada",
+ "municipality": "18087",
+ "fua": "ES501L3",
+ "income_year": 2023,
+ "sections": 180,
+ "ranked": 163,
+ "population": 230688,
+ "population_ranked": 204122,
+ "ci_canopy": 0.044,
+ "ci_canopy_tcd": 0.127,
+ "rho_canopy": 0.087,
+ "rho_lst": -0.169,
+ "rho_stl_tcd": 0.783,
+ "canopy_pct": 4.17,
+ "quintiles": {
+  "1": {
+   "income": 13180.28,
+   "canopy": 3.36,
+   "canopy_tcd": 1.8,
+   "lst": 45.14
+  },
+  "2": {
+   "income": 19698.73,
+   "canopy": 4.57,
+   "canopy_tcd": 1.59,
+   "lst": 44.91
+  },
+  "3": {
+   "income": 23273.1,
+   "canopy": 3.91,
+   "canopy_tcd": 2.28,
+   "lst": 44.61
+  },
+  "4": {
+   "income": 26914.13,
+   "canopy": 4.52,
+   "canopy_tcd": 2.91,
+   "lst": 44.79
+  },
+  "5": {
+   "income": 31858.27,
+   "canopy": 4.5,
+   "canopy_tcd": 2.94,
+   "lst": 44.48
+  }
+ },
+ "canopy_gap": 1.14,
+ "lst_gap": 0.66,
+ "canopy_urban_tcd_pct": 5.02,
+ "canopy_municipality_tcd_pct": 14.98,
+ "urban_area_ha": 2800,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 43,
+  "days": 43,
+  "clear_median": 20
+ },
+ "sections_without_income": 0
+}

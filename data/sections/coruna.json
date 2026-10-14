@@ -1,0 +1,65 @@
+{
+ "slug": "coruna",
+ "name": "A Coruña",
+ "municipality": "15030",
+ "fua": "ES026L2",
+ "income_year": 2023,
+ "sections": 186,
+ "ranked": 178,
+ "population": 245774,
+ "population_ranked": 232871,
+ "ci_canopy": 0.036,
+ "ci_canopy_tcd": 0.168,
+ "rho_canopy": 0.14,
+ "rho_lst": -0.432,
+ "rho_stl_tcd": 0.636,
+ "canopy_pct": 4.29,
+ "quintiles": {
+  "1": {
+   "income": 17766.02,
+   "canopy": 3.05,
+   "canopy_tcd": 0.08,
+   "lst": 37.58
+  },
+  "2": {
+   "income": 20689.98,
+   "canopy": 3.21,
+   "canopy_tcd": 0.21,
+   "lst": 36.9
+  },
+  "3": {
+   "income": 22963.27,
+   "canopy": 7.12,
+   "canopy_tcd": 1.1,
+   "lst": 36.77
+  },
+  "4": {
+   "income": 26877.6,
+   "canopy": 4.99,
+   "canopy_tcd": 0.71,
+   "lst": 36.2
+  },
+  "5": {
+   "income": 36182.95,
+   "canopy": 3.06,
+   "canopy_tcd": 0.24,
+   "lst": 35.6
+  }
+ },
+ "canopy_gap": 0.01,
+ "lst_gap": 1.98,
+ "canopy_urban_tcd_pct": 0.65,
+ "canopy_municipality_tcd_pct": 6.19,
+ "urban_area_ha": 2354,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 19,
+  "days": 19,
+  "clear_median": 16
+ },
+ "sections_without_income": 0
+}

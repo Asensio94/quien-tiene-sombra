@@ -1,0 +1,65 @@
+{
+ "slug": "barcelona",
+ "name": "Barcelona",
+ "municipality": "08019",
+ "fua": "ES002L2",
+ "income_year": 2023,
+ "sections": 1068,
+ "ranked": 1058,
+ "population": 1613579,
+ "population_ranked": 1599814,
+ "ci_canopy": 0.054,
+ "ci_canopy_tcd": 0.003,
+ "rho_canopy": 0.159,
+ "rho_lst": -0.165,
+ "rho_stl_tcd": 0.673,
+ "canopy_pct": 6.96,
+ "quintiles": {
+  "1": {
+   "income": 18518.6,
+   "canopy": 6.47,
+   "canopy_tcd": 1.9,
+   "lst": 41.69
+  },
+  "2": {
+   "income": 23646.62,
+   "canopy": 7.02,
+   "canopy_tcd": 1.59,
+   "lst": 41.71
+  },
+  "3": {
+   "income": 26784.56,
+   "canopy": 6.12,
+   "canopy_tcd": 0.89,
+   "lst": 41.86
+  },
+  "4": {
+   "income": 30286.45,
+   "canopy": 6.69,
+   "canopy_tcd": 1.18,
+   "lst": 41.68
+  },
+  "5": {
+   "income": 42532.25,
+   "canopy": 8.51,
+   "canopy_tcd": 1.97,
+   "lst": 41.25
+  }
+ },
+ "canopy_gap": 2.04,
+ "lst_gap": 0.44,
+ "canopy_urban_tcd_pct": 3.68,
+ "canopy_municipality_tcd_pct": 11.44,
+ "urban_area_ha": 8474,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 42,
+  "days": 42,
+  "clear_median": 33
+ },
+ "sections_without_income": 0
+}

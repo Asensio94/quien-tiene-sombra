@@ -1,0 +1,65 @@
+{
+ "slug": "cordoba",
+ "name": "Córdoba",
+ "municipality": "14021",
+ "fua": "ES020L2",
+ "income_year": 2023,
+ "sections": 256,
+ "ranked": 235,
+ "population": 317063,
+ "population_ranked": 292279,
+ "ci_canopy": 0.099,
+ "ci_canopy_tcd": 0.241,
+ "rho_canopy": 0.085,
+ "rho_lst": -0.398,
+ "rho_stl_tcd": 0.652,
+ "canopy_pct": 4.83,
+ "quintiles": {
+  "1": {
+   "income": 14011.09,
+   "canopy": 4.31,
+   "canopy_tcd": 1.01,
+   "lst": 47.01
+  },
+  "2": {
+   "income": 17069.76,
+   "canopy": 3.78,
+   "canopy_tcd": 1.66,
+   "lst": 47.03
+  },
+  "3": {
+   "income": 19138.93,
+   "canopy": 4.25,
+   "canopy_tcd": 2.89,
+   "lst": 46.49
+  },
+  "4": {
+   "income": 23193.52,
+   "canopy": 4.87,
+   "canopy_tcd": 1.92,
+   "lst": 46.35
+  },
+  "5": {
+   "income": 31563.08,
+   "canopy": 6.95,
+   "canopy_tcd": 4.63,
+   "lst": 45.82
+  }
+ },
+ "canopy_gap": 2.64,
+ "lst_gap": 1.19,
+ "canopy_urban_tcd_pct": 10.93,
+ "canopy_municipality_tcd_pct": 15.92,
+ "urban_area_ha": 10136,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 88,
+  "days": 45,
+  "clear_median": 22
+ },
+ "sections_without_income": 0
+}

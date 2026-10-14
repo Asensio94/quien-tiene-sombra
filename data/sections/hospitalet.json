@@ -1,0 +1,65 @@
+{
+ "slug": "hospitalet",
+ "name": "L'Hospitalet de Llobregat",
+ "municipality": "08101",
+ "fua": "ES002L2",
+ "income_year": 2023,
+ "sections": 195,
+ "ranked": 195,
+ "population": 278115,
+ "population_ranked": 278115,
+ "ci_canopy": 0.223,
+ "ci_canopy_tcd": 0.352,
+ "rho_canopy": 0.326,
+ "rho_lst": -0.301,
+ "rho_stl_tcd": 0.53,
+ "canopy_pct": 4.34,
+ "quintiles": {
+  "1": {
+   "income": 14984.18,
+   "canopy": 2.77,
+   "canopy_tcd": 0.19,
+   "lst": 43.23
+  },
+  "2": {
+   "income": 16649.88,
+   "canopy": 1.41,
+   "canopy_tcd": 0.13,
+   "lst": 43.1
+  },
+  "3": {
+   "income": 19200.35,
+   "canopy": 4.86,
+   "canopy_tcd": 0.52,
+   "lst": 42.78
+  },
+  "4": {
+   "income": 21764.15,
+   "canopy": 6.58,
+   "canopy_tcd": 1.17,
+   "lst": 42.28
+  },
+  "5": {
+   "income": 26010.98,
+   "canopy": 6.1,
+   "canopy_tcd": 0.98,
+   "lst": 42.9
+  }
+ },
+ "canopy_gap": 3.32,
+ "lst_gap": 0.33,
+ "canopy_urban_tcd_pct": 0.77,
+ "canopy_municipality_tcd_pct": 0.85,
+ "urban_area_ha": 1209,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 42,
+  "days": 42,
+  "clear_median": 35
+ },
+ "sections_without_income": 0
+}

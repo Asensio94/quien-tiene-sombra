@@ -1,0 +1,65 @@
+{
+ "slug": "malaga",
+ "name": "Málaga",
+ "municipality": "29067",
+ "fua": "ES006L2",
+ "income_year": 2023,
+ "sections": 435,
+ "ranked": 401,
+ "population": 584203,
+ "population_ranked": 523547,
+ "ci_canopy": 0.28,
+ "ci_canopy_tcd": 0.306,
+ "rho_canopy": 0.328,
+ "rho_lst": -0.402,
+ "rho_stl_tcd": 0.784,
+ "canopy_pct": 3.65,
+ "quintiles": {
+  "1": {
+   "income": 14206.26,
+   "canopy": 2.1,
+   "canopy_tcd": 1.54,
+   "lst": 42.09
+  },
+  "2": {
+   "income": 16811.31,
+   "canopy": 1.94,
+   "canopy_tcd": 2.07,
+   "lst": 42.35
+  },
+  "3": {
+   "income": 18736.34,
+   "canopy": 2.32,
+   "canopy_tcd": 2.26,
+   "lst": 42.38
+  },
+  "4": {
+   "income": 21840.66,
+   "canopy": 5.43,
+   "canopy_tcd": 4.92,
+   "lst": 41.7
+  },
+  "5": {
+   "income": 30582.85,
+   "canopy": 6.47,
+   "canopy_tcd": 6.12,
+   "lst": 40.7
+  }
+ },
+ "canopy_gap": 4.38,
+ "lst_gap": 1.39,
+ "canopy_urban_tcd_pct": 6.24,
+ "canopy_municipality_tcd_pct": 19.16,
+ "urban_area_ha": 9097,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 84,
+  "days": 44,
+  "clear_median": 22
+ },
+ "sections_without_income": 0
+}

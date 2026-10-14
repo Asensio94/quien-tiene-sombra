@@ -1,0 +1,411 @@
+{
+ "source": "quien-tiene-sombra",
+ "version": 1,
+ "generated": "2026-10-14T08:09Z",
+ "coverage": {
+  "label": "20 ciudades de más de 200.000 habitantes",
+  "note": "Cubierta arbórea media (HRL Tree Cover Density 2024, 10 m) sobre el suelo artificial del Urban Atlas 2021 dentro del término municipal."
+ },
+ "indicators": [
+  {
+   "id": "urban_tree_canopy:28079:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Madrid en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#madrid",
+   "municipalities": [
+    "28079"
+   ],
+   "value": {
+    "amount": 6.49,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 34149,
+    "whole_municipality_pct": 9.84
+   }
+  },
+  {
+   "id": "urban_tree_canopy:08019:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Barcelona en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#barcelona",
+   "municipalities": [
+    "08019"
+   ],
+   "value": {
+    "amount": 3.68,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 8474,
+    "whole_municipality_pct": 11.44
+   }
+  },
+  {
+   "id": "urban_tree_canopy:46250:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de València en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#valencia",
+   "municipalities": [
+    "46250"
+   ],
+   "value": {
+    "amount": 2.81,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 6003,
+    "whole_municipality_pct": 4.48
+   }
+  },
+  {
+   "id": "urban_tree_canopy:41091:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Sevilla en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#sevilla",
+   "municipalities": [
+    "41091"
+   ],
+   "value": {
+    "amount": 4.87,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 8413,
+    "whole_municipality_pct": 6.16
+   }
+  },
+  {
+   "id": "urban_tree_canopy:50297:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Zaragoza en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#zaragoza",
+   "municipalities": [
+    "50297"
+   ],
+   "value": {
+    "amount": 1.52,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 16485,
+    "whole_municipality_pct": 2.48
+   }
+  },
+  {
+   "id": "urban_tree_canopy:29067:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Málaga en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#malaga",
+   "municipalities": [
+    "29067"
+   ],
+   "value": {
+    "amount": 6.24,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 9097,
+    "whole_municipality_pct": 19.16
+   }
+  },
+  {
+   "id": "urban_tree_canopy:30030:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Murcia en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#murcia",
+   "municipalities": [
+    "30030"
+   ],
+   "value": {
+    "amount": 5.69,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 15716,
+    "whole_municipality_pct": 11.05
+   }
+  },
+  {
+   "id": "urban_tree_canopy:07040:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Palma en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#palma",
+   "municipalities": [
+    "07040"
+   ],
+   "value": {
+    "amount": 5.66,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 8356,
+    "whole_municipality_pct": 13.75
+   }
+  },
+  {
+   "id": "urban_tree_canopy:35016:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Las Palmas de Gran Canaria en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#las-palmas",
+   "municipalities": [
+    "35016"
+   ],
+   "value": {
+    "amount": 0.21,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 4442,
+    "whole_municipality_pct": 0.61
+   }
+  },
+  {
+   "id": "urban_tree_canopy:48020:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Bilbao en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#bilbao",
+   "municipalities": [
+    "48020"
+   ],
+   "value": {
+    "amount": 2.62,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 1921,
+    "whole_municipality_pct": 22.07
+   }
+  },
+  {
+   "id": "urban_tree_canopy:03014:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Alicante en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#alicante",
+   "municipalities": [
+    "03014"
+   ],
+   "value": {
+    "amount": 2.6,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 7087,
+    "whole_municipality_pct": 2.38
+   }
+  },
+  {
+   "id": "urban_tree_canopy:14021:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Córdoba en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#cordoba",
+   "municipalities": [
+    "14021"
+   ],
+   "value": {
+    "amount": 10.93,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 10136,
+    "whole_municipality_pct": 15.92
+   }
+  },
+  {
+   "id": "urban_tree_canopy:47186:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Valladolid en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#valladolid",
+   "municipalities": [
+    "47186"
+   ],
+   "value": {
+    "amount": 3.64,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 5698,
+    "whole_municipality_pct": 8.34
+   }
+  },
+  {
+   "id": "urban_tree_canopy:36057:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Vigo en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#vigo",
+   "municipalities": [
+    "36057"
+   ],
+   "value": {
+    "amount": 3.25,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 5759,
+    "whole_municipality_pct": 17.7
+   }
+  },
+  {
+   "id": "urban_tree_canopy:33024:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Gijón en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#gijon",
+   "municipalities": [
+    "33024"
+   ],
+   "value": {
+    "amount": 2.5,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 6525,
+    "whole_municipality_pct": 16.75
+   }
+  },
+  {
+   "id": "urban_tree_canopy:08101:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de L'Hospitalet de Llobregat en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#hospitalet",
+   "municipalities": [
+    "08101"
+   ],
+   "value": {
+    "amount": 0.77,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 1209,
+    "whole_municipality_pct": 0.85
+   }
+  },
+  {
+   "id": "urban_tree_canopy:01059:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Vitoria-Gasteiz en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#vitoria",
+   "municipalities": [
+    "01059"
+   ],
+   "value": {
+    "amount": 3.34,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 5422,
+    "whole_municipality_pct": 22.25
+   }
+  },
+  {
+   "id": "urban_tree_canopy:15030:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de A Coruña en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#coruna",
+   "municipalities": [
+    "15030"
+   ],
+   "value": {
+    "amount": 0.65,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 2354,
+    "whole_municipality_pct": 6.19
+   }
+  },
+  {
+   "id": "urban_tree_canopy:18087:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Granada en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#granada",
+   "municipalities": [
+    "18087"
+   ],
+   "value": {
+    "amount": 5.02,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 2800,
+    "whole_municipality_pct": 14.98
+   }
+  },
+  {
+   "id": "urban_tree_canopy:03065:2024",
+   "kind": "urban_tree_canopy",
+   "date": "2024-12-31",
+   "title": "Cubierta arbórea urbana de Elche en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/#elche",
+   "municipalities": [
+    "03065"
+   ],
+   "value": {
+    "amount": 4.17,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
+    "area_ha": 8497,
+    "whole_municipality_pct": 5.73
+   }
+  }
+ ]
+}
