@@ -21,6 +21,9 @@ def main(argv=None) -> int:
     sub.add_parser("income-year", help="print the latest ADRH year")
     a = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%H:%M:%S")
+    # GDAL warns once per Landsat tile that QA fill (1) was nudged to 0; the fill pixels are
+    # dropped anyway because their thermal band is 0.
+    logging.getLogger("rasterio").setLevel(logging.ERROR)
 
     if a.cmd == "income-year":
         from . import ine

@@ -4,6 +4,7 @@ from __future__ import annotations
 import io
 import json
 import zipfile
+from collections import Counter
 from functools import lru_cache
 
 import geopandas as gpd
@@ -55,13 +56,15 @@ def _tables() -> list[dict]:
 
 def _province_of(table_id: int) -> str:
     """The ADRH publishes one table per province and indicator group; the name doesn't say
-    which province, the first data row does."""
-    cache = config.CACHE_DIR / "ine" / "adrh_tables.json"
+    which province, the rows do. The most common code prefix in the first rows decides: the
+    first row alone can mislead (the Balearic table opens with a misfiled Alicante section)."""
+    cache = config.CACHE_DIR / "ine" / "adrh_provinces.json"
     known = json.loads(cache.read_text()) if cache.exists() else {}
     if str(table_id) not in known:
-        head = _get(config.JAXI_CSV.format(table=table_id), headers={"Range": "bytes=0-400"}).content
-        line = head.decode("latin-1").splitlines()[1]
-        known[str(table_id)] = line[:2]
+        head = _get(config.JAXI_CSV.format(table=table_id), headers={"Range": "bytes=0-30000"}).content
+        rows = head.decode("utf-8", "replace").splitlines()[1:-1]
+        codes = Counter(r[:2] for r in rows if r[:2].isdigit())
+        known[str(table_id)] = codes.most_common(1)[0][0] if codes else ""
         cache.parent.mkdir(parents=True, exist_ok=True)
         cache.write_text(json.dumps(known, indent=0, sort_keys=True))
     return known[str(table_id)]
@@ -80,7 +83,10 @@ def _table(table: int, year: int | None = None, fresh: bool = False) -> pd.DataF
 
     def read():
         df = pd.read_csv(path, sep=";", dtype=str, encoding="utf-8-sig", encoding_errors="replace")
+        # Some tables come in English format despite the /es/ URL: "Period" header, 1,276 and 42.6.
+        english = df.columns[4] == "Period"
         df.columns = ["municipality", "district", "section", "indicator", "period", "value"]
+        df["number"] = _number(df.value, english)
         return df
 
     if path.exists() and not fresh:
@@ -92,8 +98,10 @@ def _table(table: int, year: int | None = None, fresh: bool = False) -> pd.DataF
     return read()
 
 
-def _number(s: pd.Series) -> pd.Series:
-    # Spanish format: 14.105 or 1.234,5; ".." or empty when suppressed.
+def _number(s: pd.Series, english: bool = False) -> pd.Series:
+    # Spanish format: 14.105 or 1.234,5; English: 14,105 or 1,234.5; ".." or empty when suppressed.
+    if english:
+        return pd.to_numeric(s.str.replace(",", "", regex=False), errors="coerce")
     return pd.to_numeric(s.str.replace(".", "", regex=False).str.replace(",", ".", regex=False),
                          errors="coerce")
 
@@ -107,7 +115,7 @@ def by_section(municipality: str, year: int = config.INCOME_YEAR) -> pd.DataFram
         df = _table(table_id(group, prov), year)
         df = df[df.section.notna() & (df.period == str(year)) & (df.indicator == indicator)
                 & df.municipality.str.startswith(municipality)]
-        frames[col] = pd.Series(_number(df.value).values, index=df.section.str[:10].values)
+        frames[col] = pd.Series(df.number.values, index=df.section.str[:10].values)
     out = pd.DataFrame(frames)
     out.index.name = "CUSEC"
     return out.dropna(subset=["income"])

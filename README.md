@@ -23,7 +23,7 @@ La pregunta es la de Schwarz y otros (2015, [«Trees grow on money»](https://do
 - Landsat pasa hacia las 10:50 hora solar: mide el suelo a media mañana, no el pico de la tarde ni la temperatura del aire, y los tejados cuentan igual que la calle.
 - Las capas no son del mismo año: renta de 2023, Street Tree Layer de 2020–2021, Tree Cover Density de 2024, Landsat de los tres últimos veranos.
 - La Street Tree Layer 2021 aún figura como «no validada» y cambia de método respecto a la de 2018; las dos ediciones no se comparan entre sí.
-- En secciones pequeñas el INE asigna parte de la renta por imputación para proteger el secreto estadístico.
+- En secciones pequeñas el INE asigna parte de la renta por imputación para proteger el secreto estadístico. Además, los extremos aparecen recortados: la misma renta mínima (8.797 €) y máxima (58.752 €) se repite en muchas ciudades, así que dentro del quintil más rico no se distingue lo muy rico de lo rico.
 - La unidad es el municipio núcleo, no el área urbana funcional: L'Hospitalet va aparte de Barcelona.
 
 ## Pendiente

@@ -30,3 +30,12 @@ def test_numbers_in_spanish():
     assert web._es(1234.5, 1) == "1.234,5"
     assert web._es(-1.26, 1, signo=True) == "−1,3"
     assert web._es(None) == "—"
+
+
+def test_adrh_numbers_in_both_formats():
+    import pandas as pd
+    from shade import ine
+    s = pd.Series(["1.276", "42,6", ".."])
+    assert ine._number(s).tolist()[:2] == [1276, 42.6]
+    e = pd.Series(["1,276", "42.6", ".."])
+    assert ine._number(e, english=True).tolist()[:2] == [1276, 42.6]
