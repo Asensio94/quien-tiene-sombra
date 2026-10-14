@@ -17,6 +17,8 @@ def main(argv=None) -> int:
                    help="one or more slugs; default all")
     r.add_argument("--income-year", type=int, default=None,
                    help="ADRH year (default: the latest the INE publishes)")
+    v = sub.add_parser("validate", help="compare with the Madrid and Barcelona tree inventories")
+    v.add_argument("--city", action="extend", nargs="+", choices=["madrid", "barcelona"])
     sub.add_parser("web", help="rebuild docs/ from data/sections")
     sub.add_parser("income-year", help="print the latest ADRH year")
     a = p.parse_args(argv)
@@ -28,6 +30,10 @@ def main(argv=None) -> int:
     if a.cmd == "income-year":
         from . import ine
         print(ine.latest_income_year())
+        return 0
+    if a.cmd == "validate":
+        from . import inventory
+        inventory.run(a.city or tuple(inventory.LOADERS))
         return 0
     if a.cmd == "web":
         from . import web

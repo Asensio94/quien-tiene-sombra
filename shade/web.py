@@ -143,8 +143,33 @@ def _validacion(sums: list[dict]) -> str:
              'STL y Tree Cover Density por sección</th></tr>' + filas + "</table>") if filas else ""
     inv = ""
     if v.exists():
-        j = json.loads(v.read_text(encoding="utf-8"))
-        inv = "".join(f"<p>{escape(x['text'])}</p>" for x in j.get("results", []))
+        res = json.loads(v.read_text(encoding="utf-8")).get("results", [])
+        filas = "".join(
+            f"<tr><td>{escape(x['name'])}</td><td class='num'>{_es(x['trees'])}</td>"
+            f"<td class='num'>{_es(x['rho_stl'], 2)}</td><td class='num'>{_es(x['rho_tcd'], 2)}</td>"
+            f"<td class='num'>{_es(x['ci_canopy'], 2, signo=True)}</td>"
+            f"<td class='num'>{_es(x['ci_trees'], 2, signo=True)}</td>"
+            f"<td class='num'>{_es(x['ci_trees_per_resident'], 2, signo=True)}</td></tr>" for x in res)
+        fuentes = "; ".join(f"{escape(x['source'])}, {escape(x['edition'])}" for x in res)
+        mad = next((x for x in res if x["slug"] == "madrid" and "ci_basal" in x), None)
+        tronco = (f" En Madrid, que mide el perímetro de cada tronco, la sección del tronco por hectárea sigue "
+                  f"mejor a la Street Tree Layer (correlación de {_es(mad['rho_basal_stl'], 2)}) y tampoco "
+                  f"cambia con la renta (índice {_es(mad['ci_basal'], 2, signo=True)}): los árboles municipales "
+                  f"de los barrios ricos no son más grandes.") if mad else ""
+        inv = (
+            '<h3>Inventarios municipales de arbolado</h3>'
+            '<table class="params valid"><tr><th>Ciudad</th><th class="num">Árboles</th>'
+            '<th class="num">Correl. STL</th><th class="num">Correl. TCD</th>'
+            '<th class="num">Índice sombra</th><th class="num">Índice árboles/ha</th>'
+            '<th class="num">Índice árboles/vecino</th></tr>' + filas + "</table>"
+            "<p>Los árboles municipales por hectárea de cada sección ordenan las secciones de forma parecida a "
+            "las dos capas de satélite (correlaciones de rangos en torno a 0,4), así que las capas miden algo "
+            "real en la calle." + tronco + " Pero esos árboles no se concentran en las secciones de más renta: "
+            "por hectárea están repartidos casi por igual. La sombra de más que ve el satélite en los barrios "
+            "ricos sale sobre todo de lo que no está en el inventario: jardines privados, patios de manzana y "
+            "suelo de otras administraciones. Por vecino, en Madrid sí hay más árboles en los barrios ricos, "
+            "porque están menos poblados.</p>"
+            f'<p class="note">Sin palmeras. Fuentes: {fuentes}. Se guardan solo los recuentos por sección.</p>')
     else:
         inv = ('<p class="note">Pendiente: comparar la sombra de cada sección con los inventarios municipales de '
                'arbolado de Madrid y Barcelona (árboles por hectárea).</p>')

@@ -1,0 +1,36 @@
+{
+ "results": [
+  {
+   "slug": "madrid",
+   "name": "Madrid",
+   "source": "Inventario de arbolado del Ayuntamiento de Madrid (datos.madrid.es)",
+   "edition": "2026-07-09",
+   "trees": 798391,
+   "trees_in_sections": 798016,
+   "rho_stl": 0.402,
+   "rho_tcd": 0.457,
+   "ci_trees": 0.013,
+   "ci_canopy": 0.052,
+   "trees_ha_q1": 30.5,
+   "trees_ha_q5": 33.9,
+   "ci_trees_per_resident": 0.169,
+   "rho_basal_stl": 0.584,
+   "ci_basal": -0.014
+  },
+  {
+   "slug": "barcelona",
+   "name": "Barcelona",
+   "source": "Arbrat viari, de zona i de parcs de l'Ajuntament de Barcelona (Open Data BCN)",
+   "edition": "3.º trimestre de 2026",
+   "trees": 213441,
+   "trees_in_sections": 213228,
+   "rho_stl": 0.427,
+   "rho_tcd": 0.396,
+   "ci_trees": -0.029,
+   "ci_canopy": 0.054,
+   "trees_ha_q1": 33.8,
+   "trees_ha_q5": 29.2,
+   "ci_trees_per_resident": 0.019
+  }
+ ]
+}
