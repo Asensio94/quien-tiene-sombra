@@ -1,0 +1,65 @@
+{
+ "slug": "valencia",
+ "name": "València",
+ "municipality": "46250",
+ "fua": "ES003L3",
+ "income_year": 2023,
+ "sections": 591,
+ "ranked": 573,
+ "population": 813957,
+ "population_ranked": 783534,
+ "ci_canopy": 0.197,
+ "ci_canopy_tcd": 0.246,
+ "rho_canopy": 0.288,
+ "rho_lst": -0.396,
+ "rho_stl_tcd": 0.725,
+ "canopy_pct": 4.81,
+ "quintiles": {
+  "1": {
+   "income": 16102.66,
+   "canopy": 3.32,
+   "canopy_tcd": 0.87,
+   "lst": 43.67
+  },
+  "2": {
+   "income": 19503.16,
+   "canopy": 3.42,
+   "canopy_tcd": 1.18,
+   "lst": 43.61
+  },
+  "3": {
+   "income": 22306.14,
+   "canopy": 3.59,
+   "canopy_tcd": 0.88,
+   "lst": 43.31
+  },
+  "4": {
+   "income": 25701.22,
+   "canopy": 6.21,
+   "canopy_tcd": 1.89,
+   "lst": 42.97
+  },
+  "5": {
+   "income": 34833.15,
+   "canopy": 7.52,
+   "canopy_tcd": 2.59,
+   "lst": 42.4
+  }
+ },
+ "canopy_gap": 4.2,
+ "lst_gap": 1.27,
+ "canopy_urban_tcd_pct": 2.81,
+ "canopy_municipality_tcd_pct": 4.48,
+ "urban_area_ha": 6003,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 55,
+  "days": 38,
+  "clear_median": 33
+ },
+ "sections_without_income": 0
+}

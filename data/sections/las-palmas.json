@@ -1,0 +1,65 @@
+{
+ "slug": "las-palmas",
+ "name": "Las Palmas de Gran Canaria",
+ "municipality": "35016",
+ "fua": "ES008L2",
+ "income_year": 2023,
+ "sections": 278,
+ "ranked": 233,
+ "population": 376986,
+ "population_ranked": 313737,
+ "ci_canopy": 0.049,
+ "ci_canopy_tcd": 0.382,
+ "rho_canopy": 0.04,
+ "rho_lst": -0.35,
+ "rho_stl_tcd": 0.411,
+ "canopy_pct": 1.54,
+ "quintiles": {
+  "1": {
+   "income": 15166.67,
+   "canopy": 1.17,
+   "canopy_tcd": 0.01,
+   "lst": 40.66
+  },
+  "2": {
+   "income": 18042.81,
+   "canopy": 1.65,
+   "canopy_tcd": 0.05,
+   "lst": 40.52
+  },
+  "3": {
+   "income": 21203.83,
+   "canopy": 1.88,
+   "canopy_tcd": 0.09,
+   "lst": 39.91
+  },
+  "4": {
+   "income": 25737.44,
+   "canopy": 1.23,
+   "canopy_tcd": 0.06,
+   "lst": 39.46
+  },
+  "5": {
+   "income": 34653.74,
+   "canopy": 1.79,
+   "canopy_tcd": 0.19,
+   "lst": 39.81
+  }
+ },
+ "canopy_gap": 0.62,
+ "lst_gap": 0.85,
+ "canopy_urban_tcd_pct": 0.21,
+ "canopy_municipality_tcd_pct": 0.61,
+ "urban_area_ha": 4442,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 40,
+  "days": 30,
+  "clear_median": 11
+ },
+ "sections_without_income": 0
+}

@@ -59,6 +59,13 @@ jobs:
           [ -n "$INCOME_YEAR" ] && ARGS="$ARGS --income-year $INCOME_YEAR"
           python -m shade run $ARGS
 
+      # Contraste con los inventarios de arbolado de Madrid y Barcelona; si un portal falla,
+      # la página se rehace con la validación anterior.
+      - name: Validación
+        if: ${{ !inputs.web_only && (inputs.city == '' || inputs.city == 'madrid' || inputs.city == 'barcelona') }}
+        continue-on-error: true
+        run: python -m shade validate
+
       - name: Página
         run: python -m shade web
 

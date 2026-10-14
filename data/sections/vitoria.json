@@ -1,0 +1,65 @@
+{
+ "slug": "vitoria",
+ "name": "Vitoria-Gasteiz",
+ "municipality": "01059",
+ "fua": "ES012L2",
+ "income_year": 2023,
+ "sections": 166,
+ "ranked": 163,
+ "population": 253963,
+ "population_ranked": 248562,
+ "ci_canopy": -0.01,
+ "ci_canopy_tcd": 0.051,
+ "rho_canopy": -0.006,
+ "rho_lst": -0.134,
+ "rho_stl_tcd": 0.733,
+ "canopy_pct": 8.49,
+ "quintiles": {
+  "1": {
+   "income": 19515.9,
+   "canopy": 7.89,
+   "canopy_tcd": 1.89,
+   "lst": 40.82
+  },
+  "2": {
+   "income": 22407.06,
+   "canopy": 9.72,
+   "canopy_tcd": 1.88,
+   "lst": 40.7
+  },
+  "3": {
+   "income": 24493.66,
+   "canopy": 8.28,
+   "canopy_tcd": 1.85,
+   "lst": 40.24
+  },
+  "4": {
+   "income": 26364.01,
+   "canopy": 7.64,
+   "canopy_tcd": 1.58,
+   "lst": 40.64
+  },
+  "5": {
+   "income": 34715.91,
+   "canopy": 8.93,
+   "canopy_tcd": 2.53,
+   "lst": 40.3
+  }
+ },
+ "canopy_gap": 1.04,
+ "lst_gap": 0.52,
+ "canopy_urban_tcd_pct": 3.34,
+ "canopy_municipality_tcd_pct": 22.25,
+ "urban_area_ha": 5422,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 39,
+  "days": 29,
+  "clear_median": 10
+ },
+ "sections_without_income": 0
+}

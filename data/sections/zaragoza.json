@@ -1,0 +1,65 @@
+{
+ "slug": "zaragoza",
+ "name": "Zaragoza",
+ "municipality": "50297",
+ "fua": "ES005L2",
+ "income_year": 2023,
+ "sections": 501,
+ "ranked": 474,
+ "population": 682727,
+ "population_ranked": 641917,
+ "ci_canopy": 0.149,
+ "ci_canopy_tcd": 0.175,
+ "rho_canopy": 0.229,
+ "rho_lst": -0.35,
+ "rho_stl_tcd": 0.676,
+ "canopy_pct": 5.18,
+ "quintiles": {
+  "1": {
+   "income": 16736.63,
+   "canopy": 3.63,
+   "canopy_tcd": 0.43,
+   "lst": 42.97
+  },
+  "2": {
+   "income": 19505.04,
+   "canopy": 3.99,
+   "canopy_tcd": 0.8,
+   "lst": 42.77
+  },
+  "3": {
+   "income": 22700.31,
+   "canopy": 4.65,
+   "canopy_tcd": 1.09,
+   "lst": 42.43
+  },
+  "4": {
+   "income": 25718.99,
+   "canopy": 7.25,
+   "canopy_tcd": 1.31,
+   "lst": 41.91
+  },
+  "5": {
+   "income": 33897.82,
+   "canopy": 6.4,
+   "canopy_tcd": 1.11,
+   "lst": 41.69
+  }
+ },
+ "canopy_gap": 2.77,
+ "lst_gap": 1.28,
+ "canopy_urban_tcd_pct": 1.52,
+ "canopy_municipality_tcd_pct": 2.48,
+ "urban_area_ha": 16485,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 35,
+  "days": 35,
+  "clear_median": 32
+ },
+ "sections_without_income": 0
+}

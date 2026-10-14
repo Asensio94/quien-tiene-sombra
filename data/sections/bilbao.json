@@ -1,0 +1,65 @@
+{
+ "slug": "bilbao",
+ "name": "Bilbao",
+ "municipality": "48020",
+ "fua": "ES019L3",
+ "income_year": 2023,
+ "sections": 273,
+ "ranked": 258,
+ "population": 343552,
+ "population_ranked": 323716,
+ "ci_canopy": -0.051,
+ "ci_canopy_tcd": -0.162,
+ "rho_canopy": -0.015,
+ "rho_lst": 0.325,
+ "rho_stl_tcd": 0.681,
+ "canopy_pct": 4.37,
+ "quintiles": {
+  "1": {
+   "income": 18475.52,
+   "canopy": 4.58,
+   "canopy_tcd": 1.25,
+   "lst": 38.35
+  },
+  "2": {
+   "income": 21968.87,
+   "canopy": 5.49,
+   "canopy_tcd": 1.44,
+   "lst": 38.82
+  },
+  "3": {
+   "income": 26307.7,
+   "canopy": 3.97,
+   "canopy_tcd": 0.85,
+   "lst": 38.76
+  },
+  "4": {
+   "income": 30362.7,
+   "canopy": 3.95,
+   "canopy_tcd": 0.84,
+   "lst": 39.38
+  },
+  "5": {
+   "income": 42743.83,
+   "canopy": 3.88,
+   "canopy_tcd": 0.54,
+   "lst": 39.24
+  }
+ },
+ "canopy_gap": -0.7,
+ "lst_gap": -0.89,
+ "canopy_urban_tcd_pct": 2.62,
+ "canopy_municipality_tcd_pct": 22.07,
+ "urban_area_ha": 1921,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 10,
+  "days": 10,
+  "clear_median": 9
+ },
+ "sections_without_income": 0
+}

@@ -1,0 +1,65 @@
+{
+ "slug": "valladolid",
+ "name": "Valladolid",
+ "municipality": "47186",
+ "fua": "ES009L2",
+ "income_year": 2023,
+ "sections": 252,
+ "ranked": 244,
+ "population": 296647,
+ "population_ranked": 284873,
+ "ci_canopy": 0.144,
+ "ci_canopy_tcd": 0.213,
+ "rho_canopy": 0.247,
+ "rho_lst": -0.377,
+ "rho_stl_tcd": 0.841,
+ "canopy_pct": 6.95,
+ "quintiles": {
+  "1": {
+   "income": 15505.07,
+   "canopy": 3.6,
+   "canopy_tcd": 0.89,
+   "lst": 42.66
+  },
+  "2": {
+   "income": 19401.71,
+   "canopy": 6.91,
+   "canopy_tcd": 2.62,
+   "lst": 42.06
+  },
+  "3": {
+   "income": 22552.32,
+   "canopy": 6.15,
+   "canopy_tcd": 2.2,
+   "lst": 41.75
+  },
+  "4": {
+   "income": 26764.02,
+   "canopy": 9.11,
+   "canopy_tcd": 3.14,
+   "lst": 41.56
+  },
+  "5": {
+   "income": 32937.05,
+   "canopy": 8.95,
+   "canopy_tcd": 4.04,
+   "lst": 40.84
+  }
+ },
+ "canopy_gap": 5.35,
+ "lst_gap": 1.82,
+ "canopy_urban_tcd_pct": 3.64,
+ "canopy_municipality_tcd_pct": 8.34,
+ "urban_area_ha": 5698,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 22,
+  "days": 22,
+  "clear_median": 19
+ },
+ "sections_without_income": 0
+}

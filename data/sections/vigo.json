@@ -1,0 +1,65 @@
+{
+ "slug": "vigo",
+ "name": "Vigo",
+ "municipality": "36057",
+ "fua": "ES022L2",
+ "income_year": 2023,
+ "sections": 241,
+ "ranked": 224,
+ "population": 292093,
+ "population_ranked": 272287,
+ "ci_canopy": 0.006,
+ "ci_canopy_tcd": 0.062,
+ "rho_canopy": -0.07,
+ "rho_lst": -0.04,
+ "rho_stl_tcd": 0.705,
+ "canopy_pct": 8.01,
+ "quintiles": {
+  "1": {
+   "income": 18417.48,
+   "canopy": 6.11,
+   "canopy_tcd": 0.71,
+   "lst": 37.55
+  },
+  "2": {
+   "income": 20372.57,
+   "canopy": 8.63,
+   "canopy_tcd": 1.55,
+   "lst": 37.46
+  },
+  "3": {
+   "income": 21991.44,
+   "canopy": 10.06,
+   "canopy_tcd": 3.75,
+   "lst": 37.06
+  },
+  "4": {
+   "income": 23777.24,
+   "canopy": 7.85,
+   "canopy_tcd": 1.75,
+   "lst": 37.32
+  },
+  "5": {
+   "income": 29349.06,
+   "canopy": 7.37,
+   "canopy_tcd": 1.68,
+   "lst": 36.96
+  }
+ },
+ "canopy_gap": 1.26,
+ "lst_gap": 0.59,
+ "canopy_urban_tcd_pct": 3.25,
+ "canopy_municipality_tcd_pct": 17.7,
+ "urban_area_ha": 5759,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 39,
+  "days": 31,
+  "clear_median": 27
+ },
+ "sections_without_income": 0
+}

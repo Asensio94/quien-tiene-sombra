@@ -68,11 +68,12 @@ def _access_token() -> str:
 
 def download(product: dict, folder: str) -> Path:
     """Download once into the cache. Multi-file products come zipped and are unpacked; the
-    path returned is the single data file (or the folder when there are several)."""
+    path returned is the product's data file."""
     dest = config.CACHE_DIR / folder / product["Name"]
     done = dest.with_suffix(dest.suffix + ".done")
     if done.exists():
-        return Path(done.read_text(encoding="utf-8"))
+        out = Path(done.read_text(encoding="utf-8"))
+        return _data_file(out, product["Name"]) if out.is_dir() else out
     dest.parent.mkdir(parents=True, exist_ok=True)
     url = config.CDSE_DOWNLOAD.format(id=product["Id"])
     tmp = dest.with_suffix(".part")
@@ -96,14 +97,23 @@ def download(product: dict, folder: str) -> Path:
         with zipfile.ZipFile(tmp) as z:
             z.extractall(dest)
         tmp.unlink()
-        data = [p for p in dest.rglob("*") if p.is_file()
-                and p.suffix.lower() in (".fgb", ".gpkg", ".tif", ".tiff", ".shp")]
-        out = data[0] if len(data) == 1 else dest
+        out = _data_file(dest, product["Name"])
     else:
         out = dest.with_suffix(_suffix(product["Name"], tmp))
         tmp.replace(out)
     done.write_text(str(out), encoding="utf-8")
     return out
+
+
+def _data_file(folder: Path, name: str) -> Path:
+    """The data file of an unpacked product. Urban Atlas zips also carry side layers (the STL
+    one ships an urban mask, ..._UM_...), so the file named like the product wins."""
+    data = [p for p in folder.rglob("*") if p.is_file()
+            and p.suffix.lower() in (".fgb", ".gpkg", ".tif", ".tiff", ".shp")]
+    if not data:
+        return folder
+    named = [p for p in data if p.stem == name]
+    return named[0] if named else max(data, key=lambda p: p.stat().st_size)
 
 
 def _suffix(name: str, path: Path) -> str:

@@ -1,0 +1,65 @@
+{
+ "slug": "palma",
+ "name": "Palma",
+ "municipality": "07040",
+ "fua": "ES010L2",
+ "income_year": 2023,
+ "sections": 253,
+ "ranked": 231,
+ "population": 425745,
+ "population_ranked": 390552,
+ "ci_canopy": 0.16,
+ "ci_canopy_tcd": 0.347,
+ "rho_canopy": 0.186,
+ "rho_lst": -0.469,
+ "rho_stl_tcd": 0.526,
+ "canopy_pct": 4.95,
+ "quintiles": {
+  "1": {
+   "income": 17416.59,
+   "canopy": 3.65,
+   "canopy_tcd": 0.39,
+   "lst": 43.47
+  },
+  "2": {
+   "income": 21061.0,
+   "canopy": 2.97,
+   "canopy_tcd": 0.6,
+   "lst": 43.65
+  },
+  "3": {
+   "income": 23309.41,
+   "canopy": 5.3,
+   "canopy_tcd": 2.19,
+   "lst": 42.93
+  },
+  "4": {
+   "income": 25970.43,
+   "canopy": 3.76,
+   "canopy_tcd": 1.39,
+   "lst": 42.76
+  },
+  "5": {
+   "income": 33381.87,
+   "canopy": 8.99,
+   "canopy_tcd": 4.47,
+   "lst": 41.92
+  }
+ },
+ "canopy_gap": 5.34,
+ "lst_gap": 1.55,
+ "canopy_urban_tcd_pct": 5.66,
+ "canopy_municipality_tcd_pct": 13.75,
+ "urban_area_ha": 8356,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 74,
+  "days": 41,
+  "clear_median": 33
+ },
+ "sections_without_income": 0
+}

@@ -1,0 +1,65 @@
+{
+ "slug": "alicante",
+ "name": "Alicante",
+ "municipality": "03014",
+ "fua": "ES021L2",
+ "income_year": 2023,
+ "sections": 246,
+ "ranked": 234,
+ "population": 354576,
+ "population_ranked": 338119,
+ "ci_canopy": 0.227,
+ "ci_canopy_tcd": 0.322,
+ "rho_canopy": 0.221,
+ "rho_lst": -0.584,
+ "rho_stl_tcd": 0.832,
+ "canopy_pct": 3.3,
+ "quintiles": {
+  "1": {
+   "income": 11811.98,
+   "canopy": 2.32,
+   "canopy_tcd": 0.87,
+   "lst": 44.37
+  },
+  "2": {
+   "income": 15643.29,
+   "canopy": 1.18,
+   "canopy_tcd": 0.68,
+   "lst": 44.44
+  },
+  "3": {
+   "income": 19280.11,
+   "canopy": 2.77,
+   "canopy_tcd": 1.66,
+   "lst": 44.04
+  },
+  "4": {
+   "income": 23973.29,
+   "canopy": 5.27,
+   "canopy_tcd": 3.0,
+   "lst": 42.89
+  },
+  "5": {
+   "income": 29752.62,
+   "canopy": 4.92,
+   "canopy_tcd": 3.46,
+   "lst": 42.46
+  }
+ },
+ "canopy_gap": 2.6,
+ "lst_gap": 1.91,
+ "canopy_urban_tcd_pct": 2.6,
+ "canopy_municipality_tcd_pct": 2.38,
+ "urban_area_ha": 7087,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 81,
+  "days": 46,
+  "clear_median": 36
+ },
+ "sections_without_income": 0
+}

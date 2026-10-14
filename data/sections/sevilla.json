@@ -1,0 +1,65 @@
+{
+ "slug": "sevilla",
+ "name": "Sevilla",
+ "municipality": "41091",
+ "fua": "ES004L3",
+ "income_year": 2023,
+ "sections": 521,
+ "ranked": 513,
+ "population": 680373,
+ "population_ranked": 667408,
+ "ci_canopy": 0.154,
+ "ci_canopy_tcd": 0.152,
+ "rho_canopy": 0.172,
+ "rho_lst": -0.544,
+ "rho_stl_tcd": 0.704,
+ "canopy_pct": 3.28,
+ "quintiles": {
+  "1": {
+   "income": 12573.01,
+   "canopy": 2.33,
+   "canopy_tcd": 1.24,
+   "lst": 46.41
+  },
+  "2": {
+   "income": 16770.7,
+   "canopy": 2.86,
+   "canopy_tcd": 2.62,
+   "lst": 46.06
+  },
+  "3": {
+   "income": 20796.01,
+   "canopy": 3.12,
+   "canopy_tcd": 3.19,
+   "lst": 45.51
+  },
+  "4": {
+   "income": 26549.48,
+   "canopy": 3.03,
+   "canopy_tcd": 2.74,
+   "lst": 44.93
+  },
+  "5": {
+   "income": 34486.77,
+   "canopy": 5.06,
+   "canopy_tcd": 3.4,
+   "lst": 44.54
+  }
+ },
+ "canopy_gap": 2.73,
+ "lst_gap": 1.87,
+ "canopy_urban_tcd_pct": 4.87,
+ "canopy_municipality_tcd_pct": 6.16,
+ "urban_area_ha": 8413,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 43,
+  "days": 43,
+  "clear_median": 20
+ },
+ "sections_without_income": 0
+}

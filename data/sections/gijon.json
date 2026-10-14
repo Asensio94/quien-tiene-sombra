@@ -1,0 +1,65 @@
+{
+ "slug": "gijon",
+ "name": "Gijón",
+ "municipality": "33024",
+ "fua": "ES023L2",
+ "income_year": 2023,
+ "sections": 201,
+ "ranked": 188,
+ "population": 267493,
+ "population_ranked": 250603,
+ "ci_canopy": 0.253,
+ "ci_canopy_tcd": 0.418,
+ "rho_canopy": 0.19,
+ "rho_lst": -0.266,
+ "rho_stl_tcd": 0.333,
+ "canopy_pct": 2.87,
+ "quintiles": {
+  "1": {
+   "income": 17313.52,
+   "canopy": 1.69,
+   "canopy_tcd": 0.14,
+   "lst": 35.78
+  },
+  "2": {
+   "income": 19328.61,
+   "canopy": 2.01,
+   "canopy_tcd": 0.44,
+   "lst": 36.01
+  },
+  "3": {
+   "income": 21351.07,
+   "canopy": 2.54,
+   "canopy_tcd": 0.31,
+   "lst": 35.59
+  },
+  "4": {
+   "income": 23917.2,
+   "canopy": 2.53,
+   "canopy_tcd": 0.19,
+   "lst": 35.6
+  },
+  "5": {
+   "income": 31654.26,
+   "canopy": 5.63,
+   "canopy_tcd": 1.39,
+   "lst": 34.7
+  }
+ },
+ "canopy_gap": 3.94,
+ "lst_gap": 1.08,
+ "canopy_urban_tcd_pct": 2.5,
+ "canopy_municipality_tcd_pct": 16.75,
+ "urban_area_ha": 6525,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 9,
+  "days": 9,
+  "clear_median": 4
+ },
+ "sections_without_income": 0
+}

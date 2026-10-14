@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cstyle%3E.b%7Bfill%3A%23221d1a%7D.p%7Bfill%3A%233f7d20%7D.l%7Bstroke%3A%23221d1a%7D%40media%20%28prefers-color-scheme%3Adark%29%7B.b%7Bfill%3A%23ede6e0%7D.p%7Bfill%3A%2394d06c%7D.l%7Bstroke%3A%23ede6e0%7D%7D%3C/style%3E%3Cg%20class%3D%22b%22%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2231%22%20r%3D%2219%22/%3E%3Cpath%20d%3D%22M19%2040%207%2050.5l3.5%204L25%2046z%22/%3E%3Cpath%20d%3D%22M52%2022l8%202.5-8%202.5z%22/%3E%3C/g%3E%3Cpath%20class%3D%22p%22%20d%3D%22M34%2012a19%2019%200%200%201%2015%2030.8C42%2041%2037%2034%2037%2026c0-6%201.5-10.5%204-12.6A19%2019%200%200%200%2034%2012z%22/%3E%3Cg%20fill%3D%22%23221d1a%22%3E%3Ccircle%20cx%3D%2245%22%20cy%3D%2221.5%22%20r%3D%222.1%22/%3E%3C/g%3E%3Cpath%20class%3D%22l%22%20d%3D%22M31%2049.5V60m7-11v11m-10.5.2h6m1.5%200h6%22%20fill%3D%22none%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
+<title>¿Quién tiene sombra?</title>
+<meta name="description" content="Cubierta arbórea y temperatura de superficie en verano por sección censal frente a la renta de los hogares, en las grandes ciudades españolas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* common.css v1.1 — shared look of the nine open-data projects (vigia-incendios is the reference).
+   Copy this file verbatim into each repo; change it in all repos at once, never in one.
+   Each repo sets only --accent and --accent-dark below it and adds its own rules after it.
+
+   Type:  Barlow Condensed for titles and labels, Source Serif 4 for reading, IBM Plex Mono for
+          figures, codes and dates. Load them with:
+   https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap */
+
+:root{
+  --ground:#f0edea; --paper:#faf8f6; --ink:#221d1a; --muted:#6b625c; --line:#dad2cb;
+  --accent:#c2410c; --accent-dark:#fb7b3e;
+  --natura:#2f7a55; --natura-dark:#62b88a;
+  --shadow:0 1px 0 rgba(34,29,26,.06), 0 6px 18px -10px rgba(34,29,26,.28);
+  --font-title:"Barlow Condensed","Arial Narrow",sans-serif;
+  --font-text:"Source Serif 4",Georgia,serif;
+  --font-data:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#15110f; --paper:#1d1815; --ink:#ede6e0; --muted:#a69a91; --line:#362d28;
+    --accent:var(--accent-dark); --natura:var(--natura-dark);
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 22px -12px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#15110f; --paper:#1d1815; --ink:#ede6e0; --muted:#a69a91; --line:#362d28;
+  --accent:var(--accent-dark); --natura:var(--natura-dark);
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 22px -12px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:17px/1.55 var(--font-text);overflow-wrap:break-word}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+img,svg{max-width:100%}
+
+/* Header: «PROJECT NAME» with the key word in the accent colour, one sentence, then the figures. */
+.site-header{max-width:1440px;margin:0 auto;padding:28px 16px 18px;display:grid;gap:14px}
+.site-header h1{margin:0;font:700 clamp(40px,6vw,64px)/.9 var(--font-title);text-transform:uppercase;letter-spacing:.02em}
+.site-header h1 span{color:var(--accent)}
+/* Logo: the robin from logo.py before the title; same shape everywhere, breast in the accent. */
+.logo{display:inline-block;width:1.05em;height:1.05em;margin-right:.16em;vertical-align:-.13em;color:var(--ink);overflow:visible}
+.logo .logo-breast{fill:var(--accent)}
+.site-header .lede{margin:0;max-width:72ch;font-size:18px}
+.figures{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0;padding:12px 0 0;border-top:1px solid var(--line)}
+.figures div{display:grid;gap:2px}
+.figures b{font:600 30px/1 var(--font-data);font-variant-numeric:tabular-nums;color:var(--accent)}
+.figures span{font:600 13px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+/* Text roles */
+.label{font-family:var(--font-title);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.data{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+.note{color:var(--muted);font-size:14.5px}
+.badge{display:inline-block;font:600 12px/1 var(--font-title);text-transform:uppercase;letter-spacing:.09em;padding:4px 7px 3px;border:1.5px solid currentColor;color:var(--accent)}
+
+/* Cards and panels */
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:16px}
+
+/* Method section: how every figure is computed, step by step */
+.method{max-width:1440px;margin:0 auto;padding:24px 16px}
+.method h2{margin:0 0 6px;font:700 28px/1 var(--font-title);text-transform:uppercase;letter-spacing:.03em}
+.method h3{margin:18px 0 4px;font:600 18px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.06em}
+.method p,.method li{max-width:72ch}
+table.params{border-collapse:collapse;font-size:14.5px;width:100%;max-width:900px}
+table.params th,table.params td{text-align:left;vertical-align:top;padding:6px 10px 6px 0;border-bottom:1px solid var(--line)}
+table.params th{font:600 14px/1.3 var(--font-title);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;padding-right:16px}
+table.params td.num,table.params th.num{text-align:right;font-family:var(--font-data);font-variant-numeric:tabular-nums}
+
+/* Footer: sources, licence, the shared principle and the sibling projects */
+.site-footer{max-width:1440px;margin:0 auto;padding:16px 16px 40px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);display:grid;gap:10px}
+.site-footer .principle{margin:0;color:var(--ink);font-style:italic}
+.siblings{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0;padding:0;list-style:none}
+.siblings li a{text-decoration-color:var(--line)}
+.siblings li[aria-current] a{color:var(--ink);text-decoration-color:var(--accent);font-weight:600}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .figures b{font-size:24px}
+}
+:root{--accent:#3f7d20;--accent-dark:#94d06c}
+:root{--s0:#eef3e6;--s1:#c9dfb4;--s2:#93c16f;--s3:#5b9a35;--s4:#2f6614;
+  --h0:#2f6fa3;--h1:#9cc3e0;--h2:#ece6dc;--h3:#eba27a;--h4:#b33a1b;
+  --r0:#f1ecf4;--r1:#d4c3e0;--r2:#a98bc4;--r3:#7a57a3;--r4:#4a2c74}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--s0:#24301c;--s1:#35522a;--s2:#4f7d38;--s3:#77ad54;--s4:#b4e08e;
+    --h0:#6fa8d6;--h1:#3a5b77;--h2:#3a332d;--h3:#8a4a2e;--h4:#f08a5d;
+    --r0:#2c2433;--r1:#4a3a5c;--r2:#6f5590;--r3:#9d7fc2;--r4:#d2bdf0}
+}
+:root[data-theme="dark"]{--s0:#24301c;--s1:#35522a;--s2:#4f7d38;--s3:#77ad54;--s4:#b4e08e;
+  --h0:#6fa8d6;--h1:#3a5b77;--h2:#3a332d;--h3:#8a4a2e;--h4:#f08a5d;
+  --r0:#2c2433;--r1:#4a3a5c;--r2:#6f5590;--r3:#9d7fc2;--r4:#d2bdf0}
+.marca{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.marca .label{color:var(--muted);font-size:14px}
+.bloque{max-width:1440px;margin:0 auto;padding:24px 16px 0}
+.bloque > h2{margin:0 0 8px;font:700 28px/1 var(--font-title);text-transform:uppercase;letter-spacing:.03em}
+.tabla-wrap{overflow-x:auto}
+table.ciudades{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--paper)}
+table.ciudades th,table.ciudades td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+table.ciudades th{font:600 13px var(--font-title);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+table.ciudades td.num,table.ciudades th.num{text-align:right;font-family:var(--font-data);font-variant-numeric:tabular-nums;white-space:nowrap}
+table.ciudades tbody tr{cursor:pointer}
+table.ciudades tbody tr:hover,table.ciudades tbody tr.sel{background:color-mix(in srgb,var(--accent) 10%,var(--paper))}
+.barra{position:relative;width:120px;height:12px;background:var(--ground)}
+.barra::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;border-left:1px solid var(--muted)}
+.barra i{position:absolute;top:2px;bottom:2px;background:var(--accent)}
+.barra i.neg{background:var(--h4)}
+main{max-width:1440px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,1fr);gap:20px;align-items:start}
+.controles{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:10px 0;font-size:14px;color:var(--muted)}
+.controles select{font:14px var(--font-text);background:var(--paper);color:var(--ink);border:1px solid var(--line);padding:4px 6px}
+.mapa{background:var(--paper);border:1px solid var(--line);padding:8px}
+.mapa svg{display:block;width:100%;height:auto;max-height:78vh}
+.mapa path{stroke:var(--paper);stroke-width:.35}
+.mapa path.nd{fill:url(#rayas)}
+.mapa path:hover,.mapa path.sel{stroke:var(--ink);stroke-width:1.6}
+.leyenda{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--muted);align-items:center;margin-top:6px}
+.leyenda i{display:inline-block;width:14px;height:10px;margin-right:4px;vertical-align:-1px}
+.panel{display:grid;gap:14px}
+.panel h2{margin:0;font:600 26px/1.1 var(--font-title)}
+.panel .sub{margin:0;color:var(--muted);font-size:14.5px}
+dl.cifras{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px 12px}
+dl.cifras div{display:grid;gap:1px} dl.cifras dt{font-size:12px;color:var(--muted)}
+dl.cifras dd{margin:0;font:500 16px var(--font-data);font-variant-numeric:tabular-nums}
+.graf svg{width:100%;height:auto;display:block;overflow:visible}
+.graf .eje{stroke:var(--line)} .graf text{font:11px var(--font-data);fill:var(--muted)}
+.graf .pt{fill:var(--accent);fill-opacity:.35;stroke:var(--accent);stroke-opacity:.6;stroke-width:.5}
+.graf .pt.sel{fill:var(--ink);fill-opacity:1}
+.graf .q{fill:var(--accent)} .graf .qh{fill:var(--h4)}
+.graf .tit{font:600 13px var(--font-title);fill:var(--ink);text-transform:uppercase;letter-spacing:.04em}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.dos p{margin:0 0 10px;max-width:72ch}
+.method{border-top:1.5px solid var(--ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;margin-top:24px}
+.method p{margin:0 0 10px} .method ol{margin:0 0 10px;padding-left:1.4em} .method ol li{margin-bottom:8px}
+.method > div > h3:first-child{margin-top:0}
+.method table.params th{white-space:normal;width:30%}
+.method table.valid th{width:auto}
+.aviso{border-left:3px solid var(--accent);padding:2px 0 2px 12px}
+.site-footer p{margin:0}
+@media (max-width:900px){main,.method,.dos{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="marca">
+    <h1><svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="34" cy="31" r="19"/><path d="M19 40 7 50.5l3.5 4L25 46z"/><path d="M52 22l8 2.5-8 2.5z"/></g><path class="logo-breast" d="M34 12a19 19 0 0 1 15 30.8C42 41 37 34 37 26c0-6 1.5-10.5 4-12.6A19 19 0 0 0 34 12z"/><g fill="#221d1a"><circle cx="45" cy="21.5" r="2.1"/></g><path d="M31 49.5V60m7-11v11m-10.5.2h6m1.5 0h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>¿Quién tiene <span>sombra</span>?</h1>
+    <span class="label">20 ciudades · sección censal · renta 2023</span>
+  </div>
+  <p class="lede">Árboles y calor de verano, barrio a barrio, frente a la renta de los hogares. Con datos abiertos de Copernicus, Landsat y el INE se mide cuánta sombra tiene cada sección censal de las grandes ciudades y cuánto se calienta su suelo en julio y agosto, y se ordena por lo que ganan sus vecinos.</p>
+  <div class="figures">
+    <div><b>18 de 20</b><span>ciudades donde la sombra se concentra en los barrios de más renta</span></div>
+    <div><b>+1,3 °C</b><span>más de calor en el suelo de los barrios más pobres (mediana de las ciudades)</span></div>
+    <div><b>8.853</b><span>secciones censales</span></div>
+    <div><b>12.127.258</b><span>residentes</span></div>
+  </div>
+</header>
+
+<section class="bloque" id="ciudades">
+  <h2>Ciudad a ciudad</h2>
+  <p class="note">El quintil más pobre y el más rico agrupan cada uno a la quinta parte de los residentes. Pulse una ciudad para ver su mapa.</p>
+  <div class="tabla-wrap"><table class="ciudades">
+    <thead><tr><th>Ciudad</th><th>Índice de concentración de la sombra</th><th class="num">Sombra, quintil más pobre</th><th class="num">Sombra, quintil más rico</th><th class="num">Calor de más en el quintil más pobre</th><th class="num">Cubierta arbórea urbana 2024</th></tr></thead>
+    <tbody id="filas"></tbody>
+  </table></div>
+</section>
+
+<section class="bloque" id="detalle">
+  <div class="controles">
+    <label>Ciudad <select id="f-ciudad"></select></label>
+    <label>Mostrar <select id="f-modo"><option value="sombra">Sombra</option><option value="calor">Calor</option><option value="renta">Renta</option></select></label>
+  </div>
+</section>
+<main>
+  <div>
+    <div class="mapa"><svg id="mapa" viewBox="0 0 800 600" role="img" aria-label="Mapa de secciones censales">
+      <defs><pattern id="rayas" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--line)" stroke-width="2"/></pattern></defs>
+      <g id="secciones"></g></svg></div>
+    <div class="leyenda" id="leyenda" aria-label="Leyenda"></div>
+  </div>
+  <div class="panel card" id="panel" aria-live="polite"></div>
+</main>
+
+<section class="bloque" id="por-que">
+  <h2>Por qué importa</h2>
+  <div class="dos">
+    <div>
+      <p>En Baltimore, Nueva York y otras ciudades de Estados Unidos, la cubierta de árboles sigue a la renta: Schwarz y otros lo resumieron en 2015 con un título que se ha hecho famoso, «Trees grow on money» (<a href="https://doi.org/10.1371/journal.pone.0122051">PLoS ONE 10: e0122051</a>). Donde hay menos árboles el suelo se calienta más, y las olas de calor matan sobre todo a personas mayores, enfermas o que viven en casas que no pueden refrescar.</p>
+      <p>Esta página hace la misma pregunta en España con datos abiertos y la misma regla para todas las ciudades: ¿tienen los barrios pobres menos sombra y más calor?</p>
+    </div>
+    <div>
+      <p>El Reglamento europeo de Restauración de la Naturaleza (<a href="https://eur-lex.europa.eu/eli/reg/2024/1991/oj">Reglamento (UE) 2024/1991</a>, artículo 8) obliga a que, en 2030, la cubierta arbórea urbana no haya bajado respecto a 2024, y a que crezca después. La última columna de la tabla es esa cifra para cada ciudad, medida con la capa que la Comisión recomienda: la base de 2024 contra la que habrá que medir.</p>
+      <p class="aviso">Son indicios, no veredictos. Una sección con poca sombra puede tener otras razones (un casco antiguo de calles estrechas, un polígono) y la temperatura del suelo no es la del aire que se respira.</p>
+    </div>
+  </div>
+</section>
+
+<section class="method" id="metodo">
+  <div>
+    <h2>Cómo se calcula</h2>
+    <ol>
+      <li>Se toman las secciones censales de cada municipio y su renta media por unidad de consumo del Atlas de Distribución de Renta de los Hogares del INE, que reparte los ingresos declarados a Hacienda según dónde vive cada persona. La unidad de consumo corrige el tamaño del hogar.</li>
+      <li>La sombra de cada sección es la parte de su superficie cubierta por copas de árbol según la Street Tree Layer del Urban Atlas de Copernicus, a la que se suma el bosque urbano que esa capa deja fuera. Como contraste se calcula también la densidad de cubierta arbórea de la capa Tree Cover Density, a 10 metros.</li>
+      <li>El calor es la temperatura del suelo que mide la banda térmica de Landsat 8 y 9 en julio y agosto. Se descartan los píxeles con nubes, sombras o agua y se toma, para cada punto, la mediana de todos los días despejados de tres veranos. Después se promedia en cada sección.</li>
+      <li>Solo entran en las comparaciones las secciones urbanas con suficientes vecinos. Se ordenan por renta y se reparten en cinco grupos con la misma población: del quintil más pobre al más rico.</li>
+      <li>El índice de concentración resume en un número cómo se reparte la sombra a lo largo de esa ordenación: 0 si todos tienen la misma, positivo si se acumula en los barrios ricos, negativo si en los pobres.</li>
+    </ol>
+    <h3>Parámetros</h3>
+    <table class="params"><tr><th>Renta</th><td>renta media por unidad de consumo, Atlas de Distribución de Renta de los Hogares del INE (2023), por sección censal</td></tr><tr><th>Secciones</th><td>las del INE a 1 de enero del año siguiente al de la renta, que son las que usa el Atlas</td></tr><tr><th>Sombra</th><td>Street Tree Layer 2021 del Urban Atlas (manchas de árboles de 500 m² o más) y bosque urbano (clase 31000 del Urban Atlas 2021), en % de la superficie de la sección</td></tr><tr><th>Sombra, contraste</th><td>densidad de cubierta arbórea HRL Tree Cover Density 2024, 10 m</td></tr><tr><th>Calor</th><td>temperatura de superficie de Landsat 8 y 9 (Collection 2 nivel 2, banda térmica), julio y agosto de 2024–2026; mediana de las pasadas despejadas, al menos 4 por píxel de 30 m</td></tr><tr><th>Secciones que cuentan</th><td>al menos 300 residentes y 50 % de superficie artificial según el Urban Atlas; las demás se ven en el mapa rayadas</td></tr><tr><th>Quintiles</th><td>cinco grupos de secciones ordenadas por renta, con la misma población cada uno</td></tr><tr><th>Índice de concentración</th><td>de −1 a 1, ponderado por población; positivo si la sombra se acumula en las secciones de más renta</td></tr><tr><th>Cubierta arbórea urbana (art. 8)</th><td>media de la Tree Cover Density 2024 sobre el suelo artificial del Urban Atlas 2021 dentro del municipio</td></tr></table>
+  </div>
+  <div>
+    <h3>Contraste</h3>
+    <p>Las dos capas de árboles miden cosas distintas: la Street Tree Layer dibuja manchas de 500 m² o más, y la Tree Cover Density estima la densidad de copa en cada píxel de 10 metros. Si ordenan las secciones de forma parecida, la conclusión no depende de la capa elegida.</p>
+    <table class="params valid"><tr><th>Ciudad</th><th class="num">Correlación de rangos entre STL y Tree Cover Density por sección</th></tr><tr><td>Madrid</td><td class='num'>0,85</td></tr><tr><td>Barcelona</td><td class='num'>0,67</td></tr><tr><td>València</td><td class='num'>0,72</td></tr><tr><td>Sevilla</td><td class='num'>0,70</td></tr><tr><td>Zaragoza</td><td class='num'>0,68</td></tr><tr><td>Málaga</td><td class='num'>0,78</td></tr><tr><td>Murcia</td><td class='num'>0,70</td></tr><tr><td>Palma</td><td class='num'>0,53</td></tr><tr><td>Las Palmas de Gran Canaria</td><td class='num'>0,41</td></tr><tr><td>Bilbao</td><td class='num'>0,68</td></tr><tr><td>Alicante</td><td class='num'>0,83</td></tr><tr><td>Córdoba</td><td class='num'>0,65</td></tr><tr><td>Valladolid</td><td class='num'>0,84</td></tr><tr><td>Vigo</td><td class='num'>0,70</td></tr><tr><td>Gijón</td><td class='num'>0,33</td></tr><tr><td>L&#x27;Hospitalet de Llobregat</td><td class='num'>0,53</td></tr><tr><td>Vitoria-Gasteiz</td><td class='num'>0,73</td></tr><tr><td>A Coruña</td><td class='num'>0,64</td></tr><tr><td>Granada</td><td class='num'>0,78</td></tr><tr><td>Elche</td><td class='num'>0,81</td></tr></table><h3>Inventarios municipales de arbolado</h3><table class="params valid"><tr><th>Ciudad</th><th class="num">Árboles</th><th class="num">Correl. STL</th><th class="num">Correl. TCD</th><th class="num">Índice sombra</th><th class="num">Índice árboles/ha</th><th class="num">Índice árboles/vecino</th></tr><tr><td>Madrid</td><td class='num'>798.391</td><td class='num'>0,40</td><td class='num'>0,46</td><td class='num'>+0,05</td><td class='num'>+0,01</td><td class='num'>+0,17</td></tr><tr><td>Barcelona</td><td class='num'>213.441</td><td class='num'>0,43</td><td class='num'>0,40</td><td class='num'>+0,05</td><td class='num'>−0,03</td><td class='num'>+0,02</td></tr></table><p>Los árboles municipales por hectárea de cada sección ordenan las secciones de forma parecida a las dos capas de satélite (correlaciones de rangos en torno a 0,4), así que las capas miden algo real en la calle. En Madrid, que mide el perímetro de cada tronco, la sección del tronco por hectárea sigue mejor a la Street Tree Layer (correlación de 0,58) y tampoco cambia con la renta (índice −0,01): los árboles municipales de los barrios ricos no son más grandes. Pero esos árboles no se concentran en las secciones de más renta: por hectárea están repartidos casi por igual. La sombra de más que ve el satélite en los barrios ricos sale sobre todo de lo que no está en el inventario: jardines privados, patios de manzana y suelo de otras administraciones. Por vecino, en Madrid sí hay más árboles en los barrios ricos, porque están menos poblados.</p><p class="note">Sin palmeras. Fuentes: Inventario de arbolado del Ayuntamiento de Madrid (datos.madrid.es), 2026-07-09; Arbrat viari, de zona i de parcs de l&#x27;Ajuntament de Barcelona (Open Data BCN), 3.º trimestre de 2026. Se guardan solo los recuentos por sección.</p>
+    <h3>Lo que hay que saber antes de citarlo</h3>
+    <p class="aviso">La Street Tree Layer no ve los árboles de alineación sueltos ni las copas pequeñas, que en los barrios densos son casi toda la sombra de la calle. Por eso los barrios de calles estrechas pueden salir con menos sombra de la que se siente a pie.</p>
+    <p class="aviso">Landsat pasa hacia las once de la mañana, hora solar. Mide el calor del suelo a esa hora, no el de la tarde ni el del aire, y los tejados cuentan tanto como la calle.</p>
+    <p>La renta es de 2023 y las capas de árboles, de 2020–2021 (Street Tree Layer) y 2024 (Tree Cover Density). Los árboles cambian despacio, pero una plantación o una tala grande de esos años puede mover alguna sección. Las capas de 2018 y 2021 de la Street Tree Layer se hicieron con métodos distintos y no se comparan entre sí.</p>
+    <h3>Datos abiertos</h3>
+    <p><a href="secciones.csv">secciones.csv</a> con cada sección · <a href="ciudades.csv">ciudades.csv</a> con el resumen · <a href="indicators.json">indicators.json</a> con la cubierta arbórea urbana · <a href="https://github.com/Asensio94/quien-tiene-sombra">código</a>.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p class="principle">Datos públicos, reglas a la vista y cada cifra enlazada a su fuente. Indicios, no veredictos.</p>
+  <p>Street Tree Layer, Urban Atlas y Tree Cover Density: Copernicus Land Monitoring Service, © Unión Europea, Agencia Europea de Medio Ambiente · Landsat 8 y 9: USGS, vía Microsoft Planetary Computer · Renta, población y secciones censales: Instituto Nacional de Estadística.</p>
+  <nav aria-label="Proyectos hermanos"><ul class="siblings">
+    <li><a href="https://asensio94.github.io/observatorio-alegaciones/">Observatorio de alegaciones</a></li>
+    <li><a href="https://asensio94.github.io/vigia-incendios/">Vigía de incendios</a></li>
+    <li><a href="https://asensio94.github.io/centinela-natura/">Centinela Natura</a></li>
+    <li><a href="https://asensio94.github.io/vigilancia-humedales/">Vigilancia de humedales</a></li>
+    <li><a href="https://asensio94.github.io/sub-nocte/">Sub Nocte</a></li>
+    <li><a href="https://asensio94.github.io/riesgo-tendidos-aves/">Riesgo de tendidos para aves</a></li>
+    <li><a href="https://asensio94.github.io/grafo-promotores/">Grafo de promotores</a></li>
+    <li><a href="https://asensio94.github.io/cartera-cotizadas/">Cartera de las cotizadas</a></li>
+    <li><a href="https://asensio94.github.io/cuaderno-campo/">Cuaderno de campo</a></li>
+    <li><a href="https://asensio94.github.io/caudal-ecologico/">Caudal ecológico</a></li>
+    <li><a href="https://asensio94.github.io/estado-iba/">Estado de las IBA</a></li>
+    <li aria-current="page"><a href="https://asensio94.github.io/quien-tiene-sombra/">¿Quién tiene sombra?</a></li>
+  </ul></nav>
+</footer>
+<script>
+const C = [{"slug":"madrid","name":"Madrid","sections":2450,"ranked":2439,"population_ranked":3343065,"ci_canopy":0.052,"canopy_pct":6.84,"quintiles":{"1":{"income":15991.89,"canopy":5.87,"canopy_tcd":2.76,"lst":45.01},"2":{"income":20219.26,"canopy":7.08,"canopy_tcd":3.77,"lst":44.31},"3":{"income":25918.05,"canopy":6.73,"canopy_tcd":4.13,"lst":44.19},"4":{"income":33488.5,"canopy":6.17,"canopy_tcd":3.91,"lst":44.06},"5":{"income":48184.23,"canopy":8.33,"canopy_tcd":5.98,"lst":43.12}},"lst_gap":1.9,"canopy_urban_tcd_pct":6.49},{"slug":"barcelona","name":"Barcelona","sections":1068,"ranked":1058,"population_ranked":1599814,"ci_canopy":0.054,"canopy_pct":6.96,"quintiles":{"1":{"income":18518.6,"canopy":6.47,"canopy_tcd":1.9,"lst":41.69},"2":{"income":23646.62,"canopy":7.02,"canopy_tcd":1.59,"lst":41.71},"3":{"income":26784.56,"canopy":6.12,"canopy_tcd":0.89,"lst":41.86},"4":{"income":30286.45,"canopy":6.69,"canopy_tcd":1.18,"lst":41.68},"5":{"income":42532.25,"canopy":8.51,"canopy_tcd":1.97,"lst":41.25}},"lst_gap":0.44,"canopy_urban_tcd_pct":3.68},{"slug":"valencia","name":"València","sections":591,"ranked":573,"population_ranked":783534,"ci_canopy":0.197,"canopy_pct":4.81,"quintiles":{"1":{"income":16102.66,"canopy":3.32,"canopy_tcd":0.87,"lst":43.67},"2":{"income":19503.16,"canopy":3.42,"canopy_tcd":1.18,"lst":43.61},"3":{"income":22306.14,"canopy":3.59,"canopy_tcd":0.88,"lst":43.31},"4":{"income":25701.22,"canopy":6.21,"canopy_tcd":1.89,"lst":42.97},"5":{"income":34833.15,"canopy":7.52,"canopy_tcd":2.59,"lst":42.4}},"lst_gap":1.27,"canopy_urban_tcd_pct":2.81},{"slug":"sevilla","name":"Sevilla","sections":521,"ranked":513,"population_ranked":667408,"ci_canopy":0.154,"canopy_pct":3.28,"quintiles":{"1":{"income":12573.01,"canopy":2.33,"canopy_tcd":1.24,"lst":46.41},"2":{"income":16770.7,"canopy":2.86,"canopy_tcd":2.62,"lst":46.06},"3":{"income":20796.01,"canopy":3.12,"canopy_tcd":3.19,"lst":45.51},"4":{"income":26549.48,"canopy":3.03,"canopy_tcd":2.74,"lst":44.93},"5":{"income":34486.77,"canopy":5.06,"canopy_tcd":3.4,"lst":44.54}},"lst_gap":1.87,"canopy_urban_tcd_pct":4.87},{"slug":"zaragoza","name":"Zaragoza","sections":501,"ranked":474,"population_ranked":641917,"ci_canopy":0.149,"canopy_pct":5.18,"quintiles":{"1":{"income":16736.63,"canopy":3.63,"canopy_tcd":0.43,"lst":42.97},"2":{"income":19505.04,"canopy":3.99,"canopy_tcd":0.8,"lst":42.77},"3":{"income":22700.31,"canopy":4.65,"canopy_tcd":1.09,"lst":42.43},"4":{"income":25718.99,"canopy":7.25,"canopy_tcd":1.31,"lst":41.91},"5":{"income":33897.82,"canopy":6.4,"canopy_tcd":1.11,"lst":41.69}},"lst_gap":1.28,"canopy_urban_tcd_pct":1.52},{"slug":"malaga","name":"Málaga","sections":435,"ranked":401,"population_ranked":523547,"ci_canopy":0.28,"canopy_pct":3.65,"quintiles":{"1":{"income":14206.26,"canopy":2.1,"canopy_tcd":1.54,"lst":42.09},"2":{"income":16811.31,"canopy":1.94,"canopy_tcd":2.07,"lst":42.35},"3":{"income":18736.34,"canopy":2.32,"canopy_tcd":2.26,"lst":42.38},"4":{"income":21840.66,"canopy":5.43,"canopy_tcd":4.92,"lst":41.7},"5":{"income":30582.85,"canopy":6.47,"canopy_tcd":6.12,"lst":40.7}},"lst_gap":1.39,"canopy_urban_tcd_pct":6.24},{"slug":"murcia","name":"Murcia","sections":387,"ranked":318,"population_ranked":370401,"ci_canopy":0.132,"canopy_pct":5.52,"quintiles":{"1":{"income":14870.08,"canopy":4.32,"canopy_tcd":4.05,"lst":46.23},"2":{"income":17790.39,"canopy":4.07,"canopy_tcd":6.44,"lst":46.48},"3":{"income":19933.94,"canopy":4.54,"canopy_tcd":6.14,"lst":45.71},"4":{"income":24021.82,"canopy":6.73,"canopy_tcd":5.79,"lst":45.29},"5":{"income":32348.64,"canopy":7.91,"canopy_tcd":4.49,"lst":44.69}},"lst_gap":1.54,"canopy_urban_tcd_pct":5.69},{"slug":"palma","name":"Palma","sections":253,"ranked":231,"population_ranked":390552,"ci_canopy":0.16,"canopy_pct":4.95,"quintiles":{"1":{"income":17416.59,"canopy":3.65,"canopy_tcd":0.39,"lst":43.47},"2":{"income":21061.0,"canopy":2.97,"canopy_tcd":0.6,"lst":43.65},"3":{"income":23309.41,"canopy":5.3,"canopy_tcd":2.19,"lst":42.93},"4":{"income":25970.43,"canopy":3.76,"canopy_tcd":1.39,"lst":42.76},"5":{"income":33381.87,"canopy":8.99,"canopy_tcd":4.47,"lst":41.92}},"lst_gap":1.55,"canopy_urban_tcd_pct":5.66},{"slug":"las-palmas","name":"Las Palmas de Gran Canaria","sections":278,"ranked":233,"population_ranked":313737,"ci_canopy":0.049,"canopy_pct":1.54,"quintiles":{"1":{"income":15166.67,"canopy":1.17,"canopy_tcd":0.01,"lst":40.66},"2":{"income":18042.81,"canopy":1.65,"canopy_tcd":0.05,"lst":40.52},"3":{"income":21203.83,"canopy":1.88,"canopy_tcd":0.09,"lst":39.91},"4":{"income":25737.44,"canopy":1.23,"canopy_tcd":0.06,"lst":39.46},"5":{"income":34653.74,"canopy":1.79,"canopy_tcd":0.19,"lst":39.81}},"lst_gap":0.85,"canopy_urban_tcd_pct":0.21},{"slug":"bilbao","name":"Bilbao","sections":273,"ranked":258,"population_ranked":323716,"ci_canopy":-0.051,"canopy_pct":4.37,"quintiles":{"1":{"income":18475.52,"canopy":4.58,"canopy_tcd":1.25,"lst":38.35},"2":{"income":21968.87,"canopy":5.49,"canopy_tcd":1.44,"lst":38.82},"3":{"income":26307.7,"canopy":3.97,"canopy_tcd":0.85,"lst":38.76},"4":{"income":30362.7,"canopy":3.95,"canopy_tcd":0.84,"lst":39.38},"5":{"income":42743.83,"canopy":3.88,"canopy_tcd":0.54,"lst":39.24}},"lst_gap":-0.89,"canopy_urban_tcd_pct":2.62},{"slug":"alicante","name":"Alicante","sections":246,"ranked":234,"population_ranked":338119,"ci_canopy":0.227,"canopy_pct":3.3,"quintiles":{"1":{"income":11811.98,"canopy":2.32,"canopy_tcd":0.87,"lst":44.37},"2":{"income":15643.29,"canopy":1.18,"canopy_tcd":0.68,"lst":44.44},"3":{"income":19280.11,"canopy":2.77,"canopy_tcd":1.66,"lst":44.04},"4":{"income":23973.29,"canopy":5.27,"canopy_tcd":3.0,"lst":42.89},"5":{"income":29752.62,"canopy":4.92,"canopy_tcd":3.46,"lst":42.46}},"lst_gap":1.91,"canopy_urban_tcd_pct":2.6},{"slug":"cordoba","name":"Córdoba","sections":256,"ranked":235,"population_ranked":292279,"ci_canopy":0.099,"canopy_pct":4.83,"quintiles":{"1":{"income":14011.09,"canopy":4.31,"canopy_tcd":1.01,"lst":47.01},"2":{"income":17069.76,"canopy":3.78,"canopy_tcd":1.66,"lst":47.03},"3":{"income":19138.93,"canopy":4.25,"canopy_tcd":2.89,"lst":46.49},"4":{"income":23193.52,"canopy":4.87,"canopy_tcd":1.92,"lst":46.35},"5":{"income":31563.08,"canopy":6.95,"canopy_tcd":4.63,"lst":45.82}},"lst_gap":1.19,"canopy_urban_tcd_pct":10.93},{"slug":"valladolid","name":"Valladolid","sections":252,"ranked":244,"population_ranked":284873,"ci_canopy":0.144,"canopy_pct":6.95,"quintiles":{"1":{"income":15505.07,"canopy":3.6,"canopy_tcd":0.89,"lst":42.66},"2":{"income":19401.71,"canopy":6.91,"canopy_tcd":2.62,"lst":42.06},"3":{"income":22552.32,"canopy":6.15,"canopy_tcd":2.2,"lst":41.75},"4":{"income":26764.02,"canopy":9.11,"canopy_tcd":3.14,"lst":41.56},"5":{"income":32937.05,"canopy":8.95,"canopy_tcd":4.04,"lst":40.84}},"lst_gap":1.82,"canopy_urban_tcd_pct":3.64},{"slug":"vigo","name":"Vigo","sections":241,"ranked":224,"population_ranked":272287,"ci_canopy":0.006,"canopy_pct":8.01,"quintiles":{"1":{"income":18417.48,"canopy":6.11,"canopy_tcd":0.71,"lst":37.55},"2":{"income":20372.57,"canopy":8.63,"canopy_tcd":1.55,"lst":37.46},"3":{"income":21991.44,"canopy":10.06,"canopy_tcd":3.75,"lst":37.06},"4":{"income":23777.24,"canopy":7.85,"canopy_tcd":1.75,"lst":37.32},"5":{"income":29349.06,"canopy":7.37,"canopy_tcd":1.68,"lst":36.96}},"lst_gap":0.59,"canopy_urban_tcd_pct":3.25},{"slug":"gijon","name":"Gijón","sections":201,"ranked":188,"population_ranked":250603,"ci_canopy":0.253,"canopy_pct":2.87,"quintiles":{"1":{"income":17313.52,"canopy":1.69,"canopy_tcd":0.14,"lst":35.78},"2":{"income":19328.61,"canopy":2.01,"canopy_tcd":0.44,"lst":36.01},"3":{"income":21351.07,"canopy":2.54,"canopy_tcd":0.31,"lst":35.59},"4":{"income":23917.2,"canopy":2.53,"canopy_tcd":0.19,"lst":35.6},"5":{"income":31654.26,"canopy":5.63,"canopy_tcd":1.39,"lst":34.7}},"lst_gap":1.08,"canopy_urban_tcd_pct":2.5},{"slug":"hospitalet","name":"L'Hospitalet de Llobregat","sections":195,"ranked":195,"population_ranked":278115,"ci_canopy":0.223,"canopy_pct":4.34,"quintiles":{"1":{"income":14984.18,"canopy":2.77,"canopy_tcd":0.19,"lst":43.23},"2":{"income":16649.88,"canopy":1.41,"canopy_tcd":0.13,"lst":43.1},"3":{"income":19200.35,"canopy":4.86,"canopy_tcd":0.52,"lst":42.78},"4":{"income":21764.15,"canopy":6.58,"canopy_tcd":1.17,"lst":42.28},"5":{"income":26010.98,"canopy":6.1,"canopy_tcd":0.98,"lst":42.9}},"lst_gap":0.33,"canopy_urban_tcd_pct":0.77},{"slug":"vitoria","name":"Vitoria-Gasteiz","sections":166,"ranked":163,"population_ranked":248562,"ci_canopy":-0.01,"canopy_pct":8.49,"quintiles":{"1":{"income":19515.9,"canopy":7.89,"canopy_tcd":1.89,"lst":40.82},"2":{"income":22407.06,"canopy":9.72,"canopy_tcd":1.88,"lst":40.7},"3":{"income":24493.66,"canopy":8.28,"canopy_tcd":1.85,"lst":40.24},"4":{"income":26364.01,"canopy":7.64,"canopy_tcd":1.58,"lst":40.64},"5":{"income":34715.91,"canopy":8.93,"canopy_tcd":2.53,"lst":40.3}},"lst_gap":0.52,"canopy_urban_tcd_pct":3.34},{"slug":"coruna","name":"A Coruña","sections":186,"ranked":178,"population_ranked":232871,"ci_canopy":0.036,"canopy_pct":4.29,"quintiles":{"1":{"income":17766.02,"canopy":3.05,"canopy_tcd":0.08,"lst":37.58},"2":{"income":20689.98,"canopy":3.21,"canopy_tcd":0.21,"lst":36.9},"3":{"income":22963.27,"canopy":7.12,"canopy_tcd":1.1,"lst":36.77},"4":{"income":26877.6,"canopy":4.99,"canopy_tcd":0.71,"lst":36.2},"5":{"income":36182.95,"canopy":3.06,"canopy_tcd":0.24,"lst":35.6}},"lst_gap":1.98,"canopy_urban_tcd_pct":0.65},{"slug":"granada","name":"Granada","sections":180,"ranked":163,"population_ranked":204122,"ci_canopy":0.044,"canopy_pct":4.17,"quintiles":{"1":{"income":13180.28,"canopy":3.36,"canopy_tcd":1.8,"lst":45.14},"2":{"income":19698.73,"canopy":4.57,"canopy_tcd":1.59,"lst":44.91},"3":{"income":23273.1,"canopy":3.91,"canopy_tcd":2.28,"lst":44.61},"4":{"income":26914.13,"canopy":4.52,"canopy_tcd":2.91,"lst":44.79},"5":{"income":31858.27,"canopy":4.5,"canopy_tcd":2.94,"lst":44.48}},"lst_gap":0.66,"canopy_urban_tcd_pct":5.02},{"slug":"elche","name":"Elche","sections":173,"ranked":156,"population_ranked":213554,"ci_canopy":0.253,"canopy_pct":2.87,"quintiles":{"1":{"income":12531.89,"canopy":1.61,"canopy_tcd":0.81,"lst":46.14},"2":{"income":15258.0,"canopy":1.82,"canopy_tcd":1.06,"lst":46.11},"3":{"income":16635.54,"canopy":2.48,"canopy_tcd":1.66,"lst":45.85},"4":{"income":19001.71,"canopy":3.04,"canopy_tcd":2.01,"lst":45.02},"5":{"income":24114.07,"canopy":5.42,"canopy_tcd":3.15,"lst":44.59}},"lst_gap":1.55,"canopy_urban_tcd_pct":4.17}];
+const num = (x,d=0) => x==null ? "—" : x.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
+const sig = (x,d=1) => x==null ? "—" : (x>0?"+":x<0?"−":"") + num(Math.abs(x),d);
+const selC = document.getElementById("f-ciudad"), selM = document.getElementById("f-modo");
+const cache = {};
+let cur = null, data = null, sel = null;
+for (const c of C) selC.add(new Option(c.name, c.slug));
+
+document.getElementById("filas").innerHTML = [...C].sort((a,b) => (b.ci_canopy??-9) - (a.ci_canopy??-9)).map(c => {
+  const v = c.ci_canopy ?? 0, w = Math.min(Math.abs(v), .5) / .5 * 50;
+  const bar = `<div class="barra" title="${num(c.ci_canopy,3)}"><i class="${v<0?"neg":""}" style="left:${v<0?50-w:50}%;width:${w}%"></i></div>`;
+  return `<tr data-c="${c.slug}" tabindex="0"><td>${c.name}</td><td><span style="display:flex;gap:8px;align-items:center">${bar}<span class="data">${sig(c.ci_canopy,2)}</span></span></td>
+    <td class="num">${num(c.quintiles["1"].canopy,1)} %</td><td class="num">${num(c.quintiles["5"].canopy,1)} %</td>
+    <td class="num">${sig(c.lst_gap,1)} °C</td><td class="num">${num(c.canopy_urban_tcd_pct,1)} %</td></tr>`;
+}).join("");
+document.getElementById("filas").addEventListener("click", e => { const r = e.target.closest("tr"); if (r) { elegir(r.dataset.c); document.getElementById("detalle").scrollIntoView({behavior:"smooth"}); } });
+document.getElementById("filas").addEventListener("keydown", e => { const r = e.target.closest("tr"); if (r && e.key === "Enter") elegir(r.dataset.c); });
+
+// Rows: [cusec, path, population, income, canopy STL %, canopy TCD %, LST °C, ranked]
+function wmean(rows, i){ let s=0, w=0; for (const r of rows) if (r[7] && r[i]!=null && r[2]) { s += r[i]*r[2]; w += r[2]; } return w ? s/w : null; }
+function cortes(vals){ const v = vals.filter(x => x!=null).sort((a,b)=>a-b); return [.2,.4,.6,.8].map(q => v[Math.floor(q*(v.length-1))]); }
+function cuartiles(vals){ const v = vals.slice().sort((a,b)=>a-b); return [.25,.5,.75].map(q => v[Math.floor(q*(v.length-1))]); }
+const ESC = {sombra:"s", calor:"h", renta:"r"};
+function clase(v, br){ if (v==null) return null; let i = br.findIndex(t => v < t); return i < 0 ? 4 : i; }
+function pintar(){
+  if (!data) return;
+  const modo = selM.value, rk = data.s.filter(r => r[7]);
+  const lstMedia = wmean(data.s, 6);
+  const val = r => modo === "sombra" ? r[4] : modo === "renta" ? r[3] : (r[6]==null ? null : r[6] - lstMedia);
+  // Many sections have no tree patch at all: in shade mode they get their own class and the rest
+  // are split into quartiles.
+  const sinCopa = modo === "sombra";
+  const br = modo === "calor" ? [-3,-1,1,3]
+    : sinCopa ? [1e-9, ...cuartiles(rk.map(val).filter(v => v > 0))] : cortes(rk.map(val));
+  const g = document.getElementById("secciones");
+  for (const el of g.children) {
+    const r = data.byId[el.dataset.c], v = val(r), k = r[7] ? clase(v, br) : null;
+    el.classList.toggle("nd", k == null); el.style.fill = k == null ? "" : `var(--${ESC[modo]}${k})`;
+    el.classList.toggle("sel", el.dataset.c === sel);
+    el.firstChild.textContent = `Sección ${r[0]} · ${num(r[2])} residentes · ${num(r[3])} € por unidad de consumo · sombra ${num(r[4],1)} % · suelo ${num(r[6],1)} °C` + (r[7] ? "" : " · no entra en la comparación");
+  }
+  const fmt = modo === "sombra" ? (x => num(x,1)+" %") : modo === "renta" ? (x => num(Math.round(x/100)*100)+" €") : (x => sig(x,0)+" °C");
+  const lab = modo === "calor" ? ["3 °C o más por debajo","1 a 3 °C por debajo","±1 °C","1 a 3 °C por encima","3 °C o más por encima"]
+    : sinCopa ? ["sin manchas de árboles", "hasta "+fmt(br[1]), fmt(br[1])+" – "+fmt(br[2]), fmt(br[2])+" – "+fmt(br[3]), "≥ "+fmt(br[3])]
+    : ["< "+fmt(br[0]), fmt(br[0])+" – "+fmt(br[1]), fmt(br[1])+" – "+fmt(br[2]), fmt(br[2])+" – "+fmt(br[3]), "≥ "+fmt(br[3])];
+  const pre = modo === "sombra" ? "Parte de la sección con copa de árbol: " : modo === "renta" ? "Renta por unidad de consumo: " : `Temperatura del suelo frente a la media de la ciudad (${num(lstMedia,1)} °C): `;
+  document.getElementById("leyenda").innerHTML = pre + lab.map((t,i) => `<span><i style="background:var(--${ESC[modo]}${i})"></i>${t}</span>`).join("")
+    + `<span><i style="background:url(#rayas);border:1px solid var(--line)"></i>sin datos o no urbana</span>`;
+}
+function dispersion(){
+  const rk = data.s.filter(r => r[7] && r[3]!=null && r[4]!=null);
+  const W = 360, H = 230, L = 40, R = 8, T = 14, B = 30;
+  const xs = rk.map(r => r[3]), ys = rk.map(r => r[4]);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y1 = Math.max(5, ...ys) * 1.05;
+  const x = v => L + (v - x0) / (x1 - x0) * (W - L - R), y = v => T + (1 - v / y1) * (H - T - B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Renta y sombra de cada sección">`;
+  for (const t of [0, .5, 1]) { const v = y1/1.05*t; s += `<line class="eje" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L-4}" y="${y(v)+4}" text-anchor="end">${num(v,0)} %</text>`; }
+  for (const t of [0, .5, 1]) { const v = x0 + (x1-x0)*t; s += `<text x="${x(v)}" y="${H-14}" text-anchor="middle">${num(Math.round(v/1000))} mil €</text>`; }
+  s += `<text x="${W-R}" y="${H-1}" text-anchor="end">renta por unidad de consumo →</text>`;
+  s += rk.map(r => `<circle class="pt${r[0]===sel?" sel":""}" data-c="${r[0]}" cx="${x(r[3]).toFixed(1)}" cy="${y(r[4]).toFixed(1)}" r="${Math.max(1.2, Math.sqrt(r[2])/18).toFixed(1)}"><title>Sección ${r[0]}: ${num(r[3])} €, sombra ${num(r[4],1)} %</title></circle>`).join("");
+  return s + "</svg>";
+}
+function quintiles(c){
+  // Two bands so labels never collide: ground temperature (points) on top, shade (bars) below.
+  const W = 360, H = 200, L = 8, R = 8, T = 22, B = 22, bw = (W - L - R) / 5;
+  const HT = 22, HB = 32;  // temperature band: label row + point range
+  const top = T + HT + HB + 14, sub = T + HT + HB + 4;
+  const q = [1,2,3,4,5].map(k => c.quintiles[k]);
+  const ms = Math.max(...q.map(v => v.canopy || 0)) || 1;
+  const ls = q.map(v => v.lst).filter(v => v!=null), lmin = Math.min(...ls), lmax = Math.max(...ls);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sombra y calor por quintil de renta"><text class="tit" x="${L}" y="12">Suelo en verano (puntos) y sombra (barras) por quintil de renta</text>`;
+  s += `<line class="eje" x1="${L}" x2="${W-R}" y1="${sub}" y2="${sub}"/>`;
+  q.forEach((v,i) => {
+    const h = (v.canopy||0)/ms*(H-top-B-14), cx = L + bw*i + bw/2;
+    s += `<rect class="q" x="${L+bw*i+8}" y="${H-B-h}" width="${bw-16}" height="${h}"><title>Quintil ${i+1}: ${num(v.canopy,1)} % de sombra</title></rect>`;
+    s += `<text x="${cx}" y="${H-B-h-4}" text-anchor="middle">${num(v.canopy,1)} %</text>`;
+    if (v.lst!=null) { const yy = T + HT + (lmax - v.lst) / ((lmax - lmin) || 1) * HB; s += `<circle class="qh" cx="${cx}" cy="${yy}" r="4"><title>Quintil ${i+1}: ${num(v.lst,1)} °C</title></circle><text x="${cx}" y="${T + 12}" text-anchor="middle">${num(v.lst,1)} °C</text>`; }
+    s += `<text x="${cx}" y="${H-6}" text-anchor="middle">${i===0?"más pobre":i===4?"más rico":"Q"+(i+1)}</text>`;
+  });
+  return s + "</svg>";
+}
+function panel(){
+  const c = cur, p = document.getElementById("panel");
+  let extra = "";
+  if (sel && data.byId[sel]) { const r = data.byId[sel];
+    extra = `<div class="card"><b>Sección ${r[0]}</b><dl class="cifras"><div><dt>Residentes</dt><dd>${num(r[2])}</dd></div><div><dt>Renta por u. de consumo</dt><dd>${num(r[3])} €</dd></div><div><dt>Sombra (STL)</dt><dd>${num(r[4],1)} %</dd></div><div><dt>Densidad de copa (TCD)</dt><dd>${num(r[5],1)} %</dd></div><div><dt>Suelo en verano</dt><dd>${num(r[6],1)} °C</dd></div></dl></div>`; }
+  p.innerHTML = `<div><h2 id="${c.slug}">${c.name}</h2><p class="sub">${num(c.ranked)} de ${num(c.sections)} secciones entran en la comparación · ${num(c.population_ranked)} residentes</p></div>
+    <dl class="cifras">
+      <div><dt>Índice de concentración</dt><dd>${sig(c.ci_canopy,2)}</dd></div>
+      <div><dt>Sombra media</dt><dd>${num(c.canopy_pct,1)} %</dd></div>
+      <div><dt>Sombra, más pobre / más rico</dt><dd>${num(c.quintiles["1"].canopy,1)} / ${num(c.quintiles["5"].canopy,1)} %</dd></div>
+      <div><dt>Suelo, más pobre − más rico</dt><dd>${sig(c.lst_gap,1)} °C</dd></div>
+      <div><dt>Cubierta arbórea urbana 2024</dt><dd>${num(c.canopy_urban_tcd_pct,1)} %</dd></div>
+    </dl>
+    <figure class="graf" style="margin:0">${quintiles(c)}</figure>
+    <figure class="graf" style="margin:0">${dispersion()}<figcaption class="note">Cada punto es una sección; su tamaño, los residentes. Pulse un punto o una sección del mapa.</figcaption></figure>
+    ${extra}`;
+}
+async function elegir(slug, keepSel){
+  cur = C.find(c => c.slug === slug); selC.value = slug; if (!keepSel) sel = null;
+  for (const tr of document.querySelectorAll("#filas tr")) tr.classList.toggle("sel", tr.dataset.c === slug);
+  data = cache[slug] || (cache[slug] = await fetch(`data/${slug}.json`).then(r => r.json()));
+  data.byId = data.byId || Object.fromEntries(data.s.map(r => [r[0], r]));
+  const svg = document.getElementById("mapa"); svg.setAttribute("viewBox", `0 0 ${data.w} ${data.h}`);
+  document.getElementById("secciones").innerHTML = data.s.map(r => `<path data-c="${r[0]}" d="${r[1]}"><title></title></path>`).join("");
+  history.replaceState(null, "", "#" + slug);
+  pintar(); panel();
+}
+function marcar(c){ sel = c; pintar(); panel(); }
+document.getElementById("secciones").addEventListener("click", e => { const t = e.target.closest("path"); if (t) marcar(t.dataset.c); });
+document.getElementById("panel").addEventListener("click", e => { const t = e.target.closest("circle.pt"); if (t) marcar(t.dataset.c); });
+selC.addEventListener("change", () => elegir(selC.value));
+selM.addEventListener("change", pintar);
+const h = location.hash.slice(1);
+if (C.length) elegir(C.some(c => c.slug === h) ? h : C[0].slug);
+</script>
+</body>
+</html>

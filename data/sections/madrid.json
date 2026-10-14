@@ -1,0 +1,65 @@
+{
+ "slug": "madrid",
+ "name": "Madrid",
+ "municipality": "28079",
+ "fua": "ES001L3",
+ "income_year": 2023,
+ "sections": 2450,
+ "ranked": 2439,
+ "population": 3362335,
+ "population_ranked": 3343065,
+ "ci_canopy": 0.052,
+ "ci_canopy_tcd": 0.137,
+ "rho_canopy": 0.059,
+ "rho_lst": -0.366,
+ "rho_stl_tcd": 0.847,
+ "canopy_pct": 6.84,
+ "quintiles": {
+  "1": {
+   "income": 15991.89,
+   "canopy": 5.87,
+   "canopy_tcd": 2.76,
+   "lst": 45.01
+  },
+  "2": {
+   "income": 20219.26,
+   "canopy": 7.08,
+   "canopy_tcd": 3.77,
+   "lst": 44.31
+  },
+  "3": {
+   "income": 25918.05,
+   "canopy": 6.73,
+   "canopy_tcd": 4.13,
+   "lst": 44.19
+  },
+  "4": {
+   "income": 33488.5,
+   "canopy": 6.17,
+   "canopy_tcd": 3.91,
+   "lst": 44.06
+  },
+  "5": {
+   "income": 48184.23,
+   "canopy": 8.33,
+   "canopy_tcd": 5.98,
+   "lst": 43.12
+  }
+ },
+ "canopy_gap": 2.46,
+ "lst_gap": 1.9,
+ "canopy_urban_tcd_pct": 6.49,
+ "canopy_municipality_tcd_pct": 9.84,
+ "urban_area_ha": 34149,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 23,
+  "days": 23,
+  "clear_median": 22
+ },
+ "sections_without_income": 0
+}

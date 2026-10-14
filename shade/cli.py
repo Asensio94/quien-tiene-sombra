@@ -13,17 +13,27 @@ def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="shade")
     sub = p.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run", help="compute sections and summary for some or all cities")
-    r.add_argument("--city", action="append", choices=sorted(config.CITY), help="repeatable; default all")
+    r.add_argument("--city", action="extend", nargs="+", choices=sorted(config.CITY),
+                   help="one or more slugs; default all")
     r.add_argument("--income-year", type=int, default=None,
                    help="ADRH year (default: the latest the INE publishes)")
+    v = sub.add_parser("validate", help="compare with the Madrid and Barcelona tree inventories")
+    v.add_argument("--city", action="extend", nargs="+", choices=["madrid", "barcelona"])
     sub.add_parser("web", help="rebuild docs/ from data/sections")
     sub.add_parser("income-year", help="print the latest ADRH year")
     a = p.parse_args(argv)
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(message)s", datefmt="%H:%M:%S")
+    # GDAL warns once per Landsat tile that QA fill (1) was nudged to 0; the fill pixels are
+    # dropped anyway because their thermal band is 0.
+    logging.getLogger("rasterio").setLevel(logging.ERROR)
 
     if a.cmd == "income-year":
         from . import ine
         print(ine.latest_income_year())
+        return 0
+    if a.cmd == "validate":
+        from . import inventory
+        inventory.run(a.city or tuple(inventory.LOADERS))
         return 0
     if a.cmd == "web":
         from . import web

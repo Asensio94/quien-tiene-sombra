@@ -1,0 +1,65 @@
+{
+ "slug": "murcia",
+ "name": "Murcia",
+ "municipality": "30030",
+ "fua": "ES007L2",
+ "income_year": 2023,
+ "sections": 387,
+ "ranked": 318,
+ "population": 467316,
+ "population_ranked": 370401,
+ "ci_canopy": 0.132,
+ "ci_canopy_tcd": -0.009,
+ "rho_canopy": 0.143,
+ "rho_lst": -0.485,
+ "rho_stl_tcd": 0.702,
+ "canopy_pct": 5.52,
+ "quintiles": {
+  "1": {
+   "income": 14870.08,
+   "canopy": 4.32,
+   "canopy_tcd": 4.05,
+   "lst": 46.23
+  },
+  "2": {
+   "income": 17790.39,
+   "canopy": 4.07,
+   "canopy_tcd": 6.44,
+   "lst": 46.48
+  },
+  "3": {
+   "income": 19933.94,
+   "canopy": 4.54,
+   "canopy_tcd": 6.14,
+   "lst": 45.71
+  },
+  "4": {
+   "income": 24021.82,
+   "canopy": 6.73,
+   "canopy_tcd": 5.79,
+   "lst": 45.29
+  },
+  "5": {
+   "income": 32348.64,
+   "canopy": 7.91,
+   "canopy_tcd": 4.49,
+   "lst": 44.69
+  }
+ },
+ "canopy_gap": 3.58,
+ "lst_gap": 1.54,
+ "canopy_urban_tcd_pct": 5.69,
+ "canopy_municipality_tcd_pct": 11.05,
+ "urban_area_ha": 15716,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 62,
+  "days": 45,
+  "clear_median": 19
+ },
+ "sections_without_income": 0
+}
