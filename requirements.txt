@@ -1,0 +1,15 @@
+pystac-client>=0.8
+planetary-computer>=1.0
+odc-stac>=0.3.10
+odc-geo>=0.4.8
+rasterio>=1.4
+xarray>=2024.6
+dask>=2024.6
+numpy>=1.26
+pandas>=2.2
+geopandas>=1.0
+pyogrio>=0.9
+shapely>=2.0
+pyproj>=3.6
+requests>=2.31
+pytest>=8
