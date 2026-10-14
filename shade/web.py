@@ -345,6 +345,7 @@ document.getElementById("filas").addEventListener("keydown", e => { const r = e.
 // Rows: [cusec, path, population, income, canopy STL %, canopy TCD %, LST °C, ranked]
 function wmean(rows, i){ let s=0, w=0; for (const r of rows) if (r[7] && r[i]!=null && r[2]) { s += r[i]*r[2]; w += r[2]; } return w ? s/w : null; }
 function cortes(vals){ const v = vals.filter(x => x!=null).sort((a,b)=>a-b); return [.2,.4,.6,.8].map(q => v[Math.floor(q*(v.length-1))]); }
+function cuartiles(vals){ const v = vals.slice().sort((a,b)=>a-b); return [.25,.5,.75].map(q => v[Math.floor(q*(v.length-1))]); }
 const ESC = {sombra:"s", calor:"h", renta:"r"};
 function clase(v, br){ if (v==null) return null; let i = br.findIndex(t => v < t); return i < 0 ? 4 : i; }
 function pintar(){
@@ -352,7 +353,11 @@ function pintar(){
   const modo = selM.value, rk = data.s.filter(r => r[7]);
   const lstMedia = wmean(data.s, 6);
   const val = r => modo === "sombra" ? r[4] : modo === "renta" ? r[3] : (r[6]==null ? null : r[6] - lstMedia);
-  const br = modo === "calor" ? [-3,-1,1,3] : cortes(rk.map(val));
+  // Many sections have no tree patch at all: in shade mode they get their own class and the rest
+  // are split into quartiles.
+  const sinCopa = modo === "sombra";
+  const br = modo === "calor" ? [-3,-1,1,3]
+    : sinCopa ? [1e-9, ...cuartiles(rk.map(val).filter(v => v > 0))] : cortes(rk.map(val));
   const g = document.getElementById("secciones");
   for (const el of g.children) {
     const r = data.byId[el.dataset.c], v = val(r), k = r[7] ? clase(v, br) : null;
@@ -362,6 +367,7 @@ function pintar(){
   }
   const fmt = modo === "sombra" ? (x => num(x,1)+" %") : modo === "renta" ? (x => num(Math.round(x/100)*100)+" €") : (x => sig(x,0)+" °C");
   const lab = modo === "calor" ? ["3 °C o más por debajo","1 a 3 °C por debajo","±1 °C","1 a 3 °C por encima","3 °C o más por encima"]
+    : sinCopa ? ["sin manchas de árboles", "hasta "+fmt(br[1]), fmt(br[1])+" – "+fmt(br[2]), fmt(br[2])+" – "+fmt(br[3]), "≥ "+fmt(br[3])]
     : ["< "+fmt(br[0]), fmt(br[0])+" – "+fmt(br[1]), fmt(br[1])+" – "+fmt(br[2]), fmt(br[2])+" – "+fmt(br[3]), "≥ "+fmt(br[3])];
   const pre = modo === "sombra" ? "Parte de la sección con copa de árbol: " : modo === "renta" ? "Renta por unidad de consumo: " : `Temperatura del suelo frente a la media de la ciudad (${num(lstMedia,1)} °C): `;
   document.getElementById("leyenda").innerHTML = pre + lab.map((t,i) => `<span><i style="background:var(--${ESC[modo]}${i})"></i>${t}</span>`).join("")
@@ -381,16 +387,20 @@ function dispersion(){
   return s + "</svg>";
 }
 function quintiles(c){
-  const W = 360, H = 150, L = 8, R = 8, T = 22, B = 22, bw = (W - L - R) / 5;
+  // Two bands so labels never collide: ground temperature (points) on top, shade (bars) below.
+  const W = 360, H = 200, L = 8, R = 8, T = 22, B = 22, bw = (W - L - R) / 5;
+  const HT = 22, HB = 32;  // temperature band: label row + point range
+  const top = T + HT + HB + 14, sub = T + HT + HB + 4;
   const q = [1,2,3,4,5].map(k => c.quintiles[k]);
   const ms = Math.max(...q.map(v => v.canopy || 0)) || 1;
   const ls = q.map(v => v.lst).filter(v => v!=null), lmin = Math.min(...ls), lmax = Math.max(...ls);
-  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sombra y calor por quintil de renta"><text class="tit" x="${L}" y="12">Sombra (barras) y suelo (puntos) por quintil de renta</text>`;
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Sombra y calor por quintil de renta"><text class="tit" x="${L}" y="12">Suelo en verano (puntos) y sombra (barras) por quintil de renta</text>`;
+  s += `<line class="eje" x1="${L}" x2="${W-R}" y1="${sub}" y2="${sub}"/>`;
   q.forEach((v,i) => {
-    const h = (v.canopy||0)/ms*(H-T-B-10), cx = L + bw*i + bw/2;
+    const h = (v.canopy||0)/ms*(H-top-B-14), cx = L + bw*i + bw/2;
     s += `<rect class="q" x="${L+bw*i+8}" y="${H-B-h}" width="${bw-16}" height="${h}"><title>Quintil ${i+1}: ${num(v.canopy,1)} % de sombra</title></rect>`;
     s += `<text x="${cx}" y="${H-B-h-4}" text-anchor="middle">${num(v.canopy,1)} %</text>`;
-    if (v.lst!=null) { const yy = T + 4 + (lmax - v.lst) / ((lmax - lmin) || 1) * 30; s += `<circle class="qh" cx="${cx}" cy="${yy}" r="4"><title>Quintil ${i+1}: ${num(v.lst,1)} °C</title></circle><text x="${cx+7}" y="${yy+4}">${num(v.lst,1)}°</text>`; }
+    if (v.lst!=null) { const yy = T + HT + (lmax - v.lst) / ((lmax - lmin) || 1) * HB; s += `<circle class="qh" cx="${cx}" cy="${yy}" r="4"><title>Quintil ${i+1}: ${num(v.lst,1)} °C</title></circle><text x="${cx}" y="${T + 12}" text-anchor="middle">${num(v.lst,1)} °C</text>`; }
     s += `<text x="${cx}" y="${H-6}" text-anchor="middle">${i===0?"más pobre":i===4?"más rico":"Q"+(i+1)}</text>`;
   });
   return s + "</svg>";

@@ -13,7 +13,8 @@ def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="shade")
     sub = p.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("run", help="compute sections and summary for some or all cities")
-    r.add_argument("--city", action="append", choices=sorted(config.CITY), help="repeatable; default all")
+    r.add_argument("--city", action="extend", nargs="+", choices=sorted(config.CITY),
+                   help="one or more slugs; default all")
     r.add_argument("--income-year", type=int, default=None,
                    help="ADRH year (default: the latest the INE publishes)")
     sub.add_parser("web", help="rebuild docs/ from data/sections")
