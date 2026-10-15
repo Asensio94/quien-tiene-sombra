@@ -4,6 +4,8 @@ Cubierta arbórea y temperatura de superficie en verano por sección censal, fre
 
 La pregunta es la de Schwarz y otros (2015, [«Trees grow on money»](https://doi.org/10.1371/journal.pone.0122051), PLoS ONE): ¿tienen los barrios pobres menos sombra y más calor? Además, la página publica la cubierta arbórea urbana de cada ciudad en 2024, la base contra la que el Reglamento europeo de Restauración (art. 8) exige que no baje.
 
+> **Estado: mantenimiento.** Sigue funcionando y se corrigen sus fallos, pero por ahora no se le añaden funciones.
+
 ## Cómo funciona
 
 1. **Secciones y renta.** Secciones censales del INE y renta media por unidad de consumo del Atlas de Distribución de Renta de los Hogares (ADRH). La renta del año N va con las secciones a 1 de enero de N+1: los códigos del ADRH 2023 casan uno a uno con el seccionado de 2024.
