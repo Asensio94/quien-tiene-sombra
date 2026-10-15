@@ -12,7 +12,7 @@ from odc.geo.geobox import GeoBox
 from odc.geo.geom import BoundingBox
 from rasterio.features import rasterize
 
-from . import config, copernicus, ine, landsat, stats
+from . import config, copernicus, ine, insee, landsat, stats
 
 log = logging.getLogger(__name__)
 COLUMNS = ["district", "population", "income", "area_ha", "urban_share", "canopy_stl_pct",
@@ -43,10 +43,31 @@ def zonal_mean(values: np.ndarray, lab: np.ndarray, n: int) -> np.ndarray:
         return np.where(c > 0, s / c, np.nan)
 
 
-def process(city: config.City, income_year: int = config.INCOME_YEAR) -> tuple[pd.DataFrame, dict]:
+def income_year_for(city: config.City, es_year: int | None = None) -> int:
+    """The income year a city is computed with: the ADRH year asked for in Spain, Filosofi's
+    last (and only remaining) vintage in France."""
+    return config.FILOSOFI_YEAR if city.country == "FR" else (es_year or config.INCOME_YEAR)
+
+
+def units(city: config.City, income_year: int) -> gpd.GeoDataFrame:
+    """The statistical units of a city (census sections in Spain, IRIS in France), indexed by
+    their code, with a `district` column."""
+    if city.country == "FR":
+        return insee.iris(city)
     secs = ine.sections(city.municipality, config.sections_year(income_year))
-    df = secs.drop(columns="geometry").rename(columns={"CDIS": "district"}).join(
-        ine.by_section(city.municipality, income_year))
+    return secs.rename(columns={"CDIS": "district"})
+
+
+def units_with_income(city: config.City, income_year: int) -> tuple[gpd.GeoDataFrame, pd.DataFrame]:
+    secs = units(city, income_year)
+    base = secs.drop(columns="geometry")
+    if city.country == "FR":
+        return secs, base.join(insee.by_iris(secs.index))
+    return secs, base.join(ine.by_section(city.municipality, income_year))
+
+
+def process(city: config.City, income_year: int = config.INCOME_YEAR) -> tuple[pd.DataFrame, dict]:
+    secs, df = units_with_income(city, income_year)
     missing = df.income.isna().sum()
     bbox = tuple(np.round(secs.total_bounds + [-100, -100, 100, 100], -1))
     df["area_ha"] = secs.area / 1e4
@@ -101,7 +122,8 @@ def summarise(city: config.City, df: pd.DataFrame, income_year: int) -> dict:
                    "lst": stats.weighted_mean(g.lst_c, g.population)}
     rnd = lambda x, d=2: None if x is None or not np.isfinite(x) else round(float(x), d)  # noqa: E731
     return {
-        "slug": city.slug, "name": city.name, "municipality": city.municipality, "fua": city.fua,
+        "slug": city.slug, "name": city.name, "country": city.country,
+        "municipality": city.municipality, "fua": city.fua,
         "income_year": income_year, "sections": int(len(df)), "ranked": int(len(r)),
         "population": int(df.population.sum()), "population_ranked": int(r.population.sum()),
         "ci_canopy": rnd(stats.concentration_index(r.canopy_stl_pct, r.income, r.population), 3),

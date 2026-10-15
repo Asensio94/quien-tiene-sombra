@@ -15,10 +15,13 @@ def main(argv=None) -> int:
     r = sub.add_parser("run", help="compute sections and summary for some or all cities")
     r.add_argument("--city", action="extend", nargs="+", choices=sorted(config.CITY),
                    help="one or more slugs; default all")
+    r.add_argument("--country", choices=config.COUNTRIES, help="only the cities of one country")
     r.add_argument("--income-year", type=int, default=None,
-                   help="ADRH year (default: the latest the INE publishes)")
-    v = sub.add_parser("validate", help="compare with the Madrid and Barcelona tree inventories")
-    v.add_argument("--city", action="extend", nargs="+", choices=["madrid", "barcelona"])
+                   help="ADRH year for Spain (default: the latest the INE publishes); France "
+                        "always uses Filosofi 2021, the last vintage")
+    v = sub.add_parser("validate", help="compare with the municipal tree inventories")
+    v.add_argument("--city", action="extend", nargs="+",
+                   choices=["madrid", "barcelona", "paris", "lyon"])
     sub.add_parser("web", help="rebuild docs/ from data/sections")
     sub.add_parser("income-year", help="print the latest ADRH year")
     a = p.parse_args(argv)
@@ -41,12 +44,15 @@ def main(argv=None) -> int:
         return 0
 
     from . import city as city_mod, ine
-    year = a.income_year or ine.latest_income_year()
+    slugs = a.city or [c.slug for c in config.cities(a.country)]
+    es_year = None
+    if any(config.CITY[s].country == "ES" for s in slugs):
+        es_year = a.income_year or ine.latest_income_year()
     failed = []
-    for slug in a.city or [c.slug for c in config.CITIES]:
+    for slug in slugs:
         c = config.CITY[slug]
         try:
-            df, summary = city_mod.process(c, year)
+            df, summary = city_mod.process(c, city_mod.income_year_for(c, es_year))
             city_mod.save(c, df, summary)
             logging.info("%s: C=%s, canopy gap %s pt, heat gap %s °C", c.name, summary["ci_canopy"],
                          summary["canopy_gap"], summary["lst_gap"])
@@ -55,7 +61,7 @@ def main(argv=None) -> int:
             failed.append(slug)
     if failed:
         print(f"failed: {', '.join(failed)}", file=sys.stderr)
-    return 1 if failed and len(failed) == len(a.city or config.CITIES) else 0
+    return 1 if failed and len(failed) == len(slugs) else 0
 
 
 if __name__ == "__main__":

@@ -1,0 +1,66 @@
+{
+ "slug": "paris",
+ "name": "Paris",
+ "country": "FR",
+ "municipality": "75056",
+ "fua": "FR001L1",
+ "income_year": 2021,
+ "sections": 992,
+ "ranked": 864,
+ "population": 2113697,
+ "population_ranked": 2069558,
+ "ci_canopy": -0.068,
+ "ci_canopy_tcd": -0.033,
+ "rho_canopy": -0.11,
+ "rho_lst": 0.045,
+ "rho_stl_tcd": 0.682,
+ "canopy_pct": 5.02,
+ "quintiles": {
+  "1": {
+   "income": 20017.0,
+   "canopy": 6.09,
+   "canopy_tcd": 1.53,
+   "lst": 36.7
+  },
+  "2": {
+   "income": 26711.51,
+   "canopy": 5.37,
+   "canopy_tcd": 1.04,
+   "lst": 36.81
+  },
+  "3": {
+   "income": 31271.02,
+   "canopy": 4.66,
+   "canopy_tcd": 1.07,
+   "lst": 37.12
+  },
+  "4": {
+   "income": 35717.43,
+   "canopy": 4.36,
+   "canopy_tcd": 0.92,
+   "lst": 37.19
+  },
+  "5": {
+   "income": 44556.63,
+   "canopy": 4.65,
+   "canopy_tcd": 1.38,
+   "lst": 36.75
+  }
+ },
+ "canopy_gap": -1.44,
+ "lst_gap": -0.05,
+ "canopy_urban_tcd_pct": 10.64,
+ "canopy_municipality_tcd_pct": 10.43,
+ "urban_area_ha": 10293,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 8,
+  "days": 8,
+  "clear_median": 6
+ },
+ "sections_without_income": 128
+}

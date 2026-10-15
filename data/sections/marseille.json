@@ -1,0 +1,66 @@
+{
+ "slug": "marseille",
+ "name": "Marseille",
+ "country": "FR",
+ "municipality": "13055",
+ "fua": "FR203L2",
+ "income_year": 2021,
+ "sections": 393,
+ "ranked": 316,
+ "population": 877217,
+ "population_ranked": 807311,
+ "ci_canopy": 0.176,
+ "ci_canopy_tcd": 0.269,
+ "rho_canopy": 0.369,
+ "rho_lst": -0.528,
+ "rho_stl_tcd": 0.907,
+ "canopy_pct": 12.54,
+ "quintiles": {
+  "1": {
+   "income": 13288.62,
+   "canopy": 8.26,
+   "canopy_tcd": 1.4,
+   "lst": 42.78
+  },
+  "2": {
+   "income": 17983.11,
+   "canopy": 10.58,
+   "canopy_tcd": 2.46,
+   "lst": 42.64
+  },
+  "3": {
+   "income": 20651.33,
+   "canopy": 10.47,
+   "canopy_tcd": 2.32,
+   "lst": 42.48
+  },
+  "4": {
+   "income": 24057.46,
+   "canopy": 12.95,
+   "canopy_tcd": 3.62,
+   "lst": 41.87
+  },
+  "5": {
+   "income": 29463.09,
+   "canopy": 20.44,
+   "canopy_tcd": 6.0,
+   "lst": 40.64
+  }
+ },
+ "canopy_gap": 12.18,
+ "lst_gap": 2.14,
+ "canopy_urban_tcd_pct": 4.44,
+ "canopy_municipality_tcd_pct": 7.08,
+ "urban_area_ha": 13691,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 33,
+  "days": 33,
+  "clear_median": 32
+ },
+ "sections_without_income": 71
+}

@@ -50,3 +50,49 @@ def test_trees_per_section_counts_and_basal_area():
                            geometry=[Point(1, 1), Point(2, 2), Point(50, 50)], crs=config.CRS)
     t = inventory.trees_per_section(secs, pts)
     assert t.trees.tolist() == [2, 0] and t.basal_m2.tolist() == [3.0, 0.0]
+
+
+def test_insee_numbers_and_secret_cells():
+    import pandas as pd
+    from shade import insee
+    out = insee.number(pd.Series(["21830", "1234,5", "ns", "nd", "s"]))
+    assert out.tolist()[:2] == [21830, 1234.5] and out[2:].isna().all()
+
+
+def test_french_numbers_and_typography():
+    from shade import i18n
+    nn = i18n.NNBSP
+    assert i18n.num(1234567.5, "fr", 1) == f"1{nn}234{nn}567,5"
+    assert i18n.num(1234.5, "es", 1) == "1.234,5"
+    assert i18n.num(0.052, "fr", 2, sign=True) == "+0,05"
+    assert i18n._fr_typography("« ombre » : 50 % et 3 °C, 2 000 habitants ?") == (
+        f"«{nn}ombre{nn}»{nn}: 50{nn}% et 3{nn}°C, 2{nn}000 habitants{nn}?")
+
+
+def test_every_language_has_every_string():
+    from shade import i18n
+    es, fr = set(i18n.UI["es"]), set(i18n.UI["fr"])
+    # Spain-only and France-only paragraphs are the only allowed gaps.
+    assert es - fr == {"inv_trunk"}
+    assert fr - es == {"p_people", "p_people_v", "cav_filosofi", "cav_secret", "cav_scope"}
+    assert all(" %" not in v and " :" not in v for v in i18n.UI["fr"].values())
+
+
+def test_countries_and_units():
+    assert {c.country for c in config.cities("FR")} == {"FR"}
+    assert config.CITY["paris"].unit == "IRIS" and config.CITY["madrid"].unit == "CUSEC"
+    assert len(config.CITY["paris"].codes) == 20 and config.CITY["lille"].codes == ("59350",)
+    assert all(len(c.municipality) == 5 for c in config.CITIES)
+
+
+def test_indicators_v2_carry_country():
+    sums = [{"slug": "madrid", "name": "Madrid", "municipality": "28079", "canopy_urban_tcd_pct": 6.5},
+            {"slug": "paris", "name": "Paris", "country": "FR", "municipality": "75056",
+             "canopy_urban_tcd_pct": 9.1}]
+    out = web.indicators(sums, "2026-10-15T00:00Z")
+    assert out["version"] == 2 and out["coverage"]["countries"] == ["ES", "FR"]
+    es, fr = out["indicators"]
+    assert (es["country"], fr["country"]) == ("ES", "FR")
+    assert fr["id"] == "urban_tree_canopy:FR:75056:2024" and fr["url"].endswith("france.html#paris")
+    assert fr["title"].startswith("Couvert arboré urbain de Paris")
+    assert es["url"].endswith("quien-tiene-sombra/#madrid")

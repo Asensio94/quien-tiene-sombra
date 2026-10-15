@@ -1,0 +1,66 @@
+{
+ "slug": "lille",
+ "name": "Lille",
+ "country": "FR",
+ "municipality": "59350",
+ "fua": "FR009L2",
+ "income_year": 2021,
+ "sections": 110,
+ "ranked": 91,
+ "population": 238696,
+ "population_ranked": 229546,
+ "ci_canopy": -0.014,
+ "ci_canopy_tcd": 0.008,
+ "rho_canopy": -0.023,
+ "rho_lst": -0.209,
+ "rho_stl_tcd": 0.916,
+ "canopy_pct": 10.84,
+ "quintiles": {
+  "1": {
+   "income": 14760.87,
+   "canopy": 14.27,
+   "canopy_tcd": 5.81,
+   "lst": 34.41
+  },
+  "2": {
+   "income": 18078.13,
+   "canopy": 7.21,
+   "canopy_tcd": 2.91,
+   "lst": 35.29
+  },
+  "3": {
+   "income": 21124.31,
+   "canopy": 10.57,
+   "canopy_tcd": 3.94,
+   "lst": 34.51
+  },
+  "4": {
+   "income": 24239.13,
+   "canopy": 10.93,
+   "canopy_tcd": 4.92,
+   "lst": 34.59
+  },
+  "5": {
+   "income": 28820.78,
+   "canopy": 11.28,
+   "canopy_tcd": 4.8,
+   "lst": 33.27
+  }
+ },
+ "canopy_gap": -2.99,
+ "lst_gap": 1.15,
+ "canopy_urban_tcd_pct": 6.87,
+ "canopy_municipality_tcd_pct": 6.81,
+ "urban_area_ha": 3352,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 9,
+  "days": 9,
+  "clear_median": 6
+ },
+ "sections_without_income": 19
+}

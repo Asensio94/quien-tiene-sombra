@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cstyle%3E.b%7Bfill%3A%23221d1a%7D.p%7Bfill%3A%233f7d20%7D.l%7Bstroke%3A%23221d1a%7D%40media%20%28prefers-color-scheme%3Adark%29%7B.b%7Bfill%3A%23ede6e0%7D.p%7Bfill%3A%2394d06c%7D.l%7Bstroke%3A%23ede6e0%7D%7D%3C/style%3E%3Cg%20class%3D%22b%22%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2231%22%20r%3D%2219%22/%3E%3Cpath%20d%3D%22M19%2040%207%2050.5l3.5%204L25%2046z%22/%3E%3Cpath%20d%3D%22M52%2022l8%202.5-8%202.5z%22/%3E%3C/g%3E%3Cpath%20class%3D%22p%22%20d%3D%22M34%2012a19%2019%200%200%201%2015%2030.8C42%2041%2037%2034%2037%2026c0-6%201.5-10.5%204-12.6A19%2019%200%200%200%2034%2012z%22/%3E%3Cg%20fill%3D%22%23221d1a%22%3E%3Ccircle%20cx%3D%2245%22%20cy%3D%2221.5%22%20r%3D%222.1%22/%3E%3C/g%3E%3Cpath%20class%3D%22l%22%20d%3D%22M31%2049.5V60m7-11v11m-10.5.2h6m1.5%200h6%22%20fill%3D%22none%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E">
+<title>Qui a de l'ombre ?</title>
+<meta name="description" content="Couvert arboré et température de surface en été par IRIS face au revenu des ménages, dans les grandes villes françaises.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* common.css v1.1 — shared look of the nine open-data projects (vigia-incendios is the reference).
+   Copy this file verbatim into each repo; change it in all repos at once, never in one.
+   Each repo sets only --accent and --accent-dark below it and adds its own rules after it.
+
+   Type:  Barlow Condensed for titles and labels, Source Serif 4 for reading, IBM Plex Mono for
+          figures, codes and dates. Load them with:
+   https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500&display=swap */
+
+:root{
+  --ground:#f0edea; --paper:#faf8f6; --ink:#221d1a; --muted:#6b625c; --line:#dad2cb;
+  --accent:#c2410c; --accent-dark:#fb7b3e;
+  --natura:#2f7a55; --natura-dark:#62b88a;
+  --shadow:0 1px 0 rgba(34,29,26,.06), 0 6px 18px -10px rgba(34,29,26,.28);
+  --font-title:"Barlow Condensed","Arial Narrow",sans-serif;
+  --font-text:"Source Serif 4",Georgia,serif;
+  --font-data:"IBM Plex Mono",ui-monospace,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#15110f; --paper:#1d1815; --ink:#ede6e0; --muted:#a69a91; --line:#362d28;
+    --accent:var(--accent-dark); --natura:var(--natura-dark);
+    --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 22px -12px rgba(0,0,0,.7);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#15110f; --paper:#1d1815; --ink:#ede6e0; --muted:#a69a91; --line:#362d28;
+  --accent:var(--accent-dark); --natura:var(--natura-dark);
+  --shadow:0 1px 0 rgba(0,0,0,.3), 0 8px 22px -12px rgba(0,0,0,.7);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font:17px/1.55 var(--font-text);overflow-wrap:break-word}
+a{color:inherit;text-decoration-color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+img,svg{max-width:100%}
+
+/* Header: «PROJECT NAME» with the key word in the accent colour, one sentence, then the figures. */
+.site-header{max-width:1440px;margin:0 auto;padding:28px 16px 18px;display:grid;gap:14px}
+.site-header h1{margin:0;font:700 clamp(40px,6vw,64px)/.9 var(--font-title);text-transform:uppercase;letter-spacing:.02em}
+.site-header h1 span{color:var(--accent)}
+/* Logo: the robin from logo.py before the title; same shape everywhere, breast in the accent. */
+.logo{display:inline-block;width:1.05em;height:1.05em;margin-right:.16em;vertical-align:-.13em;color:var(--ink);overflow:visible}
+.logo .logo-breast{fill:var(--accent)}
+.site-header .lede{margin:0;max-width:72ch;font-size:18px}
+.figures{display:flex;flex-wrap:wrap;gap:12px 28px;margin:0;padding:12px 0 0;border-top:1px solid var(--line)}
+.figures div{display:grid;gap:2px}
+.figures b{font:600 30px/1 var(--font-data);font-variant-numeric:tabular-nums;color:var(--accent)}
+.figures span{font:600 13px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+
+/* Text roles */
+.label{font-family:var(--font-title);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.data{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+.note{color:var(--muted);font-size:14.5px}
+.badge{display:inline-block;font:600 12px/1 var(--font-title);text-transform:uppercase;letter-spacing:.09em;padding:4px 7px 3px;border:1.5px solid currentColor;color:var(--accent)}
+
+/* Cards and panels */
+.card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);padding:16px}
+
+/* Method section: how every figure is computed, step by step */
+.method{max-width:1440px;margin:0 auto;padding:24px 16px}
+.method h2{margin:0 0 6px;font:700 28px/1 var(--font-title);text-transform:uppercase;letter-spacing:.03em}
+.method h3{margin:18px 0 4px;font:600 18px/1.2 var(--font-title);text-transform:uppercase;letter-spacing:.06em}
+.method p,.method li{max-width:72ch}
+table.params{border-collapse:collapse;font-size:14.5px;width:100%;max-width:900px}
+table.params th,table.params td{text-align:left;vertical-align:top;padding:6px 10px 6px 0;border-bottom:1px solid var(--line)}
+table.params th{font:600 14px/1.3 var(--font-title);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;padding-right:16px}
+table.params td.num,table.params th.num{text-align:right;font-family:var(--font-data);font-variant-numeric:tabular-nums}
+
+/* Footer: sources, licence, the shared principle and the sibling projects */
+.site-footer{max-width:1440px;margin:0 auto;padding:16px 16px 40px;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);display:grid;gap:10px}
+.site-footer .principle{margin:0;color:var(--ink);font-style:italic}
+.siblings{display:flex;flex-wrap:wrap;gap:4px 14px;margin:0;padding:0;list-style:none}
+.siblings li a{text-decoration-color:var(--line)}
+.siblings li[aria-current] a{color:var(--ink);text-decoration-color:var(--accent);font-weight:600}
+
+@media (max-width:640px){
+  body{font-size:16px}
+  .figures b{font-size:24px}
+}
+:root{--accent:#3f7d20;--accent-dark:#94d06c}
+:root{--s0:#eef3e6;--s1:#c9dfb4;--s2:#93c16f;--s3:#5b9a35;--s4:#2f6614;
+  --h0:#2f6fa3;--h1:#9cc3e0;--h2:#ece6dc;--h3:#eba27a;--h4:#b33a1b;
+  --r0:#f1ecf4;--r1:#d4c3e0;--r2:#a98bc4;--r3:#7a57a3;--r4:#4a2c74}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--s0:#24301c;--s1:#35522a;--s2:#4f7d38;--s3:#77ad54;--s4:#b4e08e;
+    --h0:#6fa8d6;--h1:#3a5b77;--h2:#3a332d;--h3:#8a4a2e;--h4:#f08a5d;
+    --r0:#2c2433;--r1:#4a3a5c;--r2:#6f5590;--r3:#9d7fc2;--r4:#d2bdf0}
+}
+:root[data-theme="dark"]{--s0:#24301c;--s1:#35522a;--s2:#4f7d38;--s3:#77ad54;--s4:#b4e08e;
+  --h0:#6fa8d6;--h1:#3a5b77;--h2:#3a332d;--h3:#8a4a2e;--h4:#f08a5d;
+  --r0:#2c2433;--r1:#4a3a5c;--r2:#6f5590;--r3:#9d7fc2;--r4:#d2bdf0}
+.marca{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.marca .label{color:var(--muted);font-size:14px}
+.bloque{max-width:1440px;margin:0 auto;padding:24px 16px 0}
+.bloque > h2{margin:0 0 8px;font:700 28px/1 var(--font-title);text-transform:uppercase;letter-spacing:.03em}
+.tabla-wrap{overflow-x:auto}
+table.ciudades{width:100%;border-collapse:collapse;font-size:14.5px;background:var(--paper)}
+table.ciudades th,table.ciudades td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+table.ciudades th{font:600 13px var(--font-title);text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+table.ciudades td.num,table.ciudades th.num{text-align:right;font-family:var(--font-data);font-variant-numeric:tabular-nums;white-space:nowrap}
+table.ciudades tbody tr{cursor:pointer}
+table.ciudades tbody tr:hover,table.ciudades tbody tr.sel{background:color-mix(in srgb,var(--accent) 10%,var(--paper))}
+.barra{position:relative;width:120px;height:12px;background:var(--ground)}
+.barra::before{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;border-left:1px solid var(--muted)}
+.barra i{position:absolute;top:2px;bottom:2px;background:var(--accent)}
+.barra i.neg{background:var(--h4)}
+main{max-width:1440px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,1fr);gap:20px;align-items:start}
+.controles{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;padding:10px 0;font-size:14px;color:var(--muted)}
+.controles select{font:14px var(--font-text);background:var(--paper);color:var(--ink);border:1px solid var(--line);padding:4px 6px}
+.mapa{background:var(--paper);border:1px solid var(--line);padding:8px}
+.mapa svg{display:block;width:100%;height:auto;max-height:78vh}
+.mapa path{stroke:var(--paper);stroke-width:.35}
+.mapa path.nd{fill:url(#rayas)}
+.mapa path:hover,.mapa path.sel{stroke:var(--ink);stroke-width:1.6}
+.leyenda{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12.5px;color:var(--muted);align-items:center;margin-top:6px}
+.leyenda i{display:inline-block;width:14px;height:10px;margin-right:4px;vertical-align:-1px}
+.panel{display:grid;gap:14px}
+.panel h2{margin:0;font:600 26px/1.1 var(--font-title)}
+.panel .sub{margin:0;color:var(--muted);font-size:14.5px}
+dl.cifras{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px 12px}
+dl.cifras div{display:grid;gap:1px} dl.cifras dt{font-size:12px;color:var(--muted)}
+dl.cifras dd{margin:0;font:500 16px var(--font-data);font-variant-numeric:tabular-nums}
+.graf svg{width:100%;height:auto;display:block;overflow:visible}
+.graf .eje{stroke:var(--line)} .graf text{font:11px var(--font-data);fill:var(--muted)}
+.graf .pt{fill:var(--accent);fill-opacity:.35;stroke:var(--accent);stroke-opacity:.6;stroke-width:.5}
+.graf .pt.sel{fill:var(--ink);fill-opacity:1}
+.graf .q{fill:var(--accent)} .graf .qh{fill:var(--h4)}
+.graf .tit{font:600 13px var(--font-title);fill:var(--ink);text-transform:uppercase;letter-spacing:.04em}
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.dos p{margin:0 0 10px;max-width:72ch}
+.method{border-top:1.5px solid var(--ink);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;margin-top:24px}
+.method p{margin:0 0 10px} .method ol{margin:0 0 10px;padding-left:1.4em} .method ol li{margin-bottom:8px}
+.method > div > h3:first-child{margin-top:0}
+.method table.params th{white-space:normal;width:30%}
+.method table.valid th{width:auto}
+.aviso{border-left:3px solid var(--accent);padding:2px 0 2px 12px}
+.site-footer p{margin:0}
+.paises{margin:0;font-size:14px;color:var(--muted)} .paises a[aria-current]{color:var(--ink);text-decoration:none}
+@media (max-width:900px){main,.method,.dos{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div class="marca">
+    <h1><svg class="logo" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="34" cy="31" r="19"/><path d="M19 40 7 50.5l3.5 4L25 46z"/><path d="M52 22l8 2.5-8 2.5z"/></g><path class="logo-breast" d="M34 12a19 19 0 0 1 15 30.8C42 41 37 34 37 26c0-6 1.5-10.5 4-12.6A19 19 0 0 0 34 12z"/><g fill="#221d1a"><circle cx="45" cy="21.5" r="2.1"/></g><path d="M31 49.5V60m7-11v11m-10.5.2h6m1.5 0h6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Qui a de l'<span>ombre</span> ?</h1>
+    <span class="label">6 villes · IRIS · revenus 2021</span>
+    <nav class="paises label" aria-label="Pays"><a href="index.html">Espagne</a> · <a href="france.html" aria-current="page">France</a></nav>
+  </div>
+  <p class="lede">Les arbres et la chaleur de l'été, quartier par quartier, face au revenu des ménages. Avec les données ouvertes de Copernicus, de Landsat et de l'Insee, on mesure l'ombre de chaque IRIS des grandes villes françaises et combien son sol chauffe en juillet et en août, puis on les classe selon le revenu de leurs habitants.</p>
+  <div class="figures">
+    <div><b>2 sur 6</b><span>villes où l'ombre se concentre dans les quartiers les plus aisés</span></div>
+    <div><b>+1,1 °C</b><span>de chaleur en plus au sol des quartiers les plus pauvres (médiane des villes)</span></div>
+    <div><b>1 921</b><span>IRIS</span></div>
+    <div><b>4 527 398</b><span>habitants</span></div>
+  </div>
+</header>
+
+<section class="bloque" id="ciudades">
+  <h2>Ville par ville</h2>
+  <p class="note">Le quintile le plus pauvre et le plus aisé regroupent chacun un cinquième des habitants. Cliquez sur une ville pour voir sa carte.</p>
+  <div class="tabla-wrap"><table class="ciudades">
+    <thead><tr><th>Ville</th><th>Indice de concentration de l'ombre</th><th class="num">Ombre, quintile le plus pauvre</th><th class="num">Ombre, quintile le plus aisé</th><th class="num">Chaleur en plus dans le quintile le plus pauvre</th><th class="num">Couvert arboré urbain 2024</th></tr></thead>
+    <tbody id="filas"></tbody>
+  </table></div>
+</section>
+
+<section class="bloque" id="detalle">
+  <div class="controles">
+    <label>Ville <select id="f-ciudad"></select></label>
+    <label>Afficher <select id="f-modo"><option value="sombra">Ombre</option><option value="calor">Chaleur</option><option value="renta">Revenu</option></select></label>
+  </div>
+</section>
+<main>
+  <div>
+    <div class="mapa"><svg id="mapa" viewBox="0 0 800 600" role="img" aria-label="Carte des IRIS">
+      <defs><pattern id="rayas" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="var(--line)" stroke-width="2"/></pattern></defs>
+      <g id="secciones"></g></svg></div>
+    <div class="leyenda" id="leyenda" aria-label="Légende"></div>
+  </div>
+  <div class="panel card" id="panel" aria-live="polite"></div>
+</main>
+
+<section class="bloque" id="por-que">
+  <h2>Pourquoi c'est important</h2>
+  <div class="dos">
+    <div>
+      <p>À Baltimore, New York et dans d'autres villes des États-Unis, le couvert arboré suit le revenu : Schwarz et ses coauteurs l'ont résumé en 2015 par un titre devenu célèbre, « Trees grow on money » (<a href="https://doi.org/10.1371/journal.pone.0122051">PLoS ONE 10 : e0122051</a>). Là où il y a moins d'arbres, le sol chauffe davantage, et les canicules tuent surtout les personnes âgées, malades ou qui vivent dans des logements impossibles à rafraîchir.</p>
+      <p>Cette page pose la même question en France, avec des données ouvertes et la même règle pour toutes les villes : les quartiers pauvres ont-ils moins d'ombre et plus de chaleur ? Elle reprend la méthode de la <a href="index.html">page espagnole</a>, IRIS par IRIS.</p>
+    </div>
+    <div>
+      <p>Le règlement européen sur la restauration de la nature (<a href="https://eur-lex.europa.eu/eli/reg/2024/1991/oj">règlement (UE) 2024/1991</a>, article 8) impose qu'en 2030 le couvert arboré urbain n'ait pas baissé par rapport à 2024, puis qu'il augmente. La dernière colonne du tableau donne ce chiffre pour chaque ville, mesuré avec la couche que recommande la Commission : le niveau de 2024 auquel il faudra se comparer.</p>
+      <p class="aviso">Ce sont des indices, pas des verdicts. Un IRIS avec peu d'ombre peut avoir d'autres raisons (un centre ancien aux rues étroites, une zone d'activités) et la température du sol n'est pas celle de l'air que l'on respire.</p>
+    </div>
+  </div>
+</section>
+
+<section class="method" id="metodo">
+  <div>
+    <h2>Comment c'est calculé</h2>
+    <ol>
+      <li>On prend les IRIS de chaque commune, les petits quartiers d'environ 2 000 habitants que l'Insee découpe pour le recensement, avec leur revenu disponible médian par unité de consommation (dispositif Filosofi de l'Insee) et leurs habitants (recensement). Le revenu disponible est ce qui reste après impôts et prestations sociales ; l'unité de consommation corrige la taille du ménage.</li>
+      <li>L'ombre de chaque IRIS est la part de sa surface couverte par des houppiers selon la Street Tree Layer de l'Urban Atlas de Copernicus, à laquelle on ajoute la forêt urbaine que cette couche laisse de côté. Pour comparer, on calcule aussi la densité du couvert arboré de la couche Tree Cover Density, à 10 mètres.</li>
+      <li>La chaleur est la température du sol que mesure la bande thermique de Landsat 8 et 9 en juillet et en août. On écarte les pixels avec nuages, ombres ou eau et on garde, pour chaque point, la médiane de tous les jours dégagés de trois étés. On en fait ensuite la moyenne dans chaque IRIS.</li>
+      <li>Seuls les IRIS urbains assez peuplés et dont l'Insee publie le revenu entrent dans les comparaisons. On les classe par revenu et on les répartit en cinq groupes de même population : du quintile le plus pauvre au plus aisé.</li>
+      <li>L'indice de concentration résume en un nombre la façon dont l'ombre se répartit le long de ce classement : 0 si tout le monde a la même, positif si elle s'accumule dans les quartiers aisés, négatif si c'est dans les quartiers pauvres.</li>
+    </ol>
+    <h3>Paramètres</h3>
+    <table class="params"><tr><th>Revenu</th><td>revenu disponible médian par unité de consommation, Filosofi 2021 (Insee), par IRIS ; c&#x27;est le dernier millésime</td></tr><tr><th>IRIS</th><td>contours IRIS de l&#x27;IGN et de l&#x27;Insee ; dans les six villes, les codes sont les mêmes dans Filosofi (géographie au 1er janvier 2022), le recensement et les contours</td></tr><tr><th>Habitants</th><td>population municipale du recensement 2022, par IRIS</td></tr><tr><th>Ombre</th><td>Street Tree Layer 2021 de l&#x27;Urban Atlas (taches d&#x27;arbres de 500 m² ou plus) et forêt urbaine (classe 31000 de l&#x27;Urban Atlas 2021), en % de la surface de l&#x27;IRIS</td></tr><tr><th>Ombre, contrôle</th><td>densité du couvert arboré HRL Tree Cover Density 2024, 10 m</td></tr><tr><th>Chaleur</th><td>température de surface de Landsat 8 et 9 (Collection 2 niveau 2, bande thermique), juillet et août 2024–2026 ; médiane des passages dégagés, au moins 4 par pixel de 30 m</td></tr><tr><th>IRIS retenus</th><td>au moins 300 habitants, un revenu publié par l&#x27;Insee et 50 % de surface artificielle selon l&#x27;Urban Atlas ; les autres apparaissent hachurés sur la carte</td></tr><tr><th>Quintiles</th><td>cinq groupes d&#x27;IRIS classés par revenu, chacun avec la même population</td></tr><tr><th>Indice de concentration</th><td>de −1 à 1, pondéré par la population ; positif si l&#x27;ombre s&#x27;accumule dans les IRIS les plus aisés</td></tr><tr><th>Couvert arboré urbain (art. 8)</th><td>moyenne de la Tree Cover Density 2024 sur les surfaces artificielles de l&#x27;Urban Atlas 2021 dans la commune</td></tr></table>
+  </div>
+  <div>
+    <h3>Contrôles</h3>
+    <p>Les deux couches d'arbres ne mesurent pas la même chose : la Street Tree Layer dessine des taches de 500 m² ou plus, la Tree Cover Density estime la densité du houppier dans chaque pixel de 10 mètres. Si elles classent les IRIS de façon proche, la conclusion ne dépend pas de la couche choisie.</p>
+    <table class="params valid"><tr><th>Ville</th><th class="num">Corrélation de rangs entre STL et Tree Cover Density par IRIS</th></tr><tr><td>Paris</td><td class='num'>0,68</td></tr><tr><td>Marseille</td><td class='num'>0,91</td></tr><tr><td>Lyon</td><td class='num'>0,74</td></tr><tr><td>Toulouse</td><td class='num'>0,71</td></tr><tr><td>Bordeaux</td><td class='num'>0,85</td></tr><tr><td>Lille</td><td class='num'>0,92</td></tr></table><h3>Inventaires municipaux des arbres</h3><table class="params valid"><tr><th>Ville</th><th class="num">Arbres</th><th class="num">Corrél. STL</th><th class="num">Corrél. TCD</th><th class="num">Indice ombre</th><th class="num">Indice arbres/ha</th><th class="num">Indice arbres/habitant</th></tr><tr><td>Paris</td><td class='num'>219 908</td><td class='num'>0,56</td><td class='num'>0,42</td><td class='num'>−0,07</td><td class='num'>−0,11</td><td class='num'>−0,12</td></tr><tr><td>Lyon</td><td class='num'>112 341</td><td class='num'>−0,38</td><td class='num'>−0,29</td><td class='num'>−0,08</td><td class='num'>+0,05</td><td class='num'>−0,06</td></tr></table><p>À Paris, l'inventaire couvre les arbres gérés par la Ville (alignements, parcs et jardins, cimetières, écoles), sans les bois de Boulogne et de Vincennes. Ses arbres par hectare classent les IRIS dans un ordre proche de celui des deux couches satellite (corrélations de rangs de 0,56 et 0,42), et leur indice de concentration selon le revenu (−0,11) va dans le même sens que celui de l'ombre (−0,07). À Lyon, l'inventaire ne compte que les arbres d'alignement de la Métropole, et la corrélation s'inverse (−0,38 et −0,29) : les IRIS les plus ombragés sont les collines boisées des 5e et 9e arrondissements, qui ont peu d'arbres de rue, alors que les alignements se concentrent dans les quartiers denses. Les deux couches satellite, elles, s'accordent à Lyon comme ailleurs. L'inventaire lyonnais ne valide donc pas la couche d'ombre ; il mesure autre chose, les arbres de rue, dont l'indice selon le revenu est de +0,05. Aucun inventaire ne compte les arbres des jardins privés ni des cours d'immeubles, que le satellite voit.</p><p class="note">Sans palmiers. Sources : Les arbres, Ville de Paris (opendata.paris.fr), 2026-10-09; Arbres d&#x27;alignement de la Métropole de Lyon (data.grandlyon.com), 2026-10-12. Seuls les comptages par IRIS sont conservés.</p>
+    <h3>Ce qu'il faut savoir avant de le citer</h3>
+    <p class="aviso">La Street Tree Layer ne voit pas les arbres d'alignement isolés ni les petits houppiers, qui dans les quartiers denses font presque toute l'ombre de la rue. Les quartiers aux rues étroites peuvent donc sortir avec moins d'ombre qu'on n'en sent à pied.</p>
+    <p class="aviso">Landsat passe vers onze heures du matin, heure solaire. Il mesure la chaleur du sol à cette heure-là, pas celle de l'après-midi ni celle de l'air, et les toits comptent autant que la rue.</p>
+    <p>Le revenu est celui de 2021 et les habitants ceux du recensement 2022 ; les couches d'arbres datent de 2020–2021 (Street Tree Layer) et de 2024 (Tree Cover Density). Les arbres changent lentement, mais une grande plantation ou un abattage de ces années-là peut déplacer un IRIS.</p><p>Filosofi 2021 est le dernier millésime : l'Insee a renoncé à produire 2022, car la suppression de la taxe d'habitation sur les résidences principales empêche de relier les foyers fiscaux à leur logement avec la qualité voulue. Tant que la série ne reprend pas, cette page ne peut pas suivre l'évolution des écarts de revenu.</p><p>L'Insee ne diffuse pas le revenu d'un IRIS quand il compte trop peu de ménages fiscaux (secret statistique) ou quand l'estimation n'est pas fiable. IRIS sans revenu : Paris 128 sur 992 (2 % des habitants), Marseille 71 sur 393 (7 % des habitants), Lyon 16 sur 185 (1 % des habitants), Toulouse 7 sur 153 (2 % des habitants) et Lille 19 sur 110 (4 % des habitants). Ils restent sur la carte, hachurés, mais n'entrent pas dans les quintiles. S'ils étaient en moyenne plus pauvres ou plus riches que les autres, les écarts mesurés en seraient un peu déformés.</p><p>On s'en tient à la commune centre : Villeurbanne, Saint-Denis ou Mérignac n'y sont pas, même si elles font partie de la même agglomération. Les IRIS d'activité ou « divers » (bois, ports, aéroports, grands équipements) ont peu d'habitants et restent en dehors des comparaisons.</p><p>Landsat n'a pas assez de passages dégagés (au moins 4 par pixel) sur une partie de certaines villes : Bordeaux 13 sur 87 IRIS urbains restent sans température et hors comparaison. On ne change pas la règle pour eux.</p><p>Les indices de concentration et les quintiles se comparent avec la <a href="index.html">page espagnole</a>, car ils ne dépendent que du classement à l'intérieur de chaque ville ; les euros, non : ici on utilise la médiane du revenu disponible (après impôts et prestations), en Espagne la moyenne du revenu net.</p>
+    <h3>Données ouvertes</h3>
+    <p><a href="iris.csv">iris.csv</a> avec chaque IRIS · <a href="ciudades.csv">ciudades.csv</a> avec le résumé des villes des deux pays · <a href="indicators.json">indicators.json</a> avec le couvert arboré urbain · <a href="https://github.com/Asensio94/quien-tiene-sombra">code</a>.</p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <p class="principle">Données publiques, règles visibles et chaque chiffre relié à sa source. Des indices, pas des verdicts.</p>
+  <p>Street Tree Layer, Urban Atlas et Tree Cover Density : Copernicus Land Monitoring Service, © Union européenne, Agence européenne pour l'environnement · Landsat 8 et 9 : USGS, via Microsoft Planetary Computer · Revenus (Filosofi) et population par IRIS : Insee · Contours IRIS : IGN et Insee.</p>
+  <nav aria-label="Projets frères"><ul class="siblings" lang="es">
+    <li><a href="https://asensio94.github.io/observatorio-alegaciones/">Observatorio de alegaciones</a></li>
+    <li><a href="https://asensio94.github.io/vigia-incendios/">Vigía de incendios</a></li>
+    <li><a href="https://asensio94.github.io/centinela-natura/">Centinela Natura</a></li>
+    <li><a href="https://asensio94.github.io/vigilancia-humedales/">Vigilancia de humedales</a></li>
+    <li><a href="https://asensio94.github.io/sub-nocte/">Sub Nocte</a></li>
+    <li><a href="https://asensio94.github.io/riesgo-tendidos-aves/">Riesgo de tendidos para aves</a></li>
+    <li><a href="https://asensio94.github.io/grafo-promotores/">Grafo de promotores</a></li>
+    <li><a href="https://asensio94.github.io/cartera-cotizadas/">Cartera de las cotizadas</a></li>
+    <li><a href="https://asensio94.github.io/cuaderno-campo/">Cuaderno de campo</a></li>
+    <li><a href="https://asensio94.github.io/caudal-ecologico/">Caudal ecológico</a></li>
+    <li><a href="https://asensio94.github.io/estado-iba/">Estado de las IBA</a></li>
+    <li aria-current="page"><a href="https://asensio94.github.io/quien-tiene-sombra/">¿Quién tiene sombra?</a></li>
+  </ul></nav>
+</footer>
+<script>
+const C = [{"slug":"paris","name":"Paris","sections":992,"ranked":864,"population_ranked":2069558,"ci_canopy":-0.068,"canopy_pct":5.02,"quintiles":{"1":{"income":20017.0,"canopy":6.09,"canopy_tcd":1.53,"lst":36.7},"2":{"income":26711.51,"canopy":5.37,"canopy_tcd":1.04,"lst":36.81},"3":{"income":31271.02,"canopy":4.66,"canopy_tcd":1.07,"lst":37.12},"4":{"income":35717.43,"canopy":4.36,"canopy_tcd":0.92,"lst":37.19},"5":{"income":44556.63,"canopy":4.65,"canopy_tcd":1.38,"lst":36.75}},"lst_gap":-0.05,"canopy_urban_tcd_pct":10.64},{"slug":"marseille","name":"Marseille","sections":393,"ranked":316,"population_ranked":807311,"ci_canopy":0.176,"canopy_pct":12.54,"quintiles":{"1":{"income":13288.62,"canopy":8.26,"canopy_tcd":1.4,"lst":42.78},"2":{"income":17983.11,"canopy":10.58,"canopy_tcd":2.46,"lst":42.64},"3":{"income":20651.33,"canopy":10.47,"canopy_tcd":2.32,"lst":42.48},"4":{"income":24057.46,"canopy":12.95,"canopy_tcd":3.62,"lst":41.87},"5":{"income":29463.09,"canopy":20.44,"canopy_tcd":6.0,"lst":40.64}},"lst_gap":2.14,"canopy_urban_tcd_pct":4.44},{"slug":"lyon","name":"Lyon","sections":185,"ranked":169,"population_ranked":513026,"ci_canopy":-0.079,"canopy_pct":11.59,"quintiles":{"1":{"income":19338.27,"canopy":15.18,"canopy_tcd":3.88,"lst":41.35},"2":{"income":23641.58,"canopy":11.69,"canopy_tcd":1.93,"lst":41.85},"3":{"income":25860.81,"canopy":9.02,"canopy_tcd":1.43,"lst":41.9},"4":{"income":27850.93,"canopy":13.11,"canopy_tcd":2.76,"lst":41.0},"5":{"income":32761.98,"canopy":8.88,"canopy_tcd":1.88,"lst":40.93}},"lst_gap":0.43,"canopy_urban_tcd_pct":4.6},{"slug":"toulouse","name":"Toulouse","sections":153,"ranked":145,"population_ranked":495178,"ci_canopy":-0.019,"canopy_pct":13.31,"quintiles":{"1":{"income":16383.58,"canopy":13.31,"canopy_tcd":3.67,"lst":43.7},"2":{"income":20378.42,"canopy":14.23,"canopy_tcd":3.44,"lst":43.34},"3":{"income":22975.54,"canopy":13.26,"canopy_tcd":4.35,"lst":43.11},"4":{"income":25488.97,"canopy":13.31,"canopy_tcd":2.87,"lst":42.7},"5":{"income":29337.04,"canopy":12.4,"canopy_tcd":4.17,"lst":42.3}},"lst_gap":1.4,"canopy_urban_tcd_pct":4.47},{"slug":"bordeaux","name":"Bordeaux","sections":88,"ranked":74,"population_ranked":224338,"ci_canopy":0.142,"canopy_pct":9.47,"quintiles":{"1":{"income":18435.25,"canopy":8.7,"canopy_tcd":3.1,"lst":43.74},"2":{"income":22197.91,"canopy":5.6,"canopy_tcd":0.63,"lst":42.56},"3":{"income":25570.02,"canopy":7.55,"canopy_tcd":1.21,"lst":43.17},"4":{"income":29617.29,"canopy":12.19,"canopy_tcd":1.89,"lst":42.48},"5":{"income":32640.69,"canopy":13.3,"canopy_tcd":2.93,"lst":42.61}},"lst_gap":1.13,"canopy_urban_tcd_pct":3.24},{"slug":"lille","name":"Lille","sections":110,"ranked":91,"population_ranked":229546,"ci_canopy":-0.014,"canopy_pct":10.84,"quintiles":{"1":{"income":14760.87,"canopy":14.27,"canopy_tcd":5.81,"lst":34.41},"2":{"income":18078.13,"canopy":7.21,"canopy_tcd":2.91,"lst":35.29},"3":{"income":21124.31,"canopy":10.57,"canopy_tcd":3.94,"lst":34.51},"4":{"income":24239.13,"canopy":10.93,"canopy_tcd":4.92,"lst":34.59},"5":{"income":28820.78,"canopy":11.28,"canopy_tcd":4.8,"lst":33.27}},"lst_gap":1.15,"canopy_urban_tcd_pct":6.87}], T = {"unit": "IRIS", "tip": "IRIS {id} · {pop} habitants · {inc} par unité de consommation · ombre {shade} · sol {lst}", "out": " · hors comparaison", "heat_bins": "3 °C ou plus en dessous|1 à 3 °C en dessous|±1 °C|1 à 3 °C au-dessus|3 °C ou plus au-dessus", "no_patch": "pas de tache d'arbres", "upto": "jusqu'à ", "pre_shade": "Part de l'IRIS sous houppier : ", "pre_income": "Revenu disponible médian par unité de consommation : ", "pre_heat": "Température du sol par rapport à la moyenne de la ville ({t}) : ", "nodata": "sans données ou non urbain", "scatter_label": "Revenu et ombre de chaque IRIS", "thousand": "{n} k€", "x_axis": "revenu par unité de consommation →", "pt": "IRIS {id} : {inc}, ombre {shade}", "q_label": "Ombre et chaleur par quintile de revenu", "q_title": "Sol en été (points) et ombre (barres) par quintile de revenu", "q_shade": "Quintile {k} : {v} d'ombre", "q_heat": "Quintile {k} : {v}", "poorest": "plus pauvre", "richest": "plus aisé", "residents": "Habitants", "income_uc": "Revenu par u. de conso.", "shade_stl": "Ombre (STL)", "shade_tcd": "Densité du houppier (TCD)", "ground": "Sol en été", "ranked": "{a} IRIS sur {b} entrent dans la comparaison · {pop} habitants", "ci": "Indice de concentration", "mean_shade": "Ombre moyenne", "shade_q": "Ombre, plus pauvre / plus aisé", "ground_q": "Sol, plus pauvre − plus aisé", "canopy": "Couvert arboré urbain", "scatter_note": "Chaque point est un IRIS ; sa taille, ses habitants. Cliquez sur un point ou un IRIS de la carte.", "sp": " "}, LOC = "fr-FR", SP = T.sp;
+const num = (x,d=0) => x==null ? "—" : x.toLocaleString(LOC,{minimumFractionDigits:d,maximumFractionDigits:d});
+const sig = (x,d=1) => x==null ? "—" : (x>0?"+":x<0?"−":"") + num(Math.abs(x),d);
+const pct = (x,d=1) => num(x,d) + SP + "%", deg = (x,d=1) => num(x,d) + SP + "°C", eur = x => num(x) + SP + "€";
+const fill = (s,o) => s.replace(/\{(\w+)\}/g, (_,k) => o[k]);
+const selC = document.getElementById("f-ciudad"), selM = document.getElementById("f-modo");
+const cache = {};
+let cur = null, data = null, sel = null;
+for (const c of C) selC.add(new Option(c.name, c.slug));
+
+document.getElementById("filas").innerHTML = [...C].sort((a,b) => (b.ci_canopy??-9) - (a.ci_canopy??-9)).map(c => {
+  const v = c.ci_canopy ?? 0, w = Math.min(Math.abs(v), .5) / .5 * 50;
+  const bar = `<div class="barra" title="${num(c.ci_canopy,3)}"><i class="${v<0?"neg":""}" style="left:${v<0?50-w:50}%;width:${w}%"></i></div>`;
+  return `<tr data-c="${c.slug}" tabindex="0"><td>${c.name}</td><td><span style="display:flex;gap:8px;align-items:center">${bar}<span class="data">${sig(c.ci_canopy,2)}</span></span></td>
+    <td class="num">${pct(c.quintiles["1"].canopy)}</td><td class="num">${pct(c.quintiles["5"].canopy)}</td>
+    <td class="num">${sig(c.lst_gap,1)}${SP}°C</td><td class="num">${pct(c.canopy_urban_tcd_pct)}</td></tr>`;
+}).join("");
+document.getElementById("filas").addEventListener("click", e => { const r = e.target.closest("tr"); if (r) { elegir(r.dataset.c); document.getElementById("detalle").scrollIntoView({behavior:"smooth"}); } });
+document.getElementById("filas").addEventListener("keydown", e => { const r = e.target.closest("tr"); if (r && e.key === "Enter") elegir(r.dataset.c); });
+
+// Rows: [unit code, path, population, income, canopy STL %, canopy TCD %, LST °C, ranked]
+function wmean(rows, i){ let s=0, w=0; for (const r of rows) if (r[7] && r[i]!=null && r[2]) { s += r[i]*r[2]; w += r[2]; } return w ? s/w : null; }
+function cortes(vals){ const v = vals.filter(x => x!=null).sort((a,b)=>a-b); return [.2,.4,.6,.8].map(q => v[Math.floor(q*(v.length-1))]); }
+function cuartiles(vals){ const v = vals.slice().sort((a,b)=>a-b); return [.25,.5,.75].map(q => v[Math.floor(q*(v.length-1))]); }
+const ESC = {sombra:"s", calor:"h", renta:"r"};
+function clase(v, br){ if (v==null) return null; let i = br.findIndex(t => v < t); return i < 0 ? 4 : i; }
+function pintar(){
+  if (!data) return;
+  const modo = selM.value, rk = data.s.filter(r => r[7]);
+  const lstMedia = wmean(data.s, 6);
+  const val = r => modo === "sombra" ? r[4] : modo === "renta" ? r[3] : (r[6]==null ? null : r[6] - lstMedia);
+  // Many units have no tree patch at all: in shade mode they get their own class and the rest
+  // are split into quartiles.
+  const sinCopa = modo === "sombra";
+  const br = modo === "calor" ? [-3,-1,1,3]
+    : sinCopa ? [1e-9, ...cuartiles(rk.map(val).filter(v => v > 0))] : cortes(rk.map(val));
+  const g = document.getElementById("secciones");
+  for (const el of g.children) {
+    const r = data.byId[el.dataset.c], v = val(r), k = r[7] ? clase(v, br) : null;
+    el.classList.toggle("nd", k == null); el.style.fill = k == null ? "" : `var(--${ESC[modo]}${k})`;
+    el.classList.toggle("sel", el.dataset.c === sel);
+    el.firstChild.textContent = fill(T.tip, {id: r[0], pop: num(r[2]), inc: eur(r[3]), shade: pct(r[4]), lst: deg(r[6])}) + (r[7] ? "" : T.out);
+  }
+  const fmt = modo === "sombra" ? (x => pct(x)) : modo === "renta" ? (x => eur(Math.round(x/100)*100)) : (x => sig(x,0)+SP+"°C");
+  const lab = modo === "calor" ? T.heat_bins.split("|")
+    : sinCopa ? [T.no_patch, T.upto+fmt(br[1]), fmt(br[1])+" – "+fmt(br[2]), fmt(br[2])+" – "+fmt(br[3]), "≥ "+fmt(br[3])]
+    : ["< "+fmt(br[0]), fmt(br[0])+" – "+fmt(br[1]), fmt(br[1])+" – "+fmt(br[2]), fmt(br[2])+" – "+fmt(br[3]), "≥ "+fmt(br[3])];
+  const pre = modo === "sombra" ? T.pre_shade : modo === "renta" ? T.pre_income : fill(T.pre_heat, {t: deg(lstMedia)});
+  document.getElementById("leyenda").innerHTML = pre + lab.map((t,i) => `<span><i style="background:var(--${ESC[modo]}${i})"></i>${t}</span>`).join("")
+    + `<span><i style="background:url(#rayas);border:1px solid var(--line)"></i>${T.nodata}</span>`;
+}
+function dispersion(){
+  const rk = data.s.filter(r => r[7] && r[3]!=null && r[4]!=null);
+  const W = 360, H = 230, L = 40, R = 8, T0 = 14, B = 30;
+  const xs = rk.map(r => r[3]), ys = rk.map(r => r[4]);
+  const x0 = Math.min(...xs), x1 = Math.max(...xs), y1 = Math.max(5, ...ys) * 1.05;
+  const x = v => L + (v - x0) / (x1 - x0) * (W - L - R), y = v => T0 + (1 - v / y1) * (H - T0 - B);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${T.scatter_label}">`;
+  for (const t of [0, .5, 1]) { const v = y1/1.05*t; s += `<line class="eje" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L-4}" y="${y(v)+4}" text-anchor="end">${pct(v,0)}</text>`; }
+  for (const t of [0, .5, 1]) { const v = x0 + (x1-x0)*t; s += `<text x="${x(v)}" y="${H-14}" text-anchor="middle">${fill(T.thousand, {n: num(Math.round(v/1000))})}</text>`; }
+  s += `<text x="${W-R}" y="${H-1}" text-anchor="end">${T.x_axis}</text>`;
+  s += rk.map(r => `<circle class="pt${r[0]===sel?" sel":""}" data-c="${r[0]}" cx="${x(r[3]).toFixed(1)}" cy="${y(r[4]).toFixed(1)}" r="${Math.max(1.2, Math.sqrt(r[2])/18).toFixed(1)}"><title>${fill(T.pt, {id: r[0], inc: eur(r[3]), shade: pct(r[4])})}</title></circle>`).join("");
+  return s + "</svg>";
+}
+function quintiles(c){
+  // Two bands so labels never collide: ground temperature (points) on top, shade (bars) below.
+  const W = 360, H = 200, L = 8, R = 8, T0 = 22, B = 22, bw = (W - L - R) / 5;
+  const HT = 22, HB = 32;  // temperature band: label row + point range
+  const top = T0 + HT + HB + 14, sub = T0 + HT + HB + 4;
+  const q = [1,2,3,4,5].map(k => c.quintiles[k]);
+  const ms = Math.max(...q.map(v => v.canopy || 0)) || 1;
+  const ls = q.map(v => v.lst).filter(v => v!=null), lmin = Math.min(...ls), lmax = Math.max(...ls);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${T.q_label}"><text class="tit" x="${L}" y="12">${T.q_title}</text>`;
+  s += `<line class="eje" x1="${L}" x2="${W-R}" y1="${sub}" y2="${sub}"/>`;
+  q.forEach((v,i) => {
+    const h = (v.canopy||0)/ms*(H-top-B-14), cx = L + bw*i + bw/2;
+    s += `<rect class="q" x="${L+bw*i+8}" y="${H-B-h}" width="${bw-16}" height="${h}"><title>${fill(T.q_shade, {k: i+1, v: pct(v.canopy)})}</title></rect>`;
+    s += `<text x="${cx}" y="${H-B-h-4}" text-anchor="middle">${pct(v.canopy)}</text>`;
+    if (v.lst!=null) { const yy = T0 + HT + (lmax - v.lst) / ((lmax - lmin) || 1) * HB; s += `<circle class="qh" cx="${cx}" cy="${yy}" r="4"><title>${fill(T.q_heat, {k: i+1, v: deg(v.lst)})}</title></circle><text x="${cx}" y="${T0 + 12}" text-anchor="middle">${deg(v.lst)}</text>`; }
+    s += `<text x="${cx}" y="${H-6}" text-anchor="middle">${i===0?T.poorest:i===4?T.richest:"Q"+(i+1)}</text>`;
+  });
+  return s + "</svg>";
+}
+function panel(){
+  const c = cur, p = document.getElementById("panel");
+  let extra = "";
+  if (sel && data.byId[sel]) { const r = data.byId[sel];
+    extra = `<div class="card"><b>${T.unit} ${r[0]}</b><dl class="cifras"><div><dt>${T.residents}</dt><dd>${num(r[2])}</dd></div><div><dt>${T.income_uc}</dt><dd>${eur(r[3])}</dd></div><div><dt>${T.shade_stl}</dt><dd>${pct(r[4])}</dd></div><div><dt>${T.shade_tcd}</dt><dd>${pct(r[5])}</dd></div><div><dt>${T.ground}</dt><dd>${deg(r[6])}</dd></div></dl></div>`; }
+  p.innerHTML = `<div><h2 id="${c.slug}">${c.name}</h2><p class="sub">${fill(T.ranked, {a: num(c.ranked), b: num(c.sections), pop: num(c.population_ranked)})}</p></div>
+    <dl class="cifras">
+      <div><dt>${T.ci}</dt><dd>${sig(c.ci_canopy,2)}</dd></div>
+      <div><dt>${T.mean_shade}</dt><dd>${pct(c.canopy_pct)}</dd></div>
+      <div><dt>${T.shade_q}</dt><dd>${num(c.quintiles["1"].canopy,1)} / ${pct(c.quintiles["5"].canopy)}</dd></div>
+      <div><dt>${T.ground_q}</dt><dd>${sig(c.lst_gap,1)}${SP}°C</dd></div>
+      <div><dt>${T.canopy} 2024</dt><dd>${pct(c.canopy_urban_tcd_pct)}</dd></div>
+    </dl>
+    <figure class="graf" style="margin:0">${quintiles(c)}</figure>
+    <figure class="graf" style="margin:0">${dispersion()}<figcaption class="note">${T.scatter_note}</figcaption></figure>
+    ${extra}`;
+}
+async function elegir(slug, keepSel){
+  cur = C.find(c => c.slug === slug); selC.value = slug; if (!keepSel) sel = null;
+  for (const tr of document.querySelectorAll("#filas tr")) tr.classList.toggle("sel", tr.dataset.c === slug);
+  data = cache[slug] || (cache[slug] = await fetch(`data/${slug}.json`).then(r => r.json()));
+  data.byId = data.byId || Object.fromEntries(data.s.map(r => [r[0], r]));
+  const svg = document.getElementById("mapa"); svg.setAttribute("viewBox", `0 0 ${data.w} ${data.h}`);
+  document.getElementById("secciones").innerHTML = data.s.map(r => `<path data-c="${r[0]}" d="${r[1]}"><title></title></path>`).join("");
+  history.replaceState(null, "", "#" + slug);
+  pintar(); panel();
+}
+function marcar(c){ sel = c; pintar(); panel(); }
+document.getElementById("secciones").addEventListener("click", e => { const t = e.target.closest("path"); if (t) marcar(t.dataset.c); });
+document.getElementById("panel").addEventListener("click", e => { const t = e.target.closest("circle.pt"); if (t) marcar(t.dataset.c); });
+selC.addEventListener("change", () => elegir(selC.value));
+selM.addEventListener("change", pintar);
+const h = location.hash.slice(1);
+if (C.length) elegir(C.some(c => c.slug === h) ? h : C[0].slug);
+</script>
+</body>
+</html>

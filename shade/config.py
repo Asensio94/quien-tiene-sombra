@@ -18,8 +18,21 @@ CRS = "EPSG:3035"  # ETRS89-LAEA: equal-area, native CRS of the Copernicus layer
 class City:
     slug: str
     name: str
-    municipality: str   # INE 5-digit code
+    municipality: str   # INE (ES) or INSEE (FR) 5-character municipality code
     fua: str            # Urban Atlas Functional Urban Area code (2021 delineation)
+    country: str = "ES"  # ISO 3166-1 alpha-2
+    # INSEE codes the units are published under. Paris, Lyon and Marseille publish IRIS under
+    # their arrondissements (751xx, 6938x, 132xx), not under the municipality code.
+    parts: tuple[str, ...] = ()
+
+    @property
+    def unit(self) -> str:
+        """Name of the statistical unit, also the index column of data/sections/<slug>.csv."""
+        return UNIT[self.country]
+
+    @property
+    def codes(self) -> tuple[str, ...]:
+        return self.parts or (self.municipality,)
 
 
 # Municipalities over 200,000 inhabitants that sit in an Urban Atlas FUA. The unit is the core
@@ -46,8 +59,21 @@ CITIES = [
     City("coruna", "A Coruña", "15030", "ES026L2"),
     City("granada", "Granada", "18087", "ES501L3"),
     City("elche", "Elche", "03065", "ES505L1"),
+    # France: the six largest municipalities with a Street Tree Layer, unit IRIS.
+    City("paris", "Paris", "75056", "FR001L1", "FR", tuple(f"751{i:02d}" for i in range(1, 21))),
+    City("marseille", "Marseille", "13055", "FR203L2", "FR", tuple(f"132{i:02d}" for i in range(1, 17))),
+    City("lyon", "Lyon", "69123", "FR003L2", "FR", tuple(f"6938{i}" for i in range(1, 10))),
+    City("toulouse", "Toulouse", "31555", "FR004L2", "FR"),
+    City("bordeaux", "Bordeaux", "33063", "FR007L2", "FR"),
+    City("lille", "Lille", "59350", "FR009L2", "FR"),
 ]
 CITY = {c.slug: c for c in CITIES}
+COUNTRIES = ("ES", "FR")
+UNIT = {"ES": "CUSEC", "FR": "IRIS"}
+
+
+def cities(country: str | None = None) -> list[City]:
+    return [c for c in CITIES if country is None or c.country == country]
 
 # --- Income: INE Atlas de Distribución de Renta de los Hogares (ADRH) ----------------------
 # Income of year N is linked to the population on 1 January N+1, so it is published on the
@@ -62,6 +88,21 @@ SECTIONS_URL = "https://www.ine.es/prodyser/cartografia/seccionado_{year}.zip"
 
 def sections_year(income_year: int = INCOME_YEAR) -> int:
     return income_year + 1
+
+
+# --- France: INSEE Filosofi income and census population by IRIS, IGN IRIS outlines ---------
+# Filosofi 2021 is the last vintage: INSEE dropped 2022 because the end of the taxe
+# d'habitation broke the link between tax households and dwellings. Its IRIS are those of
+# 1 January 2022; the census and the IGN outlines in force today use the same codes in the six
+# cities (checked IRIS by IRIS), so they are joined by code.
+FILOSOFI_YEAR = 2021
+FILOSOFI_URL = "https://www.insee.fr/fr/statistiques/fichier/8229323/BASE_TD_FILO_IRIS_2021_DISP_CSV.zip"
+FILOSOFI_INCOME = "DISP_MED21"   # median disposable income per consumption unit (€)
+CENSUS_YEAR = 2022
+CENSUS_URL = "https://www.insee.fr/fr/statistiques/fichier/8647014/base-ic-evol-struct-pop-2022_csv.zip"
+CENSUS_POPULATION = "P22_POP"
+IRIS_WFS = "https://data.geopf.fr/wfs/ows"
+IRIS_LAYER = "STATISTICALUNITS.IRIS:contours_iris"
 
 
 # --- Copernicus Land, via the Copernicus Data Space Ecosystem (free account) ---------------
@@ -99,4 +140,5 @@ QA_REJECT_BITS = (1, 2, 3, 4, 5, 7)
 
 # --- Outputs -------------------------------------------------------------------------------
 SITE_URL = "https://asensio94.github.io/quien-tiene-sombra/"
+PAGES = {"ES": "index.html", "FR": "france.html"}
 REPO_URL = "https://github.com/Asensio94/quien-tiene-sombra"
