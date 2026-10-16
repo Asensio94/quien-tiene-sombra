@@ -1,15 +1,20 @@
 {
  "source": "quien-tiene-sombra",
- "version": 1,
- "generated": "2026-10-14T08:22Z",
+ "version": 2,
+ "generated": "2026-10-15T17:25Z",
  "coverage": {
-  "label": "20 ciudades de más de 200.000 habitantes",
-  "note": "Cubierta arbórea media (HRL Tree Cover Density 2024, 10 m) sobre el suelo artificial del Urban Atlas 2021 dentro del término municipal."
+  "label": "26 ciudades de España y Francia",
+  "countries": [
+   "ES",
+   "FR"
+  ],
+  "note": "Cubierta arbórea media (HRL Tree Cover Density 2024, 10 m) sobre el suelo artificial del Urban Atlas 2021 dentro del término municipal (commune en Francia)."
  },
  "indicators": [
   {
-   "id": "urban_tree_canopy:28079:2024",
+   "id": "urban_tree_canopy:ES:28079:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Madrid en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#madrid",
@@ -28,8 +33,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:08019:2024",
+   "id": "urban_tree_canopy:ES:08019:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Barcelona en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#barcelona",
@@ -48,8 +54,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:46250:2024",
+   "id": "urban_tree_canopy:ES:46250:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de València en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#valencia",
@@ -68,8 +75,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:41091:2024",
+   "id": "urban_tree_canopy:ES:41091:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Sevilla en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#sevilla",
@@ -88,8 +96,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:50297:2024",
+   "id": "urban_tree_canopy:ES:50297:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Zaragoza en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#zaragoza",
@@ -108,8 +117,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:29067:2024",
+   "id": "urban_tree_canopy:ES:29067:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Málaga en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#malaga",
@@ -128,8 +138,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:30030:2024",
+   "id": "urban_tree_canopy:ES:30030:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Murcia en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#murcia",
@@ -148,8 +159,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:07040:2024",
+   "id": "urban_tree_canopy:ES:07040:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Palma en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#palma",
@@ -168,8 +180,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:35016:2024",
+   "id": "urban_tree_canopy:ES:35016:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Las Palmas de Gran Canaria en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#las-palmas",
@@ -188,8 +201,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:48020:2024",
+   "id": "urban_tree_canopy:ES:48020:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Bilbao en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#bilbao",
@@ -208,8 +222,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:03014:2024",
+   "id": "urban_tree_canopy:ES:03014:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Alicante en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#alicante",
@@ -228,8 +243,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:14021:2024",
+   "id": "urban_tree_canopy:ES:14021:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Córdoba en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#cordoba",
@@ -248,8 +264,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:47186:2024",
+   "id": "urban_tree_canopy:ES:47186:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Valladolid en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#valladolid",
@@ -268,8 +285,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:36057:2024",
+   "id": "urban_tree_canopy:ES:36057:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Vigo en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#vigo",
@@ -288,8 +306,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:33024:2024",
+   "id": "urban_tree_canopy:ES:33024:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Gijón en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#gijon",
@@ -308,8 +327,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:08101:2024",
+   "id": "urban_tree_canopy:ES:08101:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de L'Hospitalet de Llobregat en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#hospitalet",
@@ -328,8 +348,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:01059:2024",
+   "id": "urban_tree_canopy:ES:01059:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Vitoria-Gasteiz en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#vitoria",
@@ -348,8 +369,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:15030:2024",
+   "id": "urban_tree_canopy:ES:15030:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de A Coruña en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#coruna",
@@ -368,8 +390,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:18087:2024",
+   "id": "urban_tree_canopy:ES:18087:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Granada en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#granada",
@@ -388,8 +411,9 @@
    }
   },
   {
-   "id": "urban_tree_canopy:03065:2024",
+   "id": "urban_tree_canopy:ES:03065:2024",
    "kind": "urban_tree_canopy",
+   "country": "ES",
    "date": "2024-12-31",
    "title": "Cubierta arbórea urbana de Elche en 2024",
    "url": "https://asensio94.github.io/quien-tiene-sombra/#elche",
@@ -405,6 +429,132 @@
     "legal_basis": "Reglamento (UE) 2024/1991, art. 8",
     "area_ha": 8497,
     "whole_municipality_pct": 5.73
+   }
+  },
+  {
+   "id": "urban_tree_canopy:FR:75056:2024",
+   "kind": "urban_tree_canopy",
+   "country": "FR",
+   "date": "2024-12-31",
+   "title": "Couvert arboré urbain de Paris en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/france.html#paris",
+   "municipalities": [
+    "75056"
+   ],
+   "value": {
+    "amount": 10.64,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Règlement (UE) 2024/1991, art. 8",
+    "area_ha": 10293,
+    "whole_municipality_pct": 10.43
+   }
+  },
+  {
+   "id": "urban_tree_canopy:FR:13055:2024",
+   "kind": "urban_tree_canopy",
+   "country": "FR",
+   "date": "2024-12-31",
+   "title": "Couvert arboré urbain de Marseille en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/france.html#marseille",
+   "municipalities": [
+    "13055"
+   ],
+   "value": {
+    "amount": 4.44,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Règlement (UE) 2024/1991, art. 8",
+    "area_ha": 13691,
+    "whole_municipality_pct": 7.08
+   }
+  },
+  {
+   "id": "urban_tree_canopy:FR:69123:2024",
+   "kind": "urban_tree_canopy",
+   "country": "FR",
+   "date": "2024-12-31",
+   "title": "Couvert arboré urbain de Lyon en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/france.html#lyon",
+   "municipalities": [
+    "69123"
+   ],
+   "value": {
+    "amount": 4.6,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Règlement (UE) 2024/1991, art. 8",
+    "area_ha": 4465,
+    "whole_municipality_pct": 4.54
+   }
+  },
+  {
+   "id": "urban_tree_canopy:FR:31555:2024",
+   "kind": "urban_tree_canopy",
+   "country": "FR",
+   "date": "2024-12-31",
+   "title": "Couvert arboré urbain de Toulouse en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/france.html#toulouse",
+   "municipalities": [
+    "31555"
+   ],
+   "value": {
+    "amount": 4.47,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Règlement (UE) 2024/1991, art. 8",
+    "area_ha": 10330,
+    "whole_municipality_pct": 6.28
+   }
+  },
+  {
+   "id": "urban_tree_canopy:FR:33063:2024",
+   "kind": "urban_tree_canopy",
+   "country": "FR",
+   "date": "2024-12-31",
+   "title": "Couvert arboré urbain de Bordeaux en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/france.html#bordeaux",
+   "municipalities": [
+    "33063"
+   ],
+   "value": {
+    "amount": 3.24,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Règlement (UE) 2024/1991, art. 8",
+    "area_ha": 4156,
+    "whole_municipality_pct": 4.34
+   }
+  },
+  {
+   "id": "urban_tree_canopy:FR:59350:2024",
+   "kind": "urban_tree_canopy",
+   "country": "FR",
+   "date": "2024-12-31",
+   "title": "Couvert arboré urbain de Lille en 2024",
+   "url": "https://asensio94.github.io/quien-tiene-sombra/france.html#lille",
+   "municipalities": [
+    "59350"
+   ],
+   "value": {
+    "amount": 6.87,
+    "unit": "%"
+   },
+   "baseline": true,
+   "details": {
+    "legal_basis": "Règlement (UE) 2024/1991, art. 8",
+    "area_ha": 3352,
+    "whole_municipality_pct": 6.81
    }
   }
  ]

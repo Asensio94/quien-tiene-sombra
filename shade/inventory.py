@@ -1,9 +1,13 @@
-"""Validation against the municipal tree inventories of Madrid and Barcelona.
+"""Validation against the municipal tree inventories of Madrid, Barcelona, Paris and Lyon.
 
-Both cities publish every municipally managed tree with its coordinates. Counting them per
-section gives an independent measure of shade, made on the ground and one tree at a time,
-including the lone street trees the Street Tree Layer misses. Only counts per section are
-kept; the tree points stay in the (git-ignored) cache.
+These cities publish every municipally managed tree with its coordinates. Counting them per
+section (IRIS in France) gives an independent measure of shade, made on the ground and one
+tree at a time, including the lone street trees the Street Tree Layer misses. Only counts per
+unit are kept; the tree points stay in the (git-ignored) cache.
+
+The inventories do not cover the same trees: Madrid and Barcelona list street, square and
+park trees; Paris lists street, garden, cemetery and facility trees but not the Bois de
+Boulogne and de Vincennes; Lyon publishes street trees only.
 """
 from __future__ import annotations
 
@@ -17,7 +21,7 @@ import numpy as np
 import pandas as pd
 import requests
 
-from . import config, ine, stats
+from . import city as city_mod, config, stats
 
 log = logging.getLogger(__name__)
 
@@ -25,18 +29,25 @@ BCN_CKAN = "https://opendata-ajuntament.barcelona.cat/data/api/3/action/package_
 BCN_DATASETS = ("arbrat-viari", "arbrat-zona", "arbrat-parcs")  # street, square, park trees
 MAD_CKAN = "https://datos.madrid.es/api/3/action/package_show"
 MAD_DATASET = "300761-0-arbolado-especies"  # "Arbolado en parques y zonas verdes (detalle)"
+PARIS_API = "https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/les-arbres"
+LYON_WFS = "https://data.grandlyon.com/geoserver/metropole-de-lyon/ows"
+LYON_LAYER = "metropole-de-lyon:abr_arbres_alignement.abrarbre"
+PALM_GENERA = ("Phoenix", "Washingtonia", "Trachycarpus", "Chamaerops", "Butia", "Livistona",
+               "Brahea", "Sabal", "Syagrus")
 
 SOURCES = {
     "madrid": "Inventario de arbolado del Ayuntamiento de Madrid (datos.madrid.es)",
     "barcelona": "Arbrat viari, de zona i de parcs de l'Ajuntament de Barcelona (Open Data BCN)",
+    "paris": "Les arbres, Ville de Paris (opendata.paris.fr)",
+    "lyon": "Arbres d'alignement de la Métropole de Lyon (data.grandlyon.com)",
 }
 
 
-def _cached(name: str, url: str) -> bytes:
+def _cached(name: str, url: str, **params) -> bytes:
     path = config.CACHE_DIR / "inventory" / name
     if not path.exists():
         path.parent.mkdir(parents=True, exist_ok=True)
-        r = requests.get(url, timeout=600)
+        r = requests.get(url, params=params or None, timeout=600)
         r.raise_for_status()
         path.write_bytes(r.content)
     return path.read_bytes()
@@ -83,7 +94,38 @@ def madrid() -> tuple[gpd.GeoDataFrame, str]:
     return pts.to_crs(config.CRS), edition
 
 
-LOADERS = {"madrid": madrid, "barcelona": barcelona}
+def _basal_m2(circumference_cm: pd.Series) -> np.ndarray:
+    """Trunk cross-section (m²) from the circumference at breast height (cm), as in Madrid."""
+    c = pd.to_numeric(circumference_cm, errors="coerce").clip(upper=600)
+    return (c ** 2 / (4 * np.pi) / 1e4).fillna(0).values
+
+
+def paris() -> tuple[gpd.GeoDataFrame, str]:
+    meta = requests.get(PARIS_API, timeout=60).json()
+    edition = (meta.get("data_processed") or meta.get("metas", {}).get("default", {}).get("modified") or "")[:10]
+    raw = _cached(f"paris_les-arbres_{edition or 'latest'}.csv", f"{PARIS_API}/exports/csv",
+                  select="genre,circonferenceencm,geo_point_2d", delimiter=";")
+    df = pd.read_csv(io.BytesIO(raw), sep=";", encoding="utf-8-sig", dtype=str)
+    df = df[~df.genre.fillna("").isin(PALM_GENERA) & df.geo_point_2d.notna()]
+    lat, lon = (df.geo_point_2d.str.split(",", expand=True)[i].astype(float) for i in (0, 1))
+    pts = gpd.GeoDataFrame({"basal_m2": _basal_m2(df.circonferenceencm)},
+                           geometry=gpd.points_from_xy(lon, lat), crs="EPSG:4326")
+    return pts.to_crs(config.CRS), edition
+
+
+def lyon() -> tuple[gpd.GeoDataFrame, str]:
+    raw = _cached("lyon_arbres_alignement.geojson", LYON_WFS, service="WFS", version="2.0.0",
+                  request="GetFeature", typeNames=LYON_LAYER, outputFormat="application/json",
+                  srsName="EPSG:4326", propertyName="genre,circonference_cm,datereleve,the_geom")
+    gdf = gpd.read_file(io.BytesIO(raw))
+    gdf = gdf[~gdf.genre.fillna("").isin(PALM_GENERA)]
+    edition = str(pd.to_datetime(gdf.datereleve, errors="coerce").max())[:10]
+    pts = gpd.GeoDataFrame({"basal_m2": _basal_m2(gdf.circonference_cm)},
+                           geometry=gdf.geometry.values, crs=gdf.crs or "EPSG:4326")
+    return pts.to_crs(config.CRS), edition
+
+
+LOADERS = {"madrid": madrid, "barcelona": barcelona, "paris": paris, "lyon": lyon}
 
 
 def trees_per_section(secs: gpd.GeoDataFrame, pts: gpd.GeoDataFrame) -> pd.DataFrame:
@@ -99,8 +141,8 @@ def trees_per_section(secs: gpd.GeoDataFrame, pts: gpd.GeoDataFrame) -> pd.DataF
 def validate(slug: str) -> dict:
     city = config.CITY[slug]
     summary = json.loads((config.SECTIONS_DIR / f"{slug}.json").read_text(encoding="utf-8"))
-    df = pd.read_csv(config.SECTIONS_DIR / f"{slug}.csv", dtype={"CUSEC": str}).set_index("CUSEC")
-    secs = ine.sections(city.municipality, config.sections_year(summary["income_year"]))
+    df = pd.read_csv(config.SECTIONS_DIR / f"{slug}.csv", dtype={city.unit: str}).set_index(city.unit)
+    secs = city_mod.units(city, summary["income_year"])
     pts, edition = LOADERS[slug]()
     per = trees_per_section(secs, pts).reindex(df.index).fillna(0)
     df["trees"] = per.trees.astype(int)
@@ -114,7 +156,7 @@ def validate(slug: str) -> dict:
     by_q = {k: stats.weighted_mean(g.trees_ha, g.population) for k, g in r.groupby(q)}
 
     out = {
-        "slug": slug, "name": city.name, "source": SOURCES[slug], "edition": edition,
+        "slug": slug, "name": city.name, "country": city.country, "source": SOURCES[slug], "edition": edition,
         "trees": int(len(pts)), "trees_in_sections": int(df.trees.sum()),
         "rho_stl": round(stats.spearman(r.trees_ha, r.canopy_stl_pct), 3),
         "rho_tcd": round(stats.spearman(r.trees_ha, r.canopy_tcd_pct), 3),

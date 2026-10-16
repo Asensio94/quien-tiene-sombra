@@ -1,0 +1,66 @@
+{
+ "slug": "toulouse",
+ "name": "Toulouse",
+ "country": "FR",
+ "municipality": "31555",
+ "fua": "FR004L2",
+ "income_year": 2021,
+ "sections": 153,
+ "ranked": 145,
+ "population": 511691,
+ "population_ranked": 495178,
+ "ci_canopy": -0.019,
+ "ci_canopy_tcd": 0.003,
+ "rho_canopy": -0.092,
+ "rho_lst": -0.496,
+ "rho_stl_tcd": 0.713,
+ "canopy_pct": 13.31,
+ "quintiles": {
+  "1": {
+   "income": 16383.58,
+   "canopy": 13.31,
+   "canopy_tcd": 3.67,
+   "lst": 43.7
+  },
+  "2": {
+   "income": 20378.42,
+   "canopy": 14.23,
+   "canopy_tcd": 3.44,
+   "lst": 43.34
+  },
+  "3": {
+   "income": 22975.54,
+   "canopy": 13.26,
+   "canopy_tcd": 4.35,
+   "lst": 43.11
+  },
+  "4": {
+   "income": 25488.97,
+   "canopy": 13.31,
+   "canopy_tcd": 2.87,
+   "lst": 42.7
+  },
+  "5": {
+   "income": 29337.04,
+   "canopy": 12.4,
+   "canopy_tcd": 4.17,
+   "lst": 42.3
+  }
+ },
+ "canopy_gap": -0.91,
+ "lst_gap": 1.4,
+ "canopy_urban_tcd_pct": 4.47,
+ "canopy_municipality_tcd_pct": 6.28,
+ "urban_area_ha": 10330,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 31,
+  "days": 24,
+  "clear_median": 19
+ },
+ "sections_without_income": 7
+}

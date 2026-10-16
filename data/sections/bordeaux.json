@@ -1,0 +1,66 @@
+{
+ "slug": "bordeaux",
+ "name": "Bordeaux",
+ "country": "FR",
+ "municipality": "33063",
+ "fua": "FR007L2",
+ "income_year": 2021,
+ "sections": 88,
+ "ranked": 74,
+ "population": 265332,
+ "population_ranked": 224338,
+ "ci_canopy": 0.142,
+ "ci_canopy_tcd": 0.052,
+ "rho_canopy": 0.34,
+ "rho_lst": -0.497,
+ "rho_stl_tcd": 0.85,
+ "canopy_pct": 9.47,
+ "quintiles": {
+  "1": {
+   "income": 18435.25,
+   "canopy": 8.7,
+   "canopy_tcd": 3.1,
+   "lst": 43.74
+  },
+  "2": {
+   "income": 22197.91,
+   "canopy": 5.6,
+   "canopy_tcd": 0.63,
+   "lst": 42.56
+  },
+  "3": {
+   "income": 25570.02,
+   "canopy": 7.55,
+   "canopy_tcd": 1.21,
+   "lst": 43.17
+  },
+  "4": {
+   "income": 29617.29,
+   "canopy": 12.19,
+   "canopy_tcd": 1.89,
+   "lst": 42.48
+  },
+  "5": {
+   "income": 32640.69,
+   "canopy": 13.3,
+   "canopy_tcd": 2.93,
+   "lst": 42.61
+  }
+ },
+ "canopy_gap": 4.6,
+ "lst_gap": 1.13,
+ "canopy_urban_tcd_pct": 3.24,
+ "canopy_municipality_tcd_pct": 4.34,
+ "urban_area_ha": 4156,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 10,
+  "days": 10,
+  "clear_median": 9
+ },
+ "sections_without_income": 0
+}

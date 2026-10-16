@@ -1,0 +1,66 @@
+{
+ "slug": "lyon",
+ "name": "Lyon",
+ "country": "FR",
+ "municipality": "69123",
+ "fua": "FR003L2",
+ "income_year": 2021,
+ "sections": 185,
+ "ranked": 169,
+ "population": 520765,
+ "population_ranked": 513026,
+ "ci_canopy": -0.079,
+ "ci_canopy_tcd": -0.105,
+ "rho_canopy": -0.267,
+ "rho_lst": -0.227,
+ "rho_stl_tcd": 0.742,
+ "canopy_pct": 11.59,
+ "quintiles": {
+  "1": {
+   "income": 19338.27,
+   "canopy": 15.18,
+   "canopy_tcd": 3.88,
+   "lst": 41.35
+  },
+  "2": {
+   "income": 23641.58,
+   "canopy": 11.69,
+   "canopy_tcd": 1.93,
+   "lst": 41.85
+  },
+  "3": {
+   "income": 25860.81,
+   "canopy": 9.02,
+   "canopy_tcd": 1.43,
+   "lst": 41.9
+  },
+  "4": {
+   "income": 27850.93,
+   "canopy": 13.11,
+   "canopy_tcd": 2.76,
+   "lst": 41.0
+  },
+  "5": {
+   "income": 32761.98,
+   "canopy": 8.88,
+   "canopy_tcd": 1.88,
+   "lst": 40.93
+  }
+ },
+ "canopy_gap": -6.3,
+ "lst_gap": 0.43,
+ "canopy_urban_tcd_pct": 4.6,
+ "canopy_municipality_tcd_pct": 4.54,
+ "urban_area_ha": 4465,
+ "lst": {
+  "summers": [
+   2024,
+   2025,
+   2026
+  ],
+  "scenes": 26,
+  "days": 26,
+  "clear_median": 23
+ },
+ "sections_without_income": 16
+}
