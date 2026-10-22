@@ -36,6 +36,40 @@ def country_of(s: dict) -> str:
     return s.get("country") or config.CITY[s["slug"]].country
 
 
+# Common footer of the Terra Aperta projects, in the hub's menu order: (Spanish name, page, French name,
+# French page). This project is not one of the twelve, so none is marked as the current page.
+_SITE = "https://asensio94.github.io/"
+FOOTER_PROJECTS = [
+    ("Sub Nocte", "sub-nocte/", "Sub Nocte", "sub-nocte/"),
+    ("Vigía de incendios", "vigia-incendios/", "Vigie des incendies", "vigia-incendios/fr/"),
+    ("Centinela Natura", "centinela-natura/", "Centinela Natura", "centinela-natura/fr/"),
+    ("Estado de las IBA", "estado-iba/", "État des IBA", "estado-iba/fr/"),
+    ("Riesgo de tendidos para aves", "riesgo-tendidos-aves/",
+     "Risque des lignes pour les oiseaux", "riesgo-tendidos-aves/regions.fr.html"),
+    ("Observatorio de alegaciones", "observatorio-alegaciones/",
+     "Observatoire des consultations", "observatorio-alegaciones/"),
+    ("Grafo de promotores", "grafo-promotores/", "Graphe des porteurs de projet", "grafo-promotores/"),
+    ("Vigilancia de humedales", "vigilancia-humedales/",
+     "Veille des zones humides", "vigilancia-humedales/france.html"),
+    ("Caudal ecológico", "caudal-ecologico/", "Débit écologique", "caudal-ecologico/"),
+    ("Acuíferos de Francia", "acuiferos-francia/", "Nappes de France", "acuiferos-francia/"),
+    ("Depuración y baño", "depuracion-y-bano/", "Épuration et baignade", "depuracion-y-bano/fr/"),
+    ("Construir en zona inundable", "zona-inundable/", "Construire en zone inondable", "zona-inundable/"),
+]
+FOOTER_HUB = {"es": ("← Terra Aperta: todos los proyectos", "terra-aperta/"),
+              "fr": ("← Terra Aperta : tous les projets", "terra-aperta/fr/")}
+
+
+def footer_nav(lang: str) -> str:
+    """The hub link and the twelve sibling projects, labels and pages in the page's language."""
+    hub, hub_page = FOOTER_HUB[lang]
+    items = "\n".join(f'    <li><a href="{_SITE}{fr_page if lang == "fr" else page}">'
+                      f'{escape(fr if lang == "fr" else es)}</a></li>'
+                      for es, page, fr, fr_page in FOOTER_PROJECTS)
+    return (f'  <p class="hub"><a href="{_SITE}{hub_page}">{escape(hub)}</a></p>\n'
+            f'  <nav aria-label="{i18n.t(lang, "siblings")}"><ul class="siblings">\n{items}\n  </ul></nav>')
+
+
 # --- Data ----------------------------------------------------------------------------------
 
 def summaries(country: str | None = None) -> list[dict]:
@@ -285,7 +319,7 @@ def page(sums: list[dict], country: str) -> str:
             .replace("__COMMON_CSS__", COMMON_CSS)
             .replace("__ACCENT__", ACCENT).replace("__ACCENT_DARK__", ACCENT_DARK)
             .replace("__PAISES__", _countries(lang, country))
-            .replace("__SIBLINGS_LANG__", "" if lang == "es" else ' lang="es"')
+            .replace("__FOOTER_NAV__", footer_nav(lang))
             .replace("__TCD__", str(config.TCD_YEAR))
             .replace("__NRICA__", i18n.t(lang, "of", a=sum(c > 0 for c in ci), b=len(ci)))
             .replace("__BRECHA__", f"{i18n.num(gap, lang, 1, True)}{sp}°C")
@@ -461,20 +495,7 @@ dl.cifras dd{margin:0;font:500 16px var(--font-data);font-variant-numeric:tabula
 <footer class="site-footer">
   <p class="principle">[[principle]]</p>
   <p>[[sources]]</p>
-  <nav aria-label="[[siblings]]"><ul class="siblings"__SIBLINGS_LANG__>
-    <li><a href="https://asensio94.github.io/observatorio-alegaciones/">Observatorio de alegaciones</a></li>
-    <li><a href="https://asensio94.github.io/vigia-incendios/">Vigía de incendios</a></li>
-    <li><a href="https://asensio94.github.io/centinela-natura/">Centinela Natura</a></li>
-    <li><a href="https://asensio94.github.io/vigilancia-humedales/">Vigilancia de humedales</a></li>
-    <li><a href="https://asensio94.github.io/sub-nocte/">Sub Nocte</a></li>
-    <li><a href="https://asensio94.github.io/riesgo-tendidos-aves/">Riesgo de tendidos para aves</a></li>
-    <li><a href="https://asensio94.github.io/grafo-promotores/">Grafo de promotores</a></li>
-    <li><a href="https://asensio94.github.io/cartera-cotizadas/">Cartera de las cotizadas</a></li>
-    <li><a href="https://asensio94.github.io/cuaderno-campo/">Cuaderno de campo</a></li>
-    <li><a href="https://asensio94.github.io/caudal-ecologico/">Caudal ecológico</a></li>
-    <li><a href="https://asensio94.github.io/estado-iba/">Estado de las IBA</a></li>
-    <li aria-current="page"><a href="https://asensio94.github.io/quien-tiene-sombra/">¿Quién tiene sombra?</a></li>
-  </ul></nav>
+__FOOTER_NAV__
 </footer>
 <script>
 const C = __DATOS__, T = __T__, LOC = "__LOCALE__", SP = T.sp;
