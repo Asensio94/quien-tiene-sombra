@@ -1,14 +1,19 @@
 name: Pasada anual
 
 # Una pasada al año basta: el INE publica la renta por sección a finales de octubre y las capas
-# de árboles cambian cada tres años. A mano sirve para rehacer una ciudad o solo la página.
+# de árboles cambian cada tres años. Hace las ciudades españolas y las francesas (Filosofi no tiene
+# millésime después de 2021, así que en Francia solo cambian Landsat y las capas cuando toque).
+# A mano sirve para rehacer una ciudad, un país o solo la página.
 on:
   schedule:
     - cron: "0 5 10 11 *"
   workflow_dispatch:
     inputs:
       city:
-        description: "Ciudad (slug, p. ej. madrid; vacío = todas)"
+        description: "Ciudad (slug, p. ej. madrid o paris; vacío = todas)"
+        required: false
+      country:
+        description: "País (ES o FR; vacío = los dos)"
         required: false
       income_year:
         description: "Año de renta del INE (vacío = el último publicado)"
@@ -52,17 +57,19 @@ jobs:
           CDSE_USER: ${{ secrets.CDSE_USER }}
           CDSE_PASSWORD: ${{ secrets.CDSE_PASSWORD }}
           CITY: ${{ inputs.city }}
+          COUNTRY: ${{ inputs.country }}
           INCOME_YEAR: ${{ inputs.income_year }}
         run: |
           ARGS=""
           [ -n "$CITY" ] && ARGS="$ARGS --city $CITY"
+          [ -n "$COUNTRY" ] && ARGS="$ARGS --country $COUNTRY"
           [ -n "$INCOME_YEAR" ] && ARGS="$ARGS --income-year $INCOME_YEAR"
           python -m shade run $ARGS
 
-      # Contraste con los inventarios de arbolado de Madrid y Barcelona; si un portal falla,
-      # la página se rehace con la validación anterior.
+      # Contraste con los inventarios de arbolado de Madrid, Barcelona, París y Lyon; si un portal
+      # falla, la página se rehace con la validación anterior.
       - name: Validación
-        if: ${{ !inputs.web_only && (inputs.city == '' || inputs.city == 'madrid' || inputs.city == 'barcelona') }}
+        if: ${{ !inputs.web_only && (inputs.city == '' || contains(fromJSON('["madrid","barcelona","paris","lyon"]'), inputs.city)) }}
         continue-on-error: true
         run: python -m shade validate
 
@@ -75,5 +82,5 @@ jobs:
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
           git add data/sections data/validation docs
           git diff --cached --quiet && exit 0
-          git commit -m "Pasada anual: secciones y página"
+          git commit -m "Pasada anual: secciones, IRIS y páginas"
           git push

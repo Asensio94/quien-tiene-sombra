@@ -31,6 +31,42 @@
    "trees_ha_q1": 33.8,
    "trees_ha_q5": 29.2,
    "ci_trees_per_resident": 0.019
+  },
+  {
+   "slug": "paris",
+   "name": "Paris",
+   "country": "FR",
+   "source": "Les arbres, Ville de Paris (opendata.paris.fr)",
+   "edition": "2026-10-09",
+   "trees": 219908,
+   "trees_in_sections": 194160,
+   "rho_stl": 0.557,
+   "rho_tcd": 0.418,
+   "ci_trees": -0.107,
+   "ci_canopy": -0.068,
+   "trees_ha_q1": 23.6,
+   "trees_ha_q5": 14.0,
+   "ci_trees_per_resident": -0.124,
+   "rho_basal_stl": 0.628,
+   "ci_basal": -0.093
+  },
+  {
+   "slug": "lyon",
+   "name": "Lyon",
+   "country": "FR",
+   "source": "Arbres d'alignement de la Métropole de Lyon (data.grandlyon.com)",
+   "edition": "2026-10-12",
+   "trees": 112341,
+   "trees_in_sections": 30243,
+   "rho_stl": -0.376,
+   "rho_tcd": -0.29,
+   "ci_trees": 0.048,
+   "ci_canopy": -0.079,
+   "trees_ha_q1": 6.9,
+   "trees_ha_q5": 9.2,
+   "ci_trees_per_resident": -0.059,
+   "rho_basal_stl": -0.379,
+   "ci_basal": 0.174
   }
  ]
 }
